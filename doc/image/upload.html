@@ -24,17 +24,16 @@
      
         <ul>
           
-          <li class="js-btn"><a href="index.html">Recipe</a></li>
-          <li class="js-btn"><a href="post_recipe.html">Create a recipe</a></li>
-          <li class="js-btn"><a href="put_recipe.html">Update a recipe</a></li>
-          <li class="js-btn"><a href="delete.html">Delete a recipe</a></li>
+           <li class="js-btn"><a href="post.html">Upload an image</a></li>
+          <li class="js-btn"><a href="put.html">Update an image</a></li>
+          <li class="js-btn"><a href="delete.html">Delete an image</a></li>
         
         </ul>
       </aside>
       <article class="doc__content">
         <section class="js-section" id="title">
-          <h3 class="section__title">POST/recipes?token=userToken</h3>
-          <p>Creer une recette</p>
+           <h3 class="section__title">POST/recipes/:id/upload/token=userToken</h3>
+          <p>Ajouter d' images a une recette</p>
          
         </section>
          <section class="js-section" id="details">
@@ -48,10 +47,16 @@
               <th>Description</th>
             </tr>
             <tr>
+              <td>id</td>
+              <td>int</td>
+              <td>OUI</td>
+              <td>identifiant de la recette sur laquelle sera effectuee l'ajout de d'images</td>
+            </tr>
+            <tr>
               <td>token</td>
               <td>String</td>
               <td>OUI</td>
-              <td>Token d'identification de l'utilisateur</td>
+              <td>Token d'identification de l'utilisateur createur de la recette</td>
             </tr>
            
            
@@ -64,18 +69,45 @@
             <pre class="code code--block">
               <code>
              $ {
-                    "adoptedTitle": "",
-                    "adoptedDescription": "",
-                    "adoptedImages":[],
-                    "proposedTitle": "Riz saute",
-                    "proposedDescription": "Riz special rapide repas a base du riz et de condiments",
-                    "ingredients":[idIngredient1, idIngredient2, idIngredient3, idIngredient4],
-                    "proposedImages": [idImage1, idImage2],
-                    "categories": [idCategorie1,idCategorie2,idCategorie3],
-                    "comments": [idComment1,idComment2,idComment3],
-                    "status":0,
-                    "authorId": 3,
-                    "steps": [stepId1,stepId2, stepId3 ]
+                     "data":{
+
+                          "image1": {
+                            "id": "2ndCYJK",
+                            "title": "c1f64245afb2",
+                            "url_viewer": "https://ibb.co/2ndCYJK",
+                            "url": "https://i.ibb.co/w04Prt6/c1f64245afb2.gif",
+                            "display_url": "https://i.ibb.co/98W13PY/c1f64245afb2.gif",
+                            "width":"1",
+                            "height":"1",
+                            "size": "42",
+                            "time": "1552042565",
+                            "expiration":"0",
+                            "image": {
+                              "filename": "c1f64245afb2.gif",
+                              "name": "c1f64245afb2",
+                              "mime": "image/gif",
+                              "extension": "gif",
+                              "url": "https://i.ibb.co/w04Prt6/c1f64245afb2.gif",
+                            },
+                           "image2": {
+                            "id": "2ndCYJ",
+                            "title": "c1f64245afb2",
+                            "url_viewer": "https://ibb.co/2ndCYJK",
+                            "url": "https://i.ibb.co/w04Prt6/c1f64245afb2.gif",
+                            "display_url": "https://i.ibb.co/98W13PY/c1f64245afb2.gif",
+                            "width":"1",
+                            "height":"1",
+                            "size": "42",
+                            "time": "1552042565",
+                            "expiration":"0",
+                            "image": {
+                              "filename": "ddsdsdsds.gif",
+                              "name": "ddsdsdsds",
+                              "mime": "image/png",
+                              "extension": "png",
+                              "url": "https://i.ibb.co/w04Prt6/c1f64245afb2.gif",
+                            },
+                            ...
 
                 }
               </code>

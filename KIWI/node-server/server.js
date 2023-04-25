@@ -1,21 +1,4 @@
 'use strict'
-const { Client } = require('pg')
-
-const client = new Client({
-    host: 'localhost',
-    port: 5432,
-    database: 'structure_logicielle',
-    user: 'postgres',
-    password: 'postgres'
-})
-
-client.connect((error) => {
-    if (error) {
-        console.error('connexion error', error.stack)
-    } else {
-        console.log('connected')
-    }
-})
 
 const express = require('express')
 
@@ -52,7 +35,7 @@ app.get('/', function (request, response) {
     response.end('<h1>Home page</h1>')
 })
 
-app.get('/datas', function (request, response) {
+app.get('/categories', function (request, response) {
     dao.connect()
     dao.query('SELECT * FROM Category', [], (result) => {
         response.writeHead(HTTP_OK, { 'Content-Type': CONTENT_TYPE_JSON })
@@ -61,7 +44,7 @@ app.get('/datas', function (request, response) {
     })
 })
 
-app.get('/datas/:id', function (request, response) {
+app.get('/categories/:id', function (request, response) {
     dao.connect()
     dao.query('SELECT * FROM Category WHERE id=$1', [request.params.id], (result) => {
         writeJSONResponse(request, response, result.rows)
@@ -69,7 +52,7 @@ app.get('/datas/:id', function (request, response) {
     })
 })
 
-app.post('/datas', function (request, response) {
+app.post('/categories', function (request, response) {
     console.log('TYPE', typeof request.body)
     dao.connect()
     dao.query('INSERT INTO Category (name, description) VALUES ($1, $2)', [request.body.name, request.body.description], function () {
@@ -77,14 +60,14 @@ app.post('/datas', function (request, response) {
     })
 })
 
-app.put('/datas', function (request, response) {
+app.put('/categories', function (request, response) {
     dao.connect()
     dao.query('UPDATE Category set name=$1, description=$2  WHERE id=$3', [request.body.name, request.body.description, request.body.id], function () {
         dao.disconnect()
     })
 })
 
-app.delete('/datas/:id', function (request, response) {
+app.delete('/categories/:id', function (request, response) {
     dao.connect()
     dao.query('DELETE  FROM Category WHERE id=$1', [request.params.id], (result) => {
         response.writeHead(HTTP_OK, { 'Content-Type': CONTENT_TYPE_JSON })

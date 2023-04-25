@@ -1,3 +1,4 @@
+//  categories ****************************************************************************
 
 GET http://localhost:8080/categories HTTP/1.1
 
@@ -26,6 +27,44 @@ content-type: application/json
 
 {"id": 2, "name":"Sandwich", "description":"recette occidentale en particulier" }
 
+
 ###
 
 DELETE http://localhost:8080/categories/1 HTTP/1.1
+
+// likes ***********************************************************************************
+
+###
+
+GET http://localhost:8080/likes HTTP/1.1
+
+
+###
+
+GET http://localhost:8080/likes/1 HTTP/1.1
+
+###
+
+
+POST http://localhost:8080/likes HTTP/1.1
+content-type: application/x-www-form-urlencoded
+   
+recipeid=5&userid=9
+
+###
+
+POST http://localhost:8080/likes HTTP/1.1
+content-type: application/json
+
+{ "recipeid":1, "userid":2}
+
+###
+
+PUT http://localhost:8080/likes HTTP/1.1
+content-type: application/json
+
+{"id": 1, "recipeid":1, "userid":12}
+
+###
+
+DELETE http://localhost:8080/likes/1 HTTP/1.1

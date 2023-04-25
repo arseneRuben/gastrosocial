@@ -16,7 +16,7 @@
       <aside class="doc__nav">
         <ul>
           <li class="js-btn"><a href="#title">URL</a></li>
-          <li class="js-btn"><a href="#details">Path details</a></li>
+          <li class="js-btn"><a href="#details">Body details</a></li>
           <li class="js-btn"><a href="#response">Response</a></li>
           <li class="js-btn"><a href="#supplements">Supplements</a></li>
         
@@ -24,23 +24,21 @@
      
         <ul>
           
-          <li class="js-btn"><a href="index.html">Recipe</a></li>
-          <li class="js-btn"><a href="post.html">Create a recipe</a></li>
-          <li class="js-btn"><a href="put.html">Update a recipe</a></li>
-           <li class="js-btn"><a href="delete.html">Delete a recipe</a></li>
+           <li class="js-btn"><a href="post.html">Upload an image</a></li>
+          <li class="js-btn"><a href="put.html">Update an image</a></li>
+          <li class="js-btn"><a href="delete.html">Delete an image</a></li>
         
         </ul>
       </aside>
       <article class="doc__content">
-         <section class="js-section" id="title">
-          <h3 class="section__title">DELETE/recipes?id=idRecipe?token=userToken</h3>
-          <p>Supprimer une recette</p>
-        </section>
-        <section class="js-section" id="details">
-          <h3 class="section__title">Paramettres de la requette</h3>
+        <section class="js-section" id="title">
+           <h3 class="section__title">POST/recipes/:id/upload/token=userToken</h3>
+          <p>Ajouter d' images a une recette</p>
          
-       
-          
+        </section>
+         <section class="js-section" id="details">
+          <h3 class="section__title">Parametres de la requette</h3>
+         
           <table id="customers">
             <tr>
               <th>Parametres</th>
@@ -49,76 +47,101 @@
               <th>Description</th>
             </tr>
             <tr>
-              <td>idRecipe</td>
-              <td>Entier</td>
+              <td>id</td>
+              <td>int</td>
               <td>OUI</td>
-              <td>Identifiant de la recette a supprimer</td>
+              <td>identifiant de la recette sur laquelle sera effectuee l'ajout de d'images</td>
             </tr>
             <tr>
               <td>token</td>
               <td>String</td>
               <td>OUI</td>
-              <td>Token d'identification de l'utilisateur</td>
-            </tr>
-           
-          </table>
-       </section>
-        <section class="js-section" id="response">
-          <h3 class="section__title">Exemple de reponse</h3>
-            <pre class="code code--block">
-         <code>
-             $ {
-                   
-                    "adoptedTitle": "Jus de raisins",
-                    "createdAt":"2021-08-06T17:04:26.000Z"
-                    "fullName": 4,
-                    "likes":4,
-                    "updatedAt":"2021-08-06T17:04:26.000Z"
-
-                }
-              </code>
-            </pre>
-         
-           <section class="js-section" id="supplements">
-          <h3 class="section__title">Details de reponse</h3>
-          
-          <table id="customers">
-            <tr>
-              <th>Attribut</th>
-              <th>Description</th>
-              <th>Requis</th>
-            </tr>
-            <tr>
-              <td>fullName</td>
-              <td>Nom du createur de la recette</td>
-              <td>OUI</td>
-            </tr>
-             <tr>
-              <td>createdAt</td>
-              <td>Date de creation de la recette</td>
-              <td>NON</td>
-            </tr>
-             <tr>
-              <td>updatedAt</td>
-              <td>Date de mise a jour de la recette</td>
-              <td>NON</td>
-            </tr>
-            <tr>
-              <td>likes</td>
-              <td>Nombre de likes</td>
-              <td>NON</td>
-            </tr>
-            <tr>
-              <td>adoptedTitle</td>
-              <td>Titre valide de la recette</td>
-              <td>OUI</td>
+              <td>Token d'identification de l'utilisateur createur de la recette</td>
             </tr>
            
            
           </table>
         
         </section>
+        <section class="js-section" id="details">
+           <h3 class="section__title">Parametres du BODY de la requette</h3>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+             $ {
+                     "data":{
+
+                          "image1": {
+                            
+                           
+                            "size": "42",
+                           
+                            "image": {
+                              "filename": "c1f64245afb2.gif",
+                             
+                              "mime": "image/gif",
+                              "extension": "gif",
+                              "url": "localhost/assets/images/c1f64245afb2.gif",
+                            },
+                           "image2": {
+                            
+                          
+                            "size": "42",
+                           
+                            "image": {
+                              "filename": "ddsdsdsds.png",
+
+                              "mime": "image/png",
+                              "extension": "png",
+                              "url": "localhost/assets/images/c1f64245afb2.png",
+                            },
+                            ...
+
+                }
+              </code>
+            </pre>
+          </div>
+          <table id="customers">
+            <tr>
+              <th>Attributs</th>
+              <th>Valeurs</th>
+              <th>Defaut</th>
+            </tr>
+            <tr>
+              <td>imagei</td>
+              <td>Ieme image</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>size</td>
+              <td>Taille de l'image</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>fileName</td>
+              <td>Nom de fichier de l'image</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>mime</td>
+              <td>Type mime de l'image</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>extension</td>
+              <td>L'extension de l'image </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>url</td>
+              <td>Source de l'image </td>
+              <td></td>
+            </tr>
+            
+          </table>
+        
         </section>
+       
        
       </article>
     </div>

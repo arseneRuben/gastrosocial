@@ -35,7 +35,7 @@
         <article class="doc__content">
             <section class="js-section" id="title">
                 <h3 class="section__title">
-                    GET/ingredients?page=idPage&orderBy=categories,createdAt,updatedAt,title&favorite=true</h3>
+                    GET/ingredients?orderBy=categories,title</h3>
                 <p>Liste paginee des ingredients ordonnees par attributs</p>
 
             </section>
@@ -52,34 +52,10 @@
                         <th>Description</th>
                     </tr>
                     <tr>
-                        <td>idPage</td>
-                        <td>Entier</td>
-                        <td>OUI</td>
-                        <td>Numero de page du resultat de la requete</td>
-                    </tr>
-                    <tr>
-                        <td>createdAt</td>
-                        <td>DateTime</td>
-                        <td>NON</td>
-                        <td>Date de creation des ingredients</td>
-                    </tr>
-                    <tr>
-                        <td>updatedAt</td>
-                        <td>DateTime</td>
-                        <td>NON</td>
-                        <td>Date de derniere modification des ingredients</td>
-                    </tr>
-                    <tr>
                         <td>title</td>
                         <td>String</td>
                         <td>NON</td>
                         <td>Titre validee des ingredients</td>
-                    </tr>
-                    <tr>
-                        <td>createdAt</td>
-                        <td>DateTime</td>
-                        <td>NON</td>
-                        <td>Date de creation des ingredients</td>
                     </tr>
                 </table>
 
@@ -91,10 +67,7 @@
              $ {
                    
                     "adoptedTitle": "Tomate",
-                    "createdAt":"2021-08-06T17:04:26.000Z"
                     "fullName": 4,
-                    "updatedAt":"2021-08-06T17:04:26.000Z"
-
                 }
               </code>
             </pre>
@@ -113,23 +86,6 @@
                             <td>Nom du createur de l'ingredient</td>
                             <td>OUI</td>
                         </tr>
-                        <tr>
-                            <td>createdAt</td>
-                            <td>Date de creation de l'ingredient</td>
-                            <td>NON</td>
-                        </tr>
-                        <tr>
-                            <td>updatedAt</td>
-                            <td>Date de mise a jour de l'ingredient</td>
-                            <td>NON</td>
-                        </tr>
-                        <tr>
-                            <td>adoptedTitle</td>
-                            <td>Titre valide de l'ingredient</td>
-                            <td>OUI</td>
-                        </tr>
-
-
                     </table>
 
                 </section>

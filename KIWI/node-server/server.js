@@ -6,6 +6,8 @@ import express from 'express'
 // ROUTES
 import categoryRoute from './routes/category.js'
 import recipeRoute from './routes/recipe.js'
+import likeRoute from './routes/like.js'
+
 import { writeJSONResponse } from './controller/util.js'
 
 const app = express()
@@ -44,72 +46,10 @@ app.get('/', function (request, response) {
 // ROUTE
 app.use('/categories', categoryRoute)
 app.use('/recipes', recipeRoute)
-
-app.put('/categories', function (request, response) {
-    dao.connect()
-    dao.query('UPDATE Category set name=$1, description=$2  WHERE id=$3', [request.body.name, request.body.description, request.body.id], function () {
-        dao.disconnect()
-    })
-})
-
-app.delete('/categories/:id', function (request, response) {
-    dao.connect()
-    dao.query('DELETE  FROM Category WHERE id=$1', [request.params.id], (result) => {
-        response.writeHead(HTTP_OK, { 'Content-Type': CONTENT_TYPE_JSON })
-        dao.disconnect()
-    })
-})
+app.use('/likes', likeRoute)
 
 //  likes   ****************************************************************************
 
-app.get('/likes', function (request, response) {
-    dao.connect()
-    dao.query('SELECT * FROM likes', [], (result) => {
-        response.writeHead(HTTP_OK, { 'Content-Type': CONTENT_TYPE_JSON })
-        response.end(JSON.stringify(result.rows, null, 4))
-        dao.disconnect()
-    })
-})
-
-app.post('/likes', function (request, response) {
-    console.log('TYPE', typeof request.body)
-    dao.connect()
-    dao.query('INSERT INTO likes (recipeid, userid) VALUES ($1, $2)', [request.body.recipeid, request.body.userid], function () {
-        dao.disconnect()
-    })
-})
-
-app.get('/likes/:id', function (request, response) {
-    dao.connect()
-    dao.query('SELECT * FROM likes WHERE id=$1', [request.params.id], (result) => {
-        writeJSONResponse(request, response, result.rows)
-        dao.disconnect()
-    })
-})
-app.put('/likes', function (request, response) {
-    dao.connect()
-    dao.query('UPDATE likes set recipeid=$1, userid=$2 WHERE id=$3', [request.body.recipeid, request.body.userid, request.body.id], function () {
-        dao.disconnect()
-    })
-})
-
-app.delete('/likes/:id', function (request, response) {
-    dao.connect()
-    dao.query('DELETE  FROM likes WHERE id=$1', [request.params.id], (result) => {
-        response.writeHead(HTTP_OK, { 'Content-Type': CONTENT_TYPE_JSON })
-        dao.disconnect()
-    })
-})
-
-//  Recipe   ****************************************************************************
-app.get('/likes', function (request, response) {
-    dao.connect()
-    dao.query('SELECT * FROM likes', [], (result) => {
-        response.writeHead(HTTP_OK, { 'Content-Type': CONTENT_TYPE_JSON })
-        response.end(JSON.stringify(result.rows, null, 4))
-        dao.disconnect()
-    })
-})
 // methode privee *******************************************************************
 
 app.listen(PORT, function () {

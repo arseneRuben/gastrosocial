@@ -56,6 +56,13 @@ recipeid=5&userid=9
 POST http://localhost:8080/likes HTTP/1.1
 content-type: application/json
 
+{ "recipeid":1, "userid":3}
+
+###
+
+POST http://localhost:8080/likes HTTP/1.1
+content-type: application/json
+
 { "recipeid":1, "userid":2}
 
 ###
@@ -137,7 +144,7 @@ GET http://localhost:8080/recipes HTTP/1.1
 POST http://localhost:8080/recipes HTTP/1.1
 content-type: application/x-www-form-urlencoded
 
-name=Sushi&description=Recette japonaise
+proposedTitle=Sushi&propsedDescription=Recette japonaise&userId=3&adoptedTitle=Sushi&adoptedDescription=Recette japonaise&status=1
 ###
 
 GET http://localhost:8080/recipes/1 HTTP/1.1
@@ -145,3 +152,6 @@ GET http://localhost:8080/recipes/1 HTTP/1.1
 
 DELETE http://localhost:8080/recipes/1 HTTP/1.1
 
+###
+
+GET http://localhost:8080/recipes/1/likes HTTP/1.1

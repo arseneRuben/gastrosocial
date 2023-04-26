@@ -1,7 +1,5 @@
 import dao from '../../node-pg/src/dao.js'
-import { writeJSONResponse } from './util.js'
-const CONTENT_TYPE_JSON = 'application/json'
-const HTTP_OK = 200
+import { CONTENT_TYPE_JSON, HTTP_OK, writeJSONResponse } from './util.js'
 
 export const createCategory = async (req, res) => {
     dao.connect()

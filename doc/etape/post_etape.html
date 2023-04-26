@@ -26,16 +26,15 @@
 
       <ul>
 
-        <li class="js-btn"><a href="index.html">Etape</a></li>
+        <li class="js-btn"><a href="get.html">get Etape</a></li>
         <li class="js-btn"><a href="post_etape.html">Create etape</a></li>
-        <li class="js-btn"><a href="put_etape.html">Update etape</a></li>
         <li class="js-btn"><a href="delete.html">Delete etape</a></li>
 
       </ul>
     </aside>
     <article class="doc__content">
       <section class="js-section" id="title">
-        <h3 class="section__title">POST/etapes?token=userToken</h3>
+        <h3 class="section__title">POST/recipe/:recipeId/etapes?token=userToken</h3>
         <p>Creer une recette</p>
 
       </section>
@@ -55,7 +54,12 @@
             <td>OUI</td>
             <td>Token d'identification de l'utilisateur</td>
           </tr>
-
+          <tr>
+            <td>recipeId</td>
+            <td>Entier</td>
+            <td>OUI</td>
+            <td>Id de la recette du resultat de la requete</td>
+          </tr>
 
         </table>
 
@@ -66,7 +70,10 @@
           <pre class="code code--block">
               <code>
              $ {
-                    
+                   
+                  "description " : " ",
+                  " stepNumber " : 1 ,
+
 
                 }
               </code>
@@ -80,12 +87,7 @@
             <th>Requis</th>
             <th>Description</th>
           </tr>
-          <tr>
-            <td>recipeId</td>
-            <td>Entier</td>
-            <td>OUI</td>
-            <td>Id de la recette du resultat de la requete</td>
-          </tr>
+
           <tr>
             <td>description</td>
             <td>String</td>
@@ -99,12 +101,7 @@
             <td>Le numero de l'etape pour creer la recette</td>
           </tr>
 
-          <tr>
-            <td>adopted</td>
-            <td>boolean</td>
-            <td>OUI</td>
-            <td></td>
-          </tr>
+
         </table>
 
       </section>
@@ -113,9 +110,15 @@
         <pre class="code code--block">
          <code>
              $ {
-                    
+              
+                   "id" : 1,
+                "description " : " ",
+                " stepNumber " : 1 ,
 
-                }
+
+              }    
+
+                
               </code>
             </pre>
 

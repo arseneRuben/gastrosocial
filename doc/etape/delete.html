@@ -26,16 +26,15 @@
 
       <ul>
 
-        <li class="js-btn"><a href="index.html">Etape</a></li>
+        <li class="js-btn"><a href="get.html"> get Etape</a></li>
         <li class="js-btn"><a href="post_etape.html">Create etape</a></li>
-        <li class="js-btn"><a href="put_etape.html">Update etape</a></li>
         <li class="js-btn"><a href="delete.html">Delete etape</a></li>
 
       </ul>
     </aside>
     <article class="doc__content">
       <section class="js-section" id="title">
-        <h3 class="section__title">DELETE/etapes?id=idRecipe?token=userToken, stepNumber</h3>
+        <h3 class="section__title">DELETE/steps/:stepId?token=userToken</h3>
         <p>Supprimer une etape</p>
       </section>
       <section class="js-section" id="details">
@@ -51,7 +50,7 @@
             <th>Description</th>
           </tr>
           <tr>
-            <td>idRecipe</td>
+            <td>stepId</td>
             <td>Entier</td>
             <td>OUI</td>
             <td>Identifiant de la recette a supprimer</td>
@@ -71,9 +70,7 @@
          <code>
              $ {
                    
-              "recipeId": 1,
-              "description":" ",
-              "stepNumber": 1
+              
 
                 }
               </code>
@@ -88,21 +85,7 @@
               <th>Description</th>
               <th>Requis</th>
             </tr>
-            <tr>
-              <td>recipeId</td>
-              <td>Id de la recette</td>
-              <td>OUI</td>
-            </tr>
-            <tr>
-              <td>description</td>
-              <td>Description des etapes pour creer la recette</td>
-              <td>OUI</td>
-            </tr>
-            <tr>
-              <td>stepNumber</td>
-              <td>Le numero de l'etape pour creer la recette</td>
-              <td>OUI</td>
-            </tr>
+
 
 
           </table>

@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "KIWI-node-server",
     "main": "test.js",
+    "type": "module",
     "scripts": {
         "start": "nodemon server"
     },

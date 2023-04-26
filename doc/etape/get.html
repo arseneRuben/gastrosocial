@@ -26,7 +26,7 @@
 
       <ul>
 
-        <li class="js-btn"><a href="index.html">Etape</a></li>
+        <li class="js-btn"><a href="get.html">get Etape</a></li>
         <li class="js-btn"><a href="post_etape.html">Create etape</a></li>
         <li class="js-btn"><a href="put_etape.html">Update etape</a></li>
         <li class="js-btn"><a href="delete.html">Delete etape</a></li>
@@ -35,7 +35,7 @@
     </aside>
     <article class="doc__content">
       <section class="js-section" id="title">
-        <h3 class="section__title">GET/etapes?page=idPage,recipeId,description,stepNumber
+        <h3 class="section__title">GET/recipes/:recipeId/etapes
         </h3>
         <p>Liste des etapes d'une recettes</p>
 
@@ -58,25 +58,7 @@
             <td>OUI</td>
             <td>Id de la recette du resultat de la requete</td>
           </tr>
-          <tr>
-            <td>description</td>
-            <td>String</td>
-            <td>OUI</td>
-            <td>Description des etapes pour creer la recette</td>
-          </tr>
-          <tr>
-            <td>stepNumber</td>
-            <td>Entier</td>
-            <td>OUI</td>
-            <td>Le numero de l'etape pour creer la recette</td>
-          </tr>
 
-          <tr>
-            <td>adopted</td>
-            <td>boolean</td>
-            <td>OUI</td>
-            <td></td>
-          </tr>
 
 
         </table>
@@ -111,16 +93,7 @@
               <td>Id de la recette</td>
               <td>OUI</td>
             </tr>
-            <tr>
-              <td>description</td>
-              <td>Description des etapes pour creer la recette</td>
-              <td>OUI</td>
-            </tr>
-            <tr>
-              <td>stepNumber</td>
-              <td>Le numero de l'etape pour creer la recette</td>
-              <td>OUI</td>
-            </tr>
+
 
 
 

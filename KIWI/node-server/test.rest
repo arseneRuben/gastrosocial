@@ -11,7 +11,7 @@ GET http://localhost:8080/categories/1 HTTP/1.1
 POST http://localhost:8080/categories HTTP/1.1
 content-type: application/x-www-form-urlencoded
 
-name=Sushi&description=Recette japonaise
+name=Sushi&description=Recette camerounaise
 
 ###
 
@@ -68,3 +68,80 @@ content-type: application/json
 ###
 
 DELETE http://localhost:8080/likes/1 HTTP/1.1
+
+
+// ingredient *********************************************************
+
+###
+
+GET http://localhost:8080/ingredient HTTP/1.1
+
+###
+
+GET http://localhost:8080/ingredient/1 HTTP/1.1
+
+###
+
+POST http://localhost:8080/ingredient HTTP/1.1
+content-type: application/x-www-form-urlencoded
+
+id=1&name=Poulet&categoryid=1
+
+###
+
+POST http://localhost:8080/ingredient HTTP/1.1
+content-type: application/json
+
+{"id": 1, "name":"Poulet", "categoryid": 1}
+
+###
+
+DELETE http://localhost:8080/ingredient/1 HTTP/1.1
+
+
+
+
+// etape *********************************************************
+
+###
+
+GET http://localhost:8080/etape HTTP/1.1
+
+###
+
+GET http://localhost:8080/etape/1 HTTP/1.1
+
+###
+
+POST http://localhost:8080/etape HTTP/1.1
+content-type: application/x-www-form-urlencoded
+
+
+
+###
+
+POST http://localhost:8080/etape HTTP/1.1
+content-type: application/json
+
+
+###
+
+DELETE http://localhost:8080/etape/1 HTTP/1.1
+
+// Cas des recettes
+###
+
+GET http://localhost:8080/recipes HTTP/1.1
+
+###
+POST http://localhost:8080/recipes HTTP/1.1
+content-type: application/x-www-form-urlencoded
+
+name=Sushi&description=Recette japonaise
+###
+
+GET http://localhost:8080/recipes/1 HTTP/1.1
+###
+
+DELETE http://localhost:8080/recipes/1 HTTP/1.1
+

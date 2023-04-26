@@ -68,3 +68,34 @@ content-type: application/json
 ###
 
 DELETE http://localhost:8080/likes/1 HTTP/1.1
+
+
+// ingredient *********************************************************
+
+###
+
+GET http://localhost:8080/ingredient HTTP/1.1
+
+###
+
+GET http://localhost:8080/ingredient/1 HTTP/1.1
+
+###
+
+POST http://localhost:8080/ingredient HTTP/1.1
+content-type: application/x-www-form-urlencoded
+
+id=1&name=Poulet&categoryid=1
+
+###
+
+POST http://localhost:8080/ingredient HTTP/1.1
+content-type: application/json
+
+{"id": 1, "name":"Poulet", "categoryid": 1}
+
+###
+
+DELETE http://localhost:8080/ingredient/1 HTTP/1.1
+
+

@@ -4,7 +4,7 @@
     "description": "KIWI-node-server",
     "main": "test.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "nodemon server"
     },
     "author": "KIWI",
     "license": "ISC",
@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "express": "^4.18.2",
+        "nodemon": "^2.0.22",
         "pg": "^8.10.0"
     }
 }

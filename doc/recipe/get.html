@@ -38,15 +38,11 @@
         
         </ul>
      
-       
-       
-       
 
       </aside>
       <article class="doc__content">
         <section class="js-section" id="title">
-          <h3 class="section__title">GET/recipes?page=idPage&orderBy=categories,createdAt,updatedAt,title&favorite=true</h3>
-          <p>Liste paginee des recettes ordonnees par attributs</p>
+          <h3 class="section__title">GET/recipes/:recipeId</p>
           
         </section>
         <section class="js-section" id="details">
@@ -62,36 +58,12 @@
               <th>Description</th>
             </tr>
             <tr>
-              <td>idPage</td>
+              <td>recipeId</td>
               <td>Entier</td>
               <td>OUI</td>
-              <td>Numero de page du resultat de la requete</td>
+              <td>Identifiant de la recette</td>
             </tr>
-            <tr>
-              <td>createdAt</td>
-              <td>DateTime</td>
-              <td>NON</td>
-              <td>Date de creation des recettes</td>
-            </tr>
-            <tr>
-               <td>updatedAt</td>
-              <td>DateTime</td>
-              <td>NON</td>
-              <td>Date de derniere modification des recettes</td>
-            </tr>
-            <tr>
-               <td>title</td>
-              <td>String</td>
-              <td>NON</td>
-              <td>Titre validee des recettes</td>
-            </tr>
-           
-            <tr>
-              <td>favorite</td>
-               <td>Booleen</td>
-              <td>NON</td>
-              <td>Selon que les recettes soient favorites ou pas</td>
-            </tr>
+            
            
           </table>
         
@@ -101,19 +73,29 @@
             <pre class="code code--block">
          <code>
              $ {
-                    {"id" : 3
+                   
+                    "id": 4,
                     "adoptedTitle": "Jus de raisins",
                     "createdAt":"2021-08-06T17:04:26.000Z"
                     "fullName": "Samuel",
                     "likes":4,
-                    "updatedAt":"2021-08-06T17:04:26.000Z"},
-                    {"id" : 4
-                    "adoptedTitle": "Jus de mangues",
-                    "createdAt":"2021-08-06T17:04:26.000Z"
-                    "fullName": "Ibrahim",
-                    "likes":4,
-                    "updatedAt":"2021-08-06T17:04:26.000Z"},
-                    ...
+                    "updatedAt":"2021-08-06T17:04:26.000Z",
+                    "ingredients" : {
+                        {"name" : "eau potable",
+                        "category" : "Liquide"},
+                        {"name": "sucre roux"
+                         "category" : "Sucres"},
+                           {"name": "Raisins"
+                         "category" : "Fruits"}
+                    }
+                     "etapes" :{
+                        {"stepNumber" : 1,
+                        "description" : "Nettoyer les fruits de raisins"},
+                        {"stepNumber": 2
+                         "description" : "Ecraser dans un moulinex"},
+                        {"stepNumber": 3
+                         "description" : "Ajouter de l'eau et un peu de sucre"},
+                    }
 
                 }
               </code>
@@ -123,11 +105,18 @@
           <h3 class="section__title">Details de reponse</h3>
           
           <table id="customers">
+
             <tr>
               <th>Attribut</th>
               <th>Description</th>
               <th>Requis</th>
             </tr>
+             <tr>
+              <td>id</td>
+              <td>identifiant de la recette</td>
+              <td>OUI</td>
+            </tr>
+
             <tr>
               <td>fullName</td>
               <td>Nom du createur de la recette</td>
@@ -151,6 +140,16 @@
             <tr>
               <td>adoptedTitle</td>
               <td>Titre valide de la recette</td>
+              <td>OUI</td>
+            </tr>
+             <tr>
+              <td>ingredients</td>
+              <td>Liste des ingredients  de la recette</td>
+              <td>OUI</td>
+            </tr>
+            <tr>
+              <td>Etapes</td>
+              <td>Liste des etapes pour preparer la recette</td>
               <td>OUI</td>
             </tr>
            

@@ -1,6 +1,8 @@
 'use strict'
-
-const express = require('express')
+// ROUTES
+import categoryRoute from './routes/category.js'
+import express from 'express'
+import dao from '../node-pg/index'
 
 const app = express()
 
@@ -9,8 +11,6 @@ app.use(express.urlencoded({ extended: true }))
 
 // parse application/json
 app.use(express.json())
-
-const dao = require('../node-pg/src/dao')
 
 const PORT = 8080
 const CONTENT_TYPE_JSON = 'application/json'
@@ -37,14 +37,8 @@ app.get('/', function (request, response) {
 
 //  categories ****************************************************************************
 
-app.get('/categories', function (request, response) {
-    dao.connect()
-    dao.query('SELECT * FROM Category', [], (result) => {
-        response.writeHead(HTTP_OK, { 'Content-Type': CONTENT_TYPE_JSON })
-        response.end(JSON.stringify(result.rows, null, 4))
-        dao.disconnect()
-    })
-})
+// ROUTE
+app.use('/category', categoryRoute)
 
 app.get('/categories/:id', function (request, response) {
     dao.connect()
@@ -118,6 +112,15 @@ app.delete('/likes/:id', function (request, response) {
     })
 })
 
+//  Recipe   ****************************************************************************
+app.get('/likes', function (request, response) {
+    dao.connect()
+    dao.query('SELECT * FROM likes', [], (result) => {
+        response.writeHead(HTTP_OK, { 'Content-Type': CONTENT_TYPE_JSON })
+        response.end(JSON.stringify(result.rows, null, 4))
+        dao.disconnect()
+    })
+})
 // methode privee *******************************************************************
 
 function writeJSONResponse (request, response, result) {

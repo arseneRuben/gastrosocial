@@ -11,12 +11,13 @@ function renderLi (recipe, onItemClick, onItemDeleteClick) {
     )
 }
 
-const ListComponent = ({ recipes, onItemClick, onItemDeleteClick, onAddClick }) => (
+const ListComponent = ({ recipes, onItemClick, onItemDeleteClick, onAddClick, onAddClick1 }) => (
     <div>
         <ul>
             {recipes.map((recipe) => renderLi(recipe, onItemClick, onItemDeleteClick))}
         </ul>
         <button onClick={onAddClick}>Ajouter une recette</button>
+        <button onClick={onAddClick1}>Ajouter un ingredient</button>
     </div>
 )
 

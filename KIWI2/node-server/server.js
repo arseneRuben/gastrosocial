@@ -7,21 +7,21 @@ import categoryRoute from './routes/category.js'
 import recipeRoute from './routes/recipe.js'
 import likeRoute from './routes/like.js'
 import ingredientRoute from './routes/ingredient.js'
-import multer from 'multer'
-import morgan from 'morgan'
+// import multer from 'multer'
+// import morgan from 'morgan'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import helmet from 'helmet'
+// import helmet from 'helmet'
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const app = express()
 
-app.use(helmet())
+/* app.use(helmet())
 app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }))
 app.use(morgan('common'))
-// set directory where we keep our assets
+// set directory where we keep our assets */
 app.use('/assets', express.static(path.join(__dirname, 'public/assets')))
 
 // parse application/x-www-form-urlencoded

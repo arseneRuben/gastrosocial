@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import InputComponent from 'component/input-component'
 import ListComponent from 'component/list-component'
 import FormComponent from 'component/form-component'
+import FormIngredientComponent from '../component/form-ingredient-component'
 
 function buildHeader (method, body) {
     return {
@@ -95,6 +96,13 @@ class FormRecipeContainer extends Component {
         })
     }
 
+    handleAddOnClick1 = () => {
+        this.setState({
+            formValues: {},
+            showForm: true
+        })
+    }
+
     handleOnSaveClick = () => {
         const method = this.state.formValues.id ? 'PUT' : 'POST'
         fetch('http://localhost:8080/recipes', buildHeader(method, this.state.formValues))
@@ -122,6 +130,19 @@ class FormRecipeContainer extends Component {
                     <InputComponent onChange={this.handleInputOnChange} label='Description adptee:' type='text' name='adoptedRecipeDescription' value={this.state.formValues.adoptedRecipeDescription} />
                 </FormComponent>
             </div>
+
+        )
+    }
+
+    renderFormIngredient () {
+        return (
+            <div>
+                <h1>Ajouter un ingredient</h1>
+                <FormIngredientComponent action='/ingredients' onSaveClick={this.handleOnSaveClick} onCancelClick={this.handleOnCancelClick}>
+                    <InputComponent onChange={this.handleInputOnChange} label='Nom:' type='text' name='ingredientName' />
+                    <InputComponent onChange={this.handleInputOnChange} label='Categorie:' type='text' name='ingredientCategorie' />
+                </FormIngredientComponent>
+            </div>
         )
     }
 
@@ -134,6 +155,7 @@ class FormRecipeContainer extends Component {
                     onItemClick={this.handleItemOnClick}
                     onItemDeleteClick={this.handleItemDeleteOnClick}
                     onAddClick={this.handleAddOnClick}
+                    onAddClick1={this.handleAddOnClick1}
                 />
             </div>
         )

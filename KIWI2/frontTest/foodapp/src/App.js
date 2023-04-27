@@ -1,8 +1,8 @@
 import React from 'react';
 // import components
 import Hero from './components/Hero';
-/*import About from './components/About';
-import Menu from './components/Menu';
+import About from './components/About';
+/*import Menu from './components/Menu';
 
 import Team from './components/Team';
 import Testimonial from './components/Testimonial';
@@ -17,7 +17,7 @@ const App = () => {
       
      {/* <About />
       <Menu />
-      <Team /> 
+     
       <Testimonial />
   <Reservation />*/}
       <Footer />

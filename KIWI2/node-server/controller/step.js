@@ -10,7 +10,7 @@ export const createStep = async (req, res) => {
 
 export const getSteps = async (req, res) => {
     dao.connect()
-    dao.query('SELECT COUNT(*) FROM steps  WHERE recipeId=$1', [req.params.id], (resp) => {
+    dao.query('SELECT * FROM steps  WHERE recipeId=$1', [req.params.id], (resp) => {
         res.writeHead(HTTP_OK, { 'Content-Type': CONTENT_TYPE_JSON })
         res.end(JSON.stringify(resp, null, 4))
 

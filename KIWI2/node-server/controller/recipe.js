@@ -28,7 +28,7 @@ export const getRecipe = async (req, res) => {
 
 export const createRecipe = async (req, res) => {
     dao.connect()
-    dao.query('INSERT INTO recipe (proposedTitle, proposedDescription,userId,adoptedTitle,adoptedDescription,status) VALUES ($1, $2, $3, $4, $5, $6)', [req.body.proposedTitle, req.body.propsedDescription, req.body.userId, req.body.adoptedTitle, req.body.adoptedDescription, req.body.status], function () {
+    dao.query('INSERT INTO recipe (proposedtitle, proposeddescription,userid,adoptedtitle,adopteddescription,status) VALUES ($1, $2, $3, $4, $5, $6)', [req.body.proposedtitle, req.body.proposeddescription, req.body.userid, req.body.adoptedtitle, req.body.adopteddescription, req.body.status], function () {
         dao.disconnect()
     })
 }

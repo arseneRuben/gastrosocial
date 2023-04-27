@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import InputComponent from 'component/input-component'
 import ListComponent from 'component/list-component'
 import FormComponent from 'component/form-component'
-import FormIngredientComponent from '../component/form-ingredient-component'
 
 function buildHeader (method, body) {
     return {
@@ -25,9 +24,7 @@ class FormRecipeContainer extends Component {
             // Indique si le formulaire doit être affiché
             showForm: false,
             // Collection d'objet affiché liste
-            recipes: [],
-            // Liste d'ingredient
-            ingredients: []
+            recipes: []
         }
 
         // Ajustment du contexte d'exécution pour avoir accès à l'instance avec this.
@@ -36,26 +33,12 @@ class FormRecipeContainer extends Component {
         this.handleInputOnChange = this.handleInputOnChange.bind(this)
     }
 
-    /* componentDidMount () {
+    componentDidMount () {
         fetch('http://localhost:8080/recipes', { method: 'GET' })
             .then(response => response.json())
             .then(responseObject => {
                 console.log(responseObject)
                 this.setState({ recipes: responseObject })
-            })
-
-         fetch('http://localhost:8080/ingredients', { method: 'GET' })
-            .then(response => response.json())
-            .then(response => {
-                this.setState({ ingredients: response })
-            })
-    } */
-
-    componentDidMount () {
-        fetch('http://localhost:8080/ingredients', { method: 'GET' })
-            .then(response => response.json())
-            .then(response => {
-                this.setState({ ingredients: response })
             })
     }
 
@@ -112,13 +95,6 @@ class FormRecipeContainer extends Component {
         })
     }
 
-    handleAddOnClick1 = () => {
-        this.setState({
-            formValues: {},
-            showForm: true
-        })
-    }
-
     handleOnSaveClick = () => {
         const method = this.state.formValues.id ? 'PUT' : 'POST'
         fetch('http://localhost:8080/recipes', buildHeader(method, this.state.formValues))
@@ -140,25 +116,15 @@ class FormRecipeContainer extends Component {
             <div>
                 <h1>Formulaire</h1>
                 <FormComponent action='/recipes' onSaveClick={this.handleOnSaveClick} onCancelClick={this.handleOnCancelClick}>
-                    <InputComponent onChange={this.handleInputOnChange} label='Nom de recette:' type='text' name='recipeName' value={this.state.formValues.recipeName} />
-                    <InputComponent onChange={this.handleInputOnChange} label='Description:' type='text' name='recipeDescription' value={this.state.formValues.recipeDescription} />
-                    <InputComponent onChange={this.handleInputOnChange} label='Nom adopte de recette:' type='text' name='adoptedRecipeName' value={this.state.formValues.adoptedRecipeName} />
-                    <InputComponent onChange={this.handleInputOnChange} label='Description adptee:' type='text' name='adoptedRecipeDescription' value={this.state.formValues.adoptedRecipeDescription} />
+                    <InputComponent onChange={this.handleInputOnChange} label='Nom de recette:' type='text' name='proposedtitle' value={this.state.formValues.proposedtitle} />
+                    <InputComponent onChange={this.handleInputOnChange} label='Description:' type='text' name='proposeddescription' value={this.state.formValues.proposeddescription} />
+                    <InputComponent onChange={this.handleInputOnChange} label='Createur :' type='text' name='userid' value={this.state.formValues.userid} />
+                    <InputComponent onChange={this.handleInputOnChange} label='Nom adopte de recette:' type='text' name='adoptedtitle' value={this.state.formValues.adoptedtitle} />
+                    <InputComponent onChange={this.handleInputOnChange} label='Description adptee:' type='text' name='adopteddescription' value={this.state.formValues.adopteddescription} />
+                    <InputComponent onChange={this.handleInputOnChange} label='Status:' type='text' name='status' value={this.state.formValues.status} />
                 </FormComponent>
             </div>
 
-        )
-    }
-
-    renderFormIngredient () {
-        return (
-            <div>
-                <h1>Ajouter un ingredient</h1>
-                <FormIngredientComponent action='/ingredients' onSaveClick={this.handleOnSaveClick} onCancelClick={this.handleOnCancelClick}>
-                    <InputComponent onChange={this.handleInputOnChange} label='Nom:' type='text' name='ingredientName' />
-                    <InputComponent onChange={this.handleInputOnChange} label='Categorie:' type='text' name='ingredientCategorie' />
-                </FormIngredientComponent>
-            </div>
         )
     }
 
@@ -173,12 +139,6 @@ class FormRecipeContainer extends Component {
                     onAddClick={this.handleAddOnClick}
                     onAddClick1={this.handleAddOnClick1}
                 />
-                <h1>Liste des ingrédients</h1>
-                {this.state.ingredients.map(ingredient => (
-                    <ul key={ingredient.id}>
-                        <li key={ingredient.id}>{ingredient.name}</li>
-                    </ul>
-                ))}
             </div>
         )
     }
@@ -186,7 +146,7 @@ class FormRecipeContainer extends Component {
     render () {
         return (
             <div>
-                {this.state.showForm ? this.renderFormIngredient() : this.renderList()}
+                {this.state.showForm ? this.renderForm() : this.renderList()}
             </div>
         )
     }

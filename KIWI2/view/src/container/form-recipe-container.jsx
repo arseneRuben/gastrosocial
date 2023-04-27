@@ -116,10 +116,12 @@ class FormRecipeContainer extends Component {
             <div>
                 <h1>Formulaire</h1>
                 <FormComponent action='/recipes' onSaveClick={this.handleOnSaveClick} onCancelClick={this.handleOnCancelClick}>
-                    <InputComponent onChange={this.handleInputOnChange} label='Nom de recette:' type='text' name='recipeName' value={this.state.formValues.recipeName} />
-                    <InputComponent onChange={this.handleInputOnChange} label='Description:' type='text' name='recipeDescription' value={this.state.formValues.recipeDescription} />
-                    <InputComponent onChange={this.handleInputOnChange} label='Nom adopte de recette:' type='text' name='adoptedRecipeName' value={this.state.formValues.adoptedRecipeName} />
-                    <InputComponent onChange={this.handleInputOnChange} label='Description adptee:' type='text' name='adoptedRecipeDescription' value={this.state.formValues.adoptedRecipeDescription} />
+                    <InputComponent onChange={this.handleInputOnChange} label='Nom de recette:' type='text' name='proposedtitle' value={this.state.formValues.proposedtitle} />
+                    <InputComponent onChange={this.handleInputOnChange} label='Description:' type='text' name='proposeddescription' value={this.state.formValues.proposeddescription} />
+                    <InputComponent onChange={this.handleInputOnChange} label='Createur :' type='text' name='userid' value={this.state.formValues.userid} />
+                    <InputComponent onChange={this.handleInputOnChange} label='Nom adopte de recette:' type='text' name='adoptedtitle' value={this.state.formValues.adoptedtitle} />
+                    <InputComponent onChange={this.handleInputOnChange} label='Description adptee:' type='text' name='adopteddescription' value={this.state.formValues.adopteddescription} />
+                    <InputComponent onChange={this.handleInputOnChange} label='Status:' type='text' name='status' value={this.state.formValues.status} />
                 </FormComponent>
             </div>
 

@@ -14,7 +14,7 @@ function buildHeader (method, body) {
     }
 }
 
-class CRUDContainer extends Component {
+class FormRecipeContainer extends Component {
     constructor (props) {
         super(props)
 
@@ -24,7 +24,7 @@ class CRUDContainer extends Component {
             // Indique si le formulaire doit être affiché
             showForm: false,
             // Collection d'objet affiché liste
-            users: []
+            recipes: []
         }
 
         // Ajustment du contexte d'exécution pour avoir accès à l'instance avec this.
@@ -37,7 +37,8 @@ class CRUDContainer extends Component {
         fetch('http://localhost:8080/recipes', { method: 'GET' })
             .then(response => response.json())
             .then(responseObject => {
-                this.setState({ users: responseObject })
+                console.log(responseObject)
+                this.setState({ recipes: responseObject })
             })
     }
 
@@ -83,7 +84,7 @@ class CRUDContainer extends Component {
         fetch('http://localhost:8080/recipes/' + id, { method: 'DELETE' })
             .then(response => response.json())
             .then(response => {
-                this.setState({ users: response })
+                this.setState({ recipes: response })
             })
     }
 
@@ -100,7 +101,7 @@ class CRUDContainer extends Component {
             .then(response => response.json())
             .then(responseObject => {
                 this.setState({
-                    users: responseObject,
+                    recipes: responseObject,
                     showForm: false
                 })
             })
@@ -114,7 +115,7 @@ class CRUDContainer extends Component {
         return (
             <div>
                 <h1>Formulaire</h1>
-                <FormComponent action='/users' onSaveClick={this.handleOnSaveClick} onCancelClick={this.handleOnCancelClick}>
+                <FormComponent action='/recipes' onSaveClick={this.handleOnSaveClick} onCancelClick={this.handleOnCancelClick}>
                     <InputComponent onChange={this.handleInputOnChange} label='Nom de recette:' type='text' name='recipeName' value={this.state.formValues.recipeName} />
                     <InputComponent onChange={this.handleInputOnChange} label='Description:' type='text' name='recipeDescription' value={this.state.formValues.recipeDescription} />
                     <InputComponent onChange={this.handleInputOnChange} label='Nom adopte de recette:' type='text' name='adoptedRecipeName' value={this.state.formValues.adoptedRecipeName} />
@@ -129,7 +130,7 @@ class CRUDContainer extends Component {
             <div>
                 <h1>Liste</h1>
                 <ListComponent
-                    users={this.state.users}
+                    recipes={this.state.recipes}
                     onItemClick={this.handleItemOnClick}
                     onItemDeleteClick={this.handleItemDeleteOnClick}
                     onAddClick={this.handleAddOnClick}
@@ -147,4 +148,4 @@ class CRUDContainer extends Component {
     }
 }
 
-export default CRUDContainer
+export default FormRecipeContainer

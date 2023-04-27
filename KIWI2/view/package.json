@@ -2,8 +2,9 @@
     "name": "kiwi",
     "version": "1.0.0",
     "description": "projet final",
+   
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+       
         "build": "npm run lint && webpack --mode production",
         "dev": "npm run lint && webpack serve --mode development",
         "lint": "eslint src/**/*.jsx"

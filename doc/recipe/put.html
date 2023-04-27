@@ -16,12 +16,21 @@
       <aside class="doc__nav">
        <ul>
           <li class="js-btn"><a href="#title">URL</a></li>
-          <li class="js-btn"><a href="#details">Body details</a></li>
+          <li class="js-btn"><a href="#details">Path details</a></li>
           <li class="js-btn"><a href="#response">Response</a></li>
           <li class="js-btn"><a href="#supplements">Supplements</a></li>
         
         </ul>
-        <ul>
+         <ul>
+          <li class="js-btn"><a href="index.html">List of recipe</a></li>
+          <li class="js-btn"><a href="get.html">Get a recipe</a></li>
+          <li class="js-btn"><a href="post.html">Create a recipe</a></li>
+          <li class="js-btn"><a href="put.html">Update a recipe</a></li>
+          <li class="js-btn"><a href="delete.html">Delete a recipe</a></li>
+        
+        
+        </ul>
+         <ul>
           
            <li class="js-btn"><a href="../image/upload.html">Upload an image</a></li>
           
@@ -29,18 +38,11 @@
         
         </ul>
      
-        <ul>
-          
-          <li class="js-btn"><a href="index.html">Recipe</a></li>
-          <li class="js-btn"><a href="post.html">Create a recipe</a></li>
-          <li class="js-btn"><a href="put.html">Update a recipe</a></li>
-          <li class="js-btn"><a href="delete.html">Delete a recipe</a></li>
-        
-        </ul>
+     
       </aside>
       <article class="doc__content">
         <section class="js-section" id="title">
-          <h3 class="section__title">PUT/recipes?token=userToken</h3>
+          <h3 class="section__title">PUT/recipes/:idrecipe?token=userToken</h3>
           <p>Modifier une recette</p>
           
         </section>
@@ -60,6 +62,12 @@
               <td>OUI</td>
               <td>Token d'identification de l'utilisateur</td>
             </tr>
+             <tr>
+              <td>idRecipe</td>
+              <td>Entier</td>
+              <td>OUI</td>
+              <td>Identifiant de la recette a modifier</td>
+            </tr>
            
            
           </table>
@@ -72,7 +80,7 @@
             <pre class="code code--block">
               <code>
              $ {
-                    "id": "idRecipe",
+                    
                     "adoptedTitle": "Riz saute",
                     "adoptedDescription": "Riz special rapide repas a base du riz et de condiments",
                     "adoptedImages":[idImage1, idImage2],

@@ -70,6 +70,17 @@ CREATE TABLE IF NOT EXISTS steps
    constraint fk_step_recipe FOREIGN KEY(recipeId) REFERENCES recipe(id)
 );
 
+CREATE TABLE IF NOT EXISTS public.ingredientrecipe
+(
+    id  SERIAL PRIMARY KEY,
+    ingredientId integer NOT NULL,
+    recipeId integer NOT NULL,
+    qte integer NOT NULL,
+    CONSTRAINT fk_ingredientrecipe_ingredient FOREIGN KEY(ingredientId) REFERENCES ingredient(id),
+    CONSTRAINT fk_ingredientrecipe_recipe FOREIGN KEY(recipeId) REFERENCES recipe(id) ,
+    CONSTRAINT uniq_ingredientrecipe UNIQUE(recipeId, ingredientId)
+);
+
 
 INSERT INTO category(name,description) VALUES('africain','recette africaine');
 INSERT INTO category(name,description) VALUES('europeen','recette europeenne');

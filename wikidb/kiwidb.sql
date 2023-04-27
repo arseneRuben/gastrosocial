@@ -59,13 +59,14 @@ CREATE TABLE IF NOT EXISTS likes
 	constraint fk_likes_recipe FOREIGN KEY(recipeId) REFERENCES recipe(id)
 );
 
-CREATE TABLE IF NOT EXISTS steps 
+CREATE TABLE IF NOT EXISTS steps
 (
    id      SERIAL PRIMARY KEY,
    recipeId    INTEGER NOT NULL,
    description    VARCHAR(200) NOT NULL,
-   stepNumber INTEGER    NOT NULL,                
-   adopted BOOLEAN NOT NULL,
+   stepNumber INTEGER    NOT NULL,               
+   adopted BOOLEAN NOT NULL DEFAULT false,
+   constraint uniq_steps UNIQUE(recipeId, stepNumber),
    constraint fk_step_recipe FOREIGN KEY(recipeId) REFERENCES recipe(id)
 );
 

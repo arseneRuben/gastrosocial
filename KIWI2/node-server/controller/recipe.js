@@ -21,7 +21,7 @@ export const deleteRecipe = async (req, res) => {
 export const getRecipe = async (req, res) => {
     dao.connect()
     dao.query('SELECT * FROM recipe WHERE id=$1', [req.params.id], (resp) => {
-        writeJSONResponse(req, res, res.rows)
+        writeJSONResponse(req, res, resp.rows)
         dao.disconnect()
     })
 }

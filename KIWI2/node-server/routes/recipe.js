@@ -7,6 +7,7 @@ const router = express.Router()
 /* READ */
 router.get('/:id/steps', getSteps)
 router.get('/:id/likes', getLikes)
+// router.get('/:id/likes', get)
 router.get('/', getRecipes)
 router.get('/:id', getRecipe)
 /* CREATE */

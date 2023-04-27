@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "KIWI postgres",
     "main": "index.js",
+    
     "scripts": {
         "test": " node test.js"
     },

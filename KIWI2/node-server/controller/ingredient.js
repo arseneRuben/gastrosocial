@@ -25,6 +25,13 @@ export const getIngredient = async (req, res) => {
         dao.disconnect()
     })
 }
+export const getIngredientsByRecipe = async (req, res) => {
+    dao.connect()
+    dao.query('SELECT * FROM ingredient WHERE recipeId=$1', [req.params.id], (resp) => {
+        writeJSONResponse(req, res, res.rows)
+        dao.disconnect()
+    })
+}
 
 export const createIngredient = async (req, res) => {
     dao.connect()

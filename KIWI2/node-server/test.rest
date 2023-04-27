@@ -85,38 +85,31 @@ GET http://localhost:8080/ingredient HTTP/1.1
 
 ###
 
-GET http://localhost:8080/ingredient/1 HTTP/1.1
+GET http://localhost:8080/ingredients HTTP/1.1
 
 ###
 
-POST http://localhost:8080/ingredient HTTP/1.1
+POST http://localhost:8080/ingredients HTTP/1.1
 content-type: application/x-www-form-urlencoded
 
-id=1&name=Poulet&categoryid=1
+id=1&name=Poulet&categoryId=1
 
 ###
 
-POST http://localhost:8080/ingredient HTTP/1.1
+POST http://localhost:8080/ingredients HTTP/1.1
 content-type: application/json
 
 {"id": 1, "name":"Poulet", "categoryid": 1}
 
 ###
 
-DELETE http://localhost:8080/ingredient/1 HTTP/1.1
+DELETE http://localhost:8080/ingredients/1 HTTP/1.1
 
 
 
 
 // etape *********************************************************
 
-###
-
-GET http://localhost:8080/etape HTTP/1.1
-
-###
-
-GET http://localhost:8080/etape/1 HTTP/1.1
 
 ###
 

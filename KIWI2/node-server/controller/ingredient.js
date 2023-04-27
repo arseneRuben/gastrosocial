@@ -10,9 +10,16 @@ export const getIngredients = async (req, res) => {
     })
 }
 
-export const deleteIngredient = async (req, res) => {
+export const deleteIngredients = async (req, res) => {
     dao.connect()
     dao.query('DELETE  FROM ingredient WHERE id=$1', [req.params.id], (result) => {
+        res.writeHead(HTTP_OK, { 'Content-Type': CONTENT_TYPE_JSON })
+        dao.disconnect()
+    })
+}
+export const deleteIngredient = async (req, res) => {
+    dao.connect()
+    dao.query('DELETE  FROM ingredientrecipe WHERE recipeId=$1 AND ingredientId=$2', [req.params.id, req.params.ingredientId], (result) => {
         res.writeHead(HTTP_OK, { 'Content-Type': CONTENT_TYPE_JSON })
         dao.disconnect()
     })

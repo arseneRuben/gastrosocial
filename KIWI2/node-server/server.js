@@ -47,6 +47,7 @@ app.get('/', function (request, response) {
 app.use('/categories', categoryRoute)
 app.use('/recipes', recipeRoute)
 app.use('/likes', likeRoute)
+// app.use('/steps', stRoute)
 
 //  likes   ****************************************************************************
 

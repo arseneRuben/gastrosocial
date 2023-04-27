@@ -17,37 +17,23 @@ export const getLikes = async (req, res) => {
         dao.disconnect()
     })
 }
+
+export const deleteLike = async (req, res) => {
+    dao.connect()
+    dao.query('DELETE  FROM likes WHERE id=$1', [req.params.id], (result) => {
+        req.writeHead(HTTP_OK, { 'Content-Type': CONTENT_TYPE_JSON })
+        dao.disconnect()
+    })
+}
+
+export const deleteLikeByUserAndRecipe = async (req, res) => {
+    dao.connect()
+    dao.query('DELETE  FROM likes WHERE userId=$1 AND recipeId=$2', [req.params.userId, req.params.recipeId], (result) => {
+        res.writeHead(HTTP_OK, { 'Content-Type': CONTENT_TYPE_JSON })
+        dao.disconnect()
+    })
+}
 /*
-app.get('/likes', function (request, response) {
-    dao.connect()
-    dao.query('SELECT * FROM likes', [], (result) => {
-        response.writeHead(HTTP_OK, { 'Content-Type': CONTENT_TYPE_JSON })
-        response.end(JSON.stringify(result.rows, null, 4))
-        dao.disconnect()
-    })
-})
-
-app.get('/likes/:id', function (request, response) {
-    dao.connect()
-    dao.query('SELECT * FROM likes WHERE id=$1', [request.params.id], (result) => {
-        writeJSONResponse(request, response, result.rows)
-        dao.disconnect()
-    })
-})
-app.put('/likes', function (request, response) {
-    dao.connect()
-    dao.query('UPDATE likes set recipeid=$1, userid=$2 WHERE id=$3', [request.body.recipeid, request.body.userid, request.body.id], function () {
-        dao.disconnect()
-    })
-})
-
-app.delete('/likes/:id', function (request, response) {
-    dao.connect()
-    dao.query('DELETE  FROM likes WHERE id=$1', [request.params.id], (result) => {
-        response.writeHead(HTTP_OK, { 'Content-Type': CONTENT_TYPE_JSON })
-        dao.disconnect()
-    })
-})
 
 //  Recipe   ****************************************************************************
 app.get('/likes', function (request, response) {

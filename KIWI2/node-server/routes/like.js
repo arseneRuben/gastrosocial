@@ -1,4 +1,4 @@
-import { createLike } from '../controller/like.js'
+import { createLike, deleteLikeByUserAndRecipe } from '../controller/like.js'
 import express from 'express'
 const router = express.Router()
 
@@ -8,7 +8,7 @@ const router = express.Router()
 router.post('/', createLike)
 /* UPDATE */
 
-/* DELETE
-router.delete('/:id', deleteLike) */
+/* DELETE */
+router.delete('/:recipeId/:userId', deleteLikeByUserAndRecipe)
 
 export default router

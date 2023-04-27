@@ -9,20 +9,33 @@ import likeRoute from './routes/like.js'
 import ingredientRoute from './routes/ingredient.js'
 // import multer from 'multer'
 // import morgan from 'morgan'
+<<<<<<< HEAD
+// import path from 'path'
+// import { fileURLToPath } from 'url'
+=======
 import path from 'path'
 import { fileURLToPath } from 'url'
+>>>>>>> 9dd735e026ff3b202e4f8dff4cb7ce5816414bbb
 // import helmet from 'helmet'
 
 /* CONFIGURATIONS */
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+// const __filename = fileURLToPath(import.meta.url)
+// const __dirname = path.dirname(__filename)
 const app = express()
 
+<<<<<<< HEAD
+// app.use(helmet())
+// app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }))
+// app.use(morgan('common'))
+// set directory where we keep our assets
+// app.use('/assets', express.static(path.join(__dirname, 'public/assets')))
+=======
 /* app.use(helmet())
 app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }))
 app.use(morgan('common'))
 // set directory where we keep our assets */
 app.use('/assets', express.static(path.join(__dirname, 'public/assets')))
+>>>>>>> 9dd735e026ff3b202e4f8dff4cb7ce5816414bbb
 
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }))

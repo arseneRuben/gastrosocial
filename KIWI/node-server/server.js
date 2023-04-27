@@ -48,8 +48,7 @@ app.get('/', function (request, response) {
 app.use('/categories', categoryRoute)
 app.use('/recipes', recipeRoute)
 app.use('/likes', likeRoute)
-
-// app.use('/steps', stRoute)
+app.use('/steps', stepRoute)
 
 //  likes   ****************************************************************************
 
@@ -57,4 +56,45 @@ app.use('/likes', likeRoute)
 
 app.listen(PORT, function () {
     console.log('Server listening on: http://localhost:%s', PORT)
+})
+
+// etape  *******************************************************************
+
+app.get('/etape', function (request, response) {
+    dao.connect()
+    dao.query('SELECT * FROM etape', [], (result) => {
+        response.writeHead(HTTP_OK, { 'Content-Type': CONTENT_TYPE_JSON })
+        response.end(JSON.stringify(result.rows, null, 4))
+        dao.disconnect()
+    })
+})
+
+app.post('/etape', function (request, response) {
+    console.log('TYPE', typeof request.body)
+    dao.connect()
+    dao.query('INSERT INTO etape (recipeid, userid) VALUES ($1, $2)', [request.body.recipeid, request.body.userid], function () {
+        dao.disconnect()
+    })
+})
+
+app.get('/etape/:id', function (request, response) {
+    dao.connect()
+    dao.query('SELECT * FROM etape WHERE id=$1', [request.params.id], (result) => {
+        writeJSONResponse(request, response, result.rows)
+        dao.disconnect()
+    })
+})
+app.put('/etape', function (request, response) {
+    dao.connect()
+    dao.query('UPDATE etape set recipeid=$1, userid=$2 WHERE id=$3', [request.body.recipeid, request.body.userid, request.body.id], function () {
+        dao.disconnect()
+    })
+})
+
+app.delete('/etape/:id', function (request, response) {
+    dao.connect()
+    dao.query('DELETE  FROM etape WHERE id=$1', [request.params.id], (result) => {
+        response.writeHead(HTTP_OK, { 'Content-Type': CONTENT_TYPE_JSON })
+        dao.disconnect()
+    })
 })

@@ -25,7 +25,9 @@ class FormRecipeContainer extends Component {
             // Indique si le formulaire doit être affiché
             showForm: false,
             // Collection d'objet affiché liste
-            recipes: []
+            recipes: [],
+            // Liste d'ingredient
+            ingredients: []
         }
 
         // Ajustment du contexte d'exécution pour avoir accès à l'instance avec this.
@@ -34,12 +36,26 @@ class FormRecipeContainer extends Component {
         this.handleInputOnChange = this.handleInputOnChange.bind(this)
     }
 
-    componentDidMount () {
+    /* componentDidMount () {
         fetch('http://localhost:8080/recipes', { method: 'GET' })
             .then(response => response.json())
             .then(responseObject => {
                 console.log(responseObject)
                 this.setState({ recipes: responseObject })
+            })
+
+         fetch('http://localhost:8080/ingredients', { method: 'GET' })
+            .then(response => response.json())
+            .then(response => {
+                this.setState({ ingredients: response })
+            })
+    } */
+
+    componentDidMount () {
+        fetch('http://localhost:8080/ingredients', { method: 'GET' })
+            .then(response => response.json())
+            .then(response => {
+                this.setState({ ingredients: response })
             })
     }
 
@@ -157,6 +173,12 @@ class FormRecipeContainer extends Component {
                     onAddClick={this.handleAddOnClick}
                     onAddClick1={this.handleAddOnClick1}
                 />
+                <h1>Liste des ingrédients</h1>
+                {this.state.ingredients.map(ingredient => (
+                    <ul key={ingredient.id}>
+                        <li key={ingredient.id}>{ingredient.name}</li>
+                    </ul>
+                ))}
             </div>
         )
     }
@@ -164,7 +186,7 @@ class FormRecipeContainer extends Component {
     render () {
         return (
             <div>
-                {this.state.showForm ? this.renderForm() : this.renderList()}
+                {this.state.showForm ? this.renderFormIngredient() : this.renderList()}
             </div>
         )
     }

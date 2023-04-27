@@ -1,6 +1,8 @@
 import { getRecipes, deleteRecipe, getRecipe, createRecipe } from '../controller/recipe.js'
 import express from 'express'
 import { getLikes } from '../controller/like.js'
+import { addIngredient } from '../controller/ingredient.js'
+
 import { getSteps, createStep, deleteStep, deleteSteps } from '../controller/step.js'
 const router = express.Router()
 
@@ -13,6 +15,7 @@ router.get('/:id', getRecipe)
 /* CREATE */
 router.post('/', createRecipe)
 router.post('/:id/steps', createStep)
+router.post('/:id/ingredients', addIngredient)
 /* UPDATE */
 
 /* DELETE */

@@ -39,3 +39,10 @@ export const createIngredient = async (req, res) => {
         dao.disconnect()
     })
 }
+
+export const addIngredient = async (req, res) => {
+    dao.connect()
+    dao.query('INSERT INTO ingredientrecipe (ingredientId, recipeId, qte) VALUES ($1, $2, $3)', [req.body.ingredientId, req.params.id, req.body.qte], function () {
+        dao.disconnect()
+    })
+}

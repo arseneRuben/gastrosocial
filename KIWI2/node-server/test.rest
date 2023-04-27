@@ -123,7 +123,12 @@ POST http://localhost:8080/recipes/1/steps HTTP/1.1
 content-type: application/x-www-form-urlencoded
 
 recipeId=1&description=Laver le poulet&stepNumber=1
+###
 
+POST http://localhost:8080/recipes/1/ingredients HTTP/1.1
+content-type: application/x-www-form-urlencoded
+
+qte=10&ingredientId=1
 
 ###
 

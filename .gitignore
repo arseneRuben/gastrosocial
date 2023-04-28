@@ -4,11 +4,11 @@
 #     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
 # Node artifact files
-node_modules/
-dist/
+**/node_modules/
+**/dist/
 
 # Compiled Java class files
-*
+
 
 # Compiled Python bytecode
 *.py[cod]

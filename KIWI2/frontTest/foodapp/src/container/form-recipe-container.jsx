@@ -135,7 +135,7 @@ class FormRecipeContainer extends Component {
 
                         
                             <div className='border-b-2 border-black'>
-                            <InputComponent onChange={this.handleInputOnChange} label='Nom de recette:' type='text' name='proposedtitle' value={this.state.formValues.proposedtitle} />
+                            <InputComponent onChange={this.handleInputOnChange} label='Nom de recette:' type='text' name='proposed_title' value={this.state.formValues.proposed_title} />
 
                             </div>
                             </fieldset>
@@ -149,7 +149,7 @@ class FormRecipeContainer extends Component {
                                 <AiOutlineFieldTime size= {45} color='black' />
                             
                                 <div className=' border-b-2  border-black'>
-                                <InputComponent onChange={this.handleInputOnChange} label='Temps de preparation(en min):' type='text' name='preparationTime' value={this.state.formValues.preparationTime} />
+                                <InputComponent onChange={this.handleInputOnChange} label='Temps de preparation(en min):' type='text' name='preparation_time' value={this.state.formValues.preparation_time} />
 
                                 </div>
                             </fieldset>
@@ -164,7 +164,7 @@ class FormRecipeContainer extends Component {
 
                         
                             <div className='border-b-2 border-black'>
-                            <InputComponent onChange={this.handleInputOnChange} label='Temps de cuisson(en min):' type='text' name='cookingTime' value={this.state.formValues.cookingTime} />
+                            <InputComponent onChange={this.handleInputOnChange} label='Temps de cuisson(en min):' type='text' name='cooking_time' value={this.state.formValues.cooking_time} />
 
                             </div>
                             </fieldset>
@@ -195,7 +195,7 @@ class FormRecipeContainer extends Component {
 
                         
                             <div className='border-b-2 border-black'>
-                            <InputComponent onChange={this.handleInputOnChange} label='Description:' type='text' name='proposeddescription' value={this.state.formValues.proposeddescription} />
+                            <InputComponent onChange={this.handleInputOnChange} label='Description:' type='text' name='proposed_description' value={this.state.formValues.proposed_description} />
 
                             </div>
                             </fieldset>
@@ -210,7 +210,7 @@ class FormRecipeContainer extends Component {
 
                             <BsPersonCircle size= {45} color='gray' />
                             <div className='border-b-2 border-black'>
-                            <InputComponent onChange={this.handleInputOnChange} label='Createur :' type='text' name='userid' value={this.state.formValues.userid} />
+                            <InputComponent onChange={this.handleInputOnChange} label='Createur :' type='text' name='user_id' value={this.state.formValues.user_id} />
 
                             </div>
                             </fieldset>

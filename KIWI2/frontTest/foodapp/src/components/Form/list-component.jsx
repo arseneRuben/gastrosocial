@@ -4,7 +4,7 @@ function renderLi (recipe, onItemClick, onItemDeleteClick) {
     return (
         <div key={recipe.id} id={recipe.id} title={'ID:' + recipe.id}>
             <span onClick={onItemClick}>
-                <strong>{recipe.proposedtitle}</strong> : {recipe.proposeddescription} {recipe.adoptedtitle} {recipe.adopteddescription} {'depuis ' + recipe.createdat + ' '}
+                <strong>{recipe.proposed_title}</strong> : {recipe.proposed_description} {recipe.proposed_title} {recipe.adopted_description} {'depuis ' + recipe.created_at + ' '}
             </span>
             <button onClick={onItemDeleteClick}>X</button>
         </div>

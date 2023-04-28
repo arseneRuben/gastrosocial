@@ -3,8 +3,7 @@ import { AiFillHeart } from 'react-icons/ai';
 import { BsShare } from 'react-icons/bs';
 import imagefirst from "../../assets/img/menu/4.png";
 import Rating from '../../components/Rating';
-import Footer from '../../components/Footer';
-import Hero from '../../components/Hero';
+
 const RecipePage = () => {
   return (
     <>

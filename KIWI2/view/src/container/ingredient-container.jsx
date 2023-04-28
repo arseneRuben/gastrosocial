@@ -3,6 +3,16 @@ import React, { Component } from 'react'
 import InputComponent from 'component/input-component'
 import FormIngredientComponent from '../component/form-ingredient-component'
 
+function buildHeader (method, body) {
+    return {
+        method,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    }
+}
+
 class IngredientContainer extends Component {
     constructor (props) {
         super(props)
@@ -12,7 +22,6 @@ class IngredientContainer extends Component {
             formValues: {},
             // Indique si le formulaire doit être affiché
             showForm: false,
-
             // Liste d'ingredient
             ingredients: []
         }
@@ -40,6 +49,18 @@ class IngredientContainer extends Component {
         })
     }
 
+    handleOnSaveClick = () => {
+        const method = this.state.formValues.id ? 'PUT' : 'POST'
+        fetch('http://localhost:8080/ingredients', buildHeader(method, this.state.formValues))
+            .then(response => response.json())
+            .then(responseObject => {
+                this.setState({
+                    recipes: responseObject,
+                    showForm: false
+                })
+            })
+    }
+
     handleAddOnClick = () => {
         this.setState({
             formValues: {},
@@ -56,8 +77,9 @@ class IngredientContainer extends Component {
             <div>
                 <h1>Ajouter un ingredient</h1>
                 <FormIngredientComponent action='/ingredients' onSaveClick={this.handleOnSaveClick} onCancelClick={this.handleOnCancelClick}>
-                    <InputComponent onChange={this.handleInputOnChange} label='Nom:' type='text' name='ingredientName' />
-                    <InputComponent onChange={this.handleInputOnChange} label='Categorie:' type='text' name='ingredientCategorie' />
+                    <InputComponent onChange={this.handleInputOnChange} label='Id:' type='text' name='id' value={this.state.formValues.id} />
+                    <InputComponent onChange={this.handleInputOnChange} label='Nom:' type='text' name='name' value={this.state.formValues.name} />
+                    <InputComponent onChange={this.handleInputOnChange} label='Categorie:' type='text' name='categoryid' value={this.state.formValues.categoryid} />
                 </FormIngredientComponent>
             </div>
         )
@@ -72,6 +94,7 @@ class IngredientContainer extends Component {
                         <li key={ingredient.id}>{ingredient.name}</li>
                     </ul>
                 ))}
+                <button onClick={this.handleAddOnClick}>Ajouter un ingredient</button>
             </div>
         )
     }

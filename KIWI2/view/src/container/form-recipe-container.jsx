@@ -137,7 +137,6 @@ class FormRecipeContainer extends Component {
                     onItemClick={this.handleItemOnClick}
                     onItemDeleteClick={this.handleItemDeleteOnClick}
                     onAddClick={this.handleAddOnClick}
-                    onAddClick1={this.handleAddOnClick1}
                 />
             </div>
         )

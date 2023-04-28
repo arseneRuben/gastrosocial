@@ -17,7 +17,6 @@ const ListComponent = ({ recipes, onItemClick, onItemDeleteClick, onAddClick, on
             {recipes.map((recipe) => renderLi(recipe, onItemClick, onItemDeleteClick))}
         </div>
         <button onClick={onAddClick}>Ajouter une recette</button>
-        <button onClick={onAddClick1}>Ajouter un ingredient</button>
     </div>
 )
 

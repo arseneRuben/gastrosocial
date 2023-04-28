@@ -1,4 +1,8 @@
 import React, { Component } from 'react'
+import {AiOutlineFieldTime} from 'react-icons/ai'
+import {TiGroup} from 'react-icons/ti'
+import {BsPersonCircle} from 'react-icons/bs'
+
 import FormComponent from '../components/Form/form-component'
 import InputComponent from '../components/Form/input-component'
 import ListComponent from '../components/Form/list-component'
@@ -114,18 +118,112 @@ class FormRecipeContainer extends Component {
 
     renderForm () {
         return (
+            <section className='flex items-center justify-between gap-[10rem] mx-32'>
+    
+    <aside className=''>
+      <div className='flex gap-10 mt-10 size 50px'>
+        <h2>Nouvelle recette</h2>
+      </div>
             <div>
                 <h1>Formulaire</h1>
                 <FormComponent action='/recipes' onSaveClick={this.handleOnSaveClick} onCancelClick={this.handleOnCancelClick}>
-                    <InputComponent onChange={this.handleInputOnChange} label='Nom de recette:' type='text' name='proposedtitle' value={this.state.formValues.proposedtitle} />
-                    <InputComponent onChange={this.handleInputOnChange} label='Description:' type='text' name='proposeddescription' value={this.state.formValues.proposeddescription} />
-                    <InputComponent onChange={this.handleInputOnChange} label='Createur :' type='text' name='userid' value={this.state.formValues.userid} />
-                    <InputComponent onChange={this.handleInputOnChange} label='Nom adopte de recette:' type='text' name='adoptedtitle' value={this.state.formValues.adoptedtitle} />
-                    <InputComponent onChange={this.handleInputOnChange} label='Description adptee:' type='text' name='adopteddescription' value={this.state.formValues.adopteddescription} />
-                    <InputComponent onChange={this.handleInputOnChange} label='Status:' type='text' name='status' value={this.state.formValues.status} />
+                <div className='flex gap-7 mt-10'>
+                    <div className='flex flex-col'>
+                    
+                            <fieldset>
+                           
+
+                        
+                            <div className='border-b-2 border-black'>
+                            <InputComponent onChange={this.handleInputOnChange} label='Nom de recette:' type='text' name='proposedtitle' value={this.state.formValues.proposedtitle} />
+
+                            </div>
+                            </fieldset>
+                        
+                    </div>
+                 </div>
+                <div className='flex gap-7 mt-10 ' >
+                    <div className='flex flex-col '>
+                        
+                            <fieldset>
+                                <AiOutlineFieldTime size= {45} color='black' />
+                            
+                                <div className=' border-b-2  border-black'>
+                                <InputComponent onChange={this.handleInputOnChange} label='Temps de preparation(en min):' type='text' name='preparationTime' value={this.state.formValues.preparationTime} />
+
+                                </div>
+                            </fieldset>
+                    </div>
+                </div> 
+
+                <div className='flex gap-7 mt-10'>
+                    <div className='flex flex-col'>
+                    
+                            <fieldset>
+                            <AiOutlineFieldTime size= {45} color='red' />
+
+                        
+                            <div className='border-b-2 border-black'>
+                            <InputComponent onChange={this.handleInputOnChange} label='Temps de cuisson(en min):' type='text' name='cookingTime' value={this.state.formValues.cookingTime} />
+
+                            </div>
+                            </fieldset>
+                        
+                    </div>
+                </div>
+
+                <div className='flex gap-7 mt-10'>
+                    <div className='flex flex-col'>
+                    
+                            <fieldset>
+                            <TiGroup size= {45} color='green' />
+
+                        
+                            <div className='border-b-2 border-black'>
+                            <InputComponent onChange={this.handleInputOnChange} label='Nombre de portions:' type='text' name='portions' value={this.state.formValues.portions} />
+
+                            </div>
+                            </fieldset>
+                        
+                    </div>
+                 </div>
+                 <div className='flex gap-7 mt-10'>
+                    <div className='flex flex-col'>
+                    
+                            <fieldset>
+                           
+
+                        
+                            <div className='border-b-2 border-black'>
+                            <InputComponent onChange={this.handleInputOnChange} label='Description:' type='text' name='proposeddescription' value={this.state.formValues.proposeddescription} />
+
+                            </div>
+                            </fieldset>
+                        
+                    </div>
+                 </div>
+                 <div className='flex gap-7 mt-10'>
+                    <div className='flex flex-col'>
+                    
+                            <fieldset>
+                           
+
+                            <BsPersonCircle size= {45} color='gray' />
+                            <div className='border-b-2 border-black'>
+                            <InputComponent onChange={this.handleInputOnChange} label='Createur :' type='text' name='userid' value={this.state.formValues.userid} />
+
+                            </div>
+                            </fieldset>
+                        
+                    </div>
+                 </div>
+              
+
+      
                 </FormComponent>
             </div>
-
+            </aside>
+  </section>
         )
     }
 

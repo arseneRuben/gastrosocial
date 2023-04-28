@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 
 import NavLinks from './components/NavLinks';
 import About from './components/About';
+import Menu from './components/Menu';
 
 import Footer from './components/Footer';
 
@@ -14,9 +15,11 @@ import { useSelector , useDispatch} from "react-redux";
 const App = () => {
   return (
     <div className='h-full bg-pattern bg-repeat max-w-[1800px] mx-auto overflow-hidden'>
-       <Hero />
+      <Hero />
       <NavLinks />
-      <Footer />
+      <Menu />
+      <About />
+      <Footer /> 
      
       <div className='h-[380px] md:h-[370px]'></div>
     </div>

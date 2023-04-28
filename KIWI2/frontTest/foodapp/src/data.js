@@ -10,10 +10,10 @@ import {
 import AboutImg from '../src/assets/img/about/plate.png';
 import ModelWhiteImg from '../src/assets/img/model-white.png';
 import ModelBlackImg from '../src/assets/img/model-black.png';
-import MenuImg1 from '../src/assets/img/menu/1.png';
-import MenuImg2 from '../src/assets/img/menu/2.png';
-import MenuImg3 from '../src/assets/img/menu/3.png';
-import MenuImg4 from '../src/assets/img/menu/4.png';
+import MenuImg1 from '../src/assets/img/menu/5.png';
+import MenuImg2 from '../src/assets/img/menu/6.png';
+import MenuImg3 from '../src/assets/img/menu/7.png';
+import MenuImg4 from '../src/assets/img/menu/8.png';
 import SignatureImg from '../src/assets/img/team/signature.png';
 import ChefImg from '../src/assets/img/team/chef.png';
 import Avatar1 from '../src/assets/img/testimonial/avatar1.png';
@@ -63,27 +63,27 @@ export const menuData = {
   menuItems: [
     {
       image: MenuImg1,
-      name: 'Chocolate Cake',
-      price: '$7.99',
-      description: 'Class aptent taciti ciosqu litora torquent per',
+      name: 'Magrets de canard et radicchio aux pommes et à l érable',
+      price: '',
+      description: '',
     },
     {
       image: MenuImg2,
-      name: 'Veggie Burger',
-      price: '$9.49',
-      description: 'Class aptent taciti ciosqu litora torquent per',
+      name: 'Truite à la ciboulette et purée de courge',
+      price: '',
+      description: '',
     },
     {
       image: MenuImg3,
-      name: 'King Burger',
-      price: '$8.50',
-      description: 'Class aptent taciti ciosqu litora torquent per',
+      name: 'Saumon poêlé et purée de pommes de terre aux poireaux',
+      price: '',
+      description: '',
     },
     {
       image: MenuImg4,
-      name: 'Mexican Burger',
-      price: '$9.99',
-      description: 'Class aptent taciti ciosqu litora torquent per',
+      name: 'Tartines aux oeufs et aux champignons',
+      price: '',
+      description: '',
     },
   ],
 };

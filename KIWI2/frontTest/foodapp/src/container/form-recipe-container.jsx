@@ -76,8 +76,8 @@ class FormRecipeContainer extends Component {
             .then(response => response.json())
             .then(responseObject => {
                 this.setState({
-                    formValues: responseObject,
-                    showForm: true
+                    recipes: responseObject,
+                    showForm: false
                 })
             })
     }
@@ -230,7 +230,7 @@ class FormRecipeContainer extends Component {
     renderList () {
         return (
             <div>
-                <h1>Liste</h1>
+                 {this.state.recipes.length > 1 ? <h4>Liste</h4> : <h4>Details d'une recette</h4>}
                 <ListComponent
                     recipes={this.state.recipes}
                     onItemClick={this.handleItemOnClick}

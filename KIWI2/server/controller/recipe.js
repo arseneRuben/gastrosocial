@@ -28,7 +28,13 @@ export const getRecipe = async (req, res) => {
 
 export const createRecipe = async (req, res) => {
     connect()
-    query('INSERT INTO recipe (proposed_title, proposed_description,user_id,preparation_time, cooking_time) VALUES ($1, $2, $3, $4, $5)', [req.body.proposed_title, req.body.proposed_description, req.body.user_id, req.body.preparation_time, req.body.cooking_time], function () {
+    query('INSERT INTO recipe (proposed_title, proposed_description,user_id,preparation_time,cooking_time,portions) VALUES ($1, $2, $3, $4, $5,$6)', [req.body.proposed_title, req.body.proposed_description, req.body.user_id, req.body.preparation_time, req.body.cooking_time, req.body.portions], function () {
+        disconnect()
+    })
+}
+export const updateRecipe = async (req, res) => {
+    connect()
+    query('UPATE  recipe SET proposed_title= $1 , proposed_description=$2,user_id=$3,preparation_time=$4,cooking_time=$5,portions=$6 WHERE id=$7', [req.body.proposed_title, req.body.proposed_description, req.body.user_id, req.body.preparation_time, req.body.cooking_time, req.body.portions, req.body.id], function () {
         disconnect()
     })
 }

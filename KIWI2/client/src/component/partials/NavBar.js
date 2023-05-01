@@ -22,7 +22,7 @@ const Navbar = () => {
                             <a className="dropdown-item" href="#">Moderations</a>
                             <a className="dropdown-item" href="#">Settings</a>
                             <div className='dropdown-divider'></div>
-                            <a className="dropdown-item" href="#">Logout</a>
+                            <a className="dropdown-item" href="/auth">Logout</a>
                          </div>
 
                     </ul>

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 
-import InputComponent from '../component/input-component'
+import InputComponent from '../component/form/input-component'
 import ListComponent from '../component/list-component'
-import FormComponent from '../component/form-component'
+import FormComponent from '../component/form/form-component'
 
 function buildHeader (method, body) {
     return {
@@ -94,6 +94,9 @@ class FormRecipeContainer extends Component {
             formValues: {},
             showForm: true
         })
+        this.render(
+            
+        )
     }
 
     handleOnSaveClick = () => {

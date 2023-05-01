@@ -8,6 +8,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Header from "./component/partials/Header";
 import RecipePage from "./pages/recipePage/index";
 import ProfilePage from "./pages/profilePage";
+import IngredientPage from "./pages/ingredientPage";
 
 
 function App() {
@@ -17,8 +18,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/ingredient/index" element={<IngredientPage />} />
           <Route path="/profile" element={<ProfilePage />} />
-
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/recipe/index" element={<RecipePage />} />
         </Routes>

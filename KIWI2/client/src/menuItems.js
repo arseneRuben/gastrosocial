@@ -19,14 +19,27 @@ export const menuItems = [
           title: 'Favoris',
           url: '/recipe/favorite',
         },
-        {
-            title: 'Details',
-            url: '/recipe/detail',
-          }
+       
       ],
     },
     {
       title: 'About',
       url: '/about',
+    },
+    {
+      title: 'Ingredients',
+      url: '/recipe',
+      submenu: [
+        {
+          title: 'Nouvelle ',
+          url: '/ingredient/new',
+        },
+        {
+            title: 'Catalogue ',
+            url: '/ingredient/index',
+          }
+      
+      
+      ],
     },
   ];

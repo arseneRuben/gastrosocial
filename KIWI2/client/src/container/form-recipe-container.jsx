@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 
-import InputComponent from 'component/input-component'
-import ListComponent from 'component/list-component'
-import FormComponent from 'component/form-component'
+import InputComponent from '../component/input-component'
+import ListComponent from '../component/list-component'
+import FormComponent from '../component/form-component'
 
 function buildHeader (method, body) {
     return {
@@ -143,7 +143,7 @@ class FormRecipeContainer extends Component {
 
     renderList () {
         return (
-            <div>
+            <div className="row mb-2">
                 {this.state.recipes.length > 1 ? <h1>Liste</h1> : <h1>Details d'une recette</h1>}
                 <ListComponent
                     recipes={this.state.recipes}

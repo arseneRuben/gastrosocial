@@ -13,6 +13,7 @@ export const getRecipe = (id) => async (dispatch) => {
 
 export const getRecipes = (page) => async (dispatch) => {
   try {
+    console.log("data")
     dispatch({ type: START_LOADING });
     const { data: { data, currentPage, numberOfPages } } = await api.fetchRecipes(page);
 

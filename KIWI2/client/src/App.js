@@ -6,6 +6,7 @@ import Header from "./component/partials/Header";
 import HomePage from "./pages/homePage";
 import IngredientPage from "./pages/ingredientPage";
 import ProfilePage from "./pages/profilePage";
+import Footer from "./component/Footer";
 
 
 
@@ -25,7 +26,8 @@ const App = () => {
 
         </Routes>
       </BrowserRouter>
-     
+      <Footer/>
+
     </div>
   );
 }

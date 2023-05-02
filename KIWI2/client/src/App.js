@@ -7,6 +7,7 @@ import HomePage from "./pages/homePage";
 import IngredientPage from "./pages/ingredientPage";
 import ProfilePage from "./pages/profilePage";
 import Footer from "./component/Footer";
+import Carouseel from "./component/partials/Carouseel";
 
 
 
@@ -26,6 +27,7 @@ const App = () => {
 
         </Routes>
       </BrowserRouter>
+      <Carouseel/>
       <Footer/>
 
     </div>

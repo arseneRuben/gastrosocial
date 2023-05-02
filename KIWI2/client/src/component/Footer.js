@@ -41,7 +41,7 @@ export default function App() {
           <div className='row mt-3'>
             <div md="3" lg="4" xl="3" className='col-3 mx-auto mb-4'>
               <h6 className='text-uppercase fw-bold mb-4'>
-                Company name
+                KIWI
               </h6>
               <p>
                 Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
@@ -53,22 +53,22 @@ export default function App() {
               <h6 className='text-uppercase fw-bold mb-4'>Products</h6>
               <p>
                 <a href='#!' className='text-reset'>
-                  Angular
+                  Recette
                 </a>
               </p>
               <p>
                 <a href='#!' className='text-reset'>
-                  React
+                  Categories
                 </a>
               </p>
               <p>
                 <a href='#!' className='text-reset'>
-                  Vue
+                  Ingredients
                 </a>
               </p>
               <p>
                 <a href='#!' className='text-reset'>
-                  Laravel
+                  Login
                 </a>
               </p>
             </div>

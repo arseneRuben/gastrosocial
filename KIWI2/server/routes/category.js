@@ -1,4 +1,4 @@
-import { getCategories, deleteCategory, getCategory, createCategory } from '../controller/category.js'
+import { getCategories, deleteCategory, getCategory, createCategory } from '../dao/category.js'
 import express from 'express'
 const router = express.Router()
 

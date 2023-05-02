@@ -1,4 +1,4 @@
-import { createLike, deleteLikeByUserAndRecipe } from '../controller/like.js'
+import { createLike, deleteLikeByUserAndRecipe } from '../dao/like.js'
 import express from 'express'
 const router = express.Router()
 

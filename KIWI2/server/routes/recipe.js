@@ -1,9 +1,8 @@
-import { getRecipes, deleteRecipe, getRecipe, createRecipe } from '../controller/recipe.js'
+import { getRecipes, deleteRecipe, getRecipe, createRecipe } from '../dao/recipe.js'
 import express from 'express'
-import { getLikes } from '../controller/like.js'
-import { addIngredient, getIngredientsByRecipe, deleteIngredient, deleteIngredients } from '../controller/ingredient.js'
-
-import { getSteps, createStep, deleteStep, deleteSteps } from '../controller/step.js'
+import { getLikes } from '../dao/like.js'
+import { addIngredient, getIngredientsByRecipe, deleteIngredient, deleteIngredients } from '../dao/ingredient.js'
+import { getSteps, createStep, deleteStep, deleteSteps } from '../dao/step.js'
 const router = express.Router()
 
 /* READ */

@@ -1,6 +1,6 @@
 import { menuItems } from '../../menuItems';
 import MenuItems from './menu/MenuItems';
-
+import SearchIcon from '@mui/icons-material/Search';
 const Navbar = () => {
     return (
         <nav className='navbar navbar-expand-sm navbar-light bg-light'>
@@ -15,8 +15,25 @@ const Navbar = () => {
                     {menuItems.map((menu, index) => {
                         return <MenuItems items={menu} key={index} />;
                     })}
+
+                    
                     </ul>
+                    
+                    <div className="input-group row" >
+                         <div className="form-outline col-10">
+                             <input  id="search-input" type="search" className="form-control " placeholder='rechercher' />
+                             
+                         </div>
+                        <div className='col-2'>
+                            <button id="search-button" type="button" className="btn btn-primary">
+                        <SearchIcon/>
+
+                        </button>
+                        </div>
+                    </div>
                     <ul className="nav navbar-nav ms-auto">
+
+                    
                          <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Admin</a>
                          <div className='dropdown-menu dropdown-menu-end'>
                             <a className="dropdown-item" href="#">Moderations</a>

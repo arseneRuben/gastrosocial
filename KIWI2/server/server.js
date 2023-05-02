@@ -19,18 +19,6 @@ import ingredientRoute from './routes/ingredient.js'
 // const __dirname = path.dirname(__filename)
 const app = express()
 
-// app.use(helmet())
-// app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }))
-// app.use(morgan('common'))
-// set directory where we keep our assets
-// app.use('/assets', express.static(path.join(__dirname, 'public/assets')))
-
-// parse application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }))
-
-// parse application/json
-app.use(express.json())
-
 const PORT = 8080
 const CONTENT_TYPE_HTML = 'text/html'
 const HTTP_OK = 200
@@ -47,6 +35,12 @@ app.use(function (request, response, next) {
     response.header('Access-Control-Allow-Credentials', 'false')
     next()
 })
+
+// parse application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }))
+
+// parse application/json
+app.use(express.json())
 
 app.get('/', function (request, response) {
     response.writeHead(HTTP_OK, { 'Content-Type': CONTENT_TYPE_HTML })

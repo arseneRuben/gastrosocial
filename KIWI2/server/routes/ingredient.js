@@ -1,4 +1,4 @@
-import { getIngredients, deleteIngredient, getIngredient, createIngredient } from '../controller/ingredient.js'
+import { getIngredients, deleteIngredient, getIngredient, createIngredient } from '../dao/ingredient.js'
 import express from 'express'
 const router = express.Router()
 

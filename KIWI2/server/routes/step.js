@@ -1,4 +1,4 @@
-import { getSteps, deleteStep, createStep, deleteSteps } from '../controller/step.js'
+import { getSteps, deleteStep, createStep, deleteSteps } from '../dao/step.js'
 import express from 'express'
 const router = express.Router()
 

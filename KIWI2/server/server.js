@@ -7,18 +7,10 @@ import categoryRoute from './routes/category.js'
 import recipeRoute from './routes/recipe.js'
 import likeRoute from './routes/like.js'
 import ingredientRoute from './routes/ingredient.js'
-// import multer from 'multer'
-// import morgan from 'morgan'
-// import path from 'path'
-// import { fileURLToPath } from 'url'
-// import helmet from 'helmet'
 
-/* CONFIGURATIONS */
-// const __filename = fileURLToPath(import.meta.url)
-// const __dirname = path.dirname(__filename)
 const app = express()
 
-const PORT = 8080
+const PORT = 8000
 const CONTENT_TYPE_HTML = 'text/html'
 const HTTP_OK = 200
 
@@ -31,7 +23,7 @@ app.use(function (request, response, next) {
     response.header('Access-Control-Allow-Origin', '*')
     response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
     response.header('Access-Control-Allow-Methods', 'POST, PUT, GET, DELETE, OPTIONS')
-    response.header('Access-Control-Allow-Credentials', 'false')
+    response.header('Access-Control-Allow-Credentials', 'true')
     next()
 })
 

@@ -137,7 +137,7 @@ DELETE http://localhost:8080/etape/1 HTTP/1.1
 // Cas des recettes
 ###
 
-GET http://localhost:8080/recipes HTTP/1.1
+GET http://localhost:8000/recipes HTTP/1.1
 
 ###
 POST http://localhost:8080/recipes HTTP/1.1

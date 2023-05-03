@@ -2,7 +2,7 @@ import React from 'react';
 import { BsShare } from 'react-icons/bs';
 import Rating from '../../component/Rating';
 
-const RecipeDetails = () => {
+const RecipeDetails = ({recipe}) => {
 
   return (
     <>
@@ -11,7 +11,7 @@ const RecipeDetails = () => {
     
       <aside className=''>
         <div className='flex gap-10 mt-10 '>
-          <h2>Nom de la reccette</h2>
+          <h2>{recipe.adopted_title}</h2>
           <button className='bg-slate-400 text-white p-1 px-5 rounded-lg flex items-center gap-5'> 
           <BsShare />
           <p>partager</p>
@@ -26,12 +26,12 @@ const RecipeDetails = () => {
           <p>Ajouter a mes favories</p>
         </div>
         <div className='flex gap-7 mt-10'>
-          <p>1h15min de preparation</p>
-          <p>1h15min de cuisson</p>
-          <p>4 portion</p>
+          <p>{recipe.preparation_time} min de preparation</p>
+          <p> {recipe.cooking_time} min de cuisson</p>
+          <p>{recipe.portions} portion</p>
         </div>
         <div className='flex gap-7 mt-10 w-[30rem]'>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus, harum asperiores quas minus at dolorum porro id eos tempora expedita et ut, possimus, quisquam corrupti nemo necessitatibus quasi numquam perspiciatis.</p>
+          <p>{recipe.adopted_description}.</p>
           <aside className=''>
 
             <div className='w-[100%] ml-32'>

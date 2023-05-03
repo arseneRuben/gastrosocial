@@ -7,6 +7,8 @@ export const getRecipe = (id) => async (dispatch) => {
     dispatch({ type: START_LOADING });
     const { data } = await api.fetchRecipe(id);
     dispatch({ type: FETCH_RECIPE, payload: { recipe: data } });
+    dispatch({ type: END_LOADING });
+
   } catch (error) {
     console.log(error);
   }

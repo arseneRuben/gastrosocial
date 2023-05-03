@@ -26,7 +26,6 @@ const RecipePage = () => {
   
                  {isLoading ? <SyncIcon /> :
                   <div className="  d-flex flex-wrap  mb-4 box-shadow">
-                     
 
                          {recipes?.map((recipe) => (
                           <div className="card" key={recipe.id}>

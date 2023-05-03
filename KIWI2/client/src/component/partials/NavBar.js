@@ -11,21 +11,33 @@ const Navbar = () => {
                     <span className='navbar-toggler-icon'></span>
                 </button>
                 <div id="navbarCollapse" className='collapse navbar-collapse'>
+                    
                     <ul className="nav navbar-nav">
                     {menuItems.map((menu, index) => {
                         return <MenuItems items={menu} key={index} />;
                     })}
                     </ul>
+                    <form className="form-inline my-2 my-lg-0">
+                        <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"/>
+                    </form>
+                    <form class="d-flex">
+                        <button class="btn btn-outline-dark" type="submit">
+                            <i class="bi-cart-fill me-1"></i>
+                            Liste d'epicerie
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                        </button>
+                    </form>
                     <ul className="nav navbar-nav ms-auto">
-                         <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Admin</a>
+                         <a className="nav-link dropdown-toggle" href="/"  data-bs-toggle="dropdown">Admin</a>
                          <div className='dropdown-menu dropdown-menu-end'>
-                            <a className="dropdown-item" href="#">Moderations</a>
-                            <a className="dropdown-item" href="#">Settings</a>
+                            <a className="dropdown-item" href="/">Moderations</a>
+                            <a className="dropdown-item" href="/">Settings</a>
                             <div className='dropdown-divider'></div>
                             <a className="dropdown-item" href="/auth">Logout</a>
                          </div>
 
                     </ul>
+                    
                 </div>
             </div>
       </nav>

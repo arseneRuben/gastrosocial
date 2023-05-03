@@ -8,11 +8,19 @@ import IngredientPage from "./pages/ingredientPage";
 import RecipePage from './pages/recipePage';
 import Footer from "./component/Footer";
 import NewRecipePage from './pages/recipePage/new';
+import {useEffect} from 'react';
+import { getRecipes } from "./actions/recipes";
+import { useDispatch } from 'react-redux';
 
 
 
 const App = () => {
-
+ const dispatch = useDispatch();
+  
+  useEffect(()=> {
+    dispatch(getRecipes());
+    
+  }, [dispatch])
  
   
   return (

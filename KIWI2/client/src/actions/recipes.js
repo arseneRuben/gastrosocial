@@ -1,6 +1,7 @@
 import { START_LOADING, END_LOADING, FETCH_ALL, FETCH_RECIPE, FETCH_BY_SEARCH, CREATE, UPDATE, DELETE, LIKE, COMMENT, FETCH_BY_CREATOR } from '../constants/actionTypes';
-import * as api from '../api/index.js';
+import * as api from '../api';
 
+// ACTION CREATORS
 export const getRecipe = (id) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
@@ -11,12 +12,11 @@ export const getRecipe = (id) => async (dispatch) => {
   }
 };
 
-export const getRecipes = (page) => async (dispatch) => {
+export const getRecipes = () => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
-    const { data: { data, currentPage, numberOfPages } } = await api.fetchRecipes(page);
-
-    dispatch({ type: FETCH_ALL, payload: { data, currentPage, numberOfPages } });
+    const {  data}  = await api.fetchRecipes();
+    dispatch({ type: FETCH_ALL, payload: { data } });
     dispatch({ type: END_LOADING });
   } catch (error) {
     console.log(error);

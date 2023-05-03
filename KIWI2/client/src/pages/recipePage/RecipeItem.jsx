@@ -5,7 +5,6 @@ const RecipeItem = ({ recipe }) => {
 
   const handleClick = async (e) => {
     navigate(`/recipes/${recipe.id}`);
-    
   };
     return (
         <div className="card-body d-flex flex-column align-items-start">

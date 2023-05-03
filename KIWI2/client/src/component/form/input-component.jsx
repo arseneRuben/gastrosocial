@@ -1,6 +1,5 @@
 import React from 'react'
-import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
-import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
+
 const InputComponent = ({ name, label, type, onChange, value , autoFocus, labelClass, half, handleShowPassword}) => (
   <div className="form-group row m-2">
         <label className={labelClass} htmlFor={name}>{label}</label>

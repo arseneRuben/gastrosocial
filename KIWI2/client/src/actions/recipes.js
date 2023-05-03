@@ -49,7 +49,7 @@ export const getRecipesBySearch = (searchQuery) => async (dispatch) => {
 
 export const createRecipe = (recipe, history) => async (dispatch) => {
   try {
-    console.log(recipe);
+    console.log(recipe)
     dispatch({ type: START_LOADING });
     const { data } = await api.createRecipe(recipe);
 

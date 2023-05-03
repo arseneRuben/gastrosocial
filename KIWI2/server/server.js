@@ -7,7 +7,6 @@ import categoryRoute from './routes/category.js'
 import recipeRoute from './routes/recipe.js'
 import likeRoute from './routes/like.js'
 import ingredientRoute from './routes/ingredient.js'
-
 const app = express()
 
 const PORT = 8000

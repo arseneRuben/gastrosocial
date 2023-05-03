@@ -1,15 +1,14 @@
 
 
-
 const IngredientPage = () => {
+    return (
 
-     
-        return (
-            <div>
-                  <h1>Liste des ingredients</h1>
-             </div>
-        )
-
- 
+    <div>
+    
+      
+       
+        <div><h1>Ingredient Page</h1></div>
+      
+    </div>)
 };
 export default IngredientPage;

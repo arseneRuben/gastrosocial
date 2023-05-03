@@ -5,7 +5,7 @@ import SyncIcon from '@mui/icons-material/Sync';
 
 const RecipePage = () => {
       const  {recipes,isLoading}  = useSelector((state) => state.recipes);
-      console.log(recipes)
+
       if (!recipes.length && !isLoading ) return 'Pas de recettes';
         return (
                  isLoading ? <SyncIcon /> :

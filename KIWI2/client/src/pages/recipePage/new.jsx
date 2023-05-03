@@ -20,7 +20,6 @@ const NewRecipePage = () => {
       const handleSubmit = async (e) => {
 
             e.preventDefault();
-            
               dispatch(createRecipe({ ...postData}, history));
               clear();
           };

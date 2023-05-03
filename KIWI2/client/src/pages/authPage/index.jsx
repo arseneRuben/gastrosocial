@@ -30,10 +30,10 @@ const LoginPage = () => {
      
   <form onSubmit={handleSubmit}>
     <div className='row justify-content-center '>
-    <div class="col-md-6">
-                <div class="card d-flex p-2">
-                     <div class="card-header text-center"> { isSignup ? <>Sign Up </>: <>Sign In </> }</div>
-                     <div class="card-body">
+    <div className="col-md-6">
+                <div className="card d-flex p-2">
+                     <div className="card-header text-center"> { isSignup ? <>Sign Up </>: <>Sign In </> }</div>
+                     <div className="card-body">
 
                    { isSignup && (
                       <>
@@ -46,7 +46,7 @@ const LoginPage = () => {
                          
 
                             <div className="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary" onClick={switchMode}>
+                                <button type="submit" className="btn btn-primary" onClick={switchMode}>
                                      { isSignup ? <>Deja inscrit? SignIn  </>: <> Pas encore inscrit? Sign Up </> }
                                 </button>
                                

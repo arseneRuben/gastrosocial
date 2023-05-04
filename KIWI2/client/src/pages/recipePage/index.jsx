@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import RecipeItem from './RecipeItem';
 import SyncIcon from '@mui/icons-material/Sync';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 

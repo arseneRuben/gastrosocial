@@ -26,10 +26,21 @@ export const deleteRecipe = async (req, res) => {
     }
 }
 
+export const findRecipeByTitle = async (req, res) => {
+    try {
+        connect()
+        query('SELECT * FROM recipe WHERE adopted_title=$1 OR proposed_title=$1', [req.params.title], (resp) => {
+            writeJSONResponse(req, res, resp.rows)
+            disconnect()
+        })
+    } catch (error) {
+        res.status(404).json({ message: error.message })
+    }
+}
+
 export const getRecipe = async (req, res) => {
     try {
         connect()
-
         query('SELECT * FROM recipe WHERE id=$1', [req.params.id], (resp) => {
             writeJSONResponse(req, res, resp.rows)
             disconnect()
@@ -42,9 +53,10 @@ export const getRecipe = async (req, res) => {
 export const createRecipe = async (req, res) => {
     try {
         connect()
-        return query('INSERT INTO recipe (proposed_title, proposed_description,user_id,preparation_time,cooking_time,portions) VALUES ($1, $2, $3, $4, $5,$6)', [req.body.proposed_title, req.body.proposed_description, req.body.user_id, req.body.preparation_time, req.body.cooking_time, req.body.portions], function () {
+        query('INSERT INTO recipe (proposed_title, proposed_description,user_id,preparation_time,cooking_time,portions) VALUES ($1, $2, $3, $4, $5,$6) RETURNING id', [req.body.proposed_title, req.body.proposed_description, req.body.user_id, req.body.preparation_time, req.body.cooking_time, req.body.portions], function () {
             disconnect()
         })
+        //   return res.row[0].id
     } catch (error) {
         res.status(404).json({ message: error.message })
     }

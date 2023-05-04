@@ -2,6 +2,7 @@
 'use strict'
 import express from 'express'
 import multer from 'multer' // Handle multiple files upload
+import fetch from 'node-fetch'
 
 // ROUTES
 import categoryRoute from './routes/category.js'
@@ -26,7 +27,7 @@ const storage = multer.diskStorage({
     }
 })
 const upload = multer({ storage })
-const uploadMultiple = upload.fields([{ name: 'file' }])
+const uploadMultiple = upload.fields([{ name: 'files' }])
 
 // Only to show node-fs-client
 // CORS for development only
@@ -57,11 +58,14 @@ app.use('/categories', categoryRoute)
 app.use('/recipes', recipeRoute)
 app.use('/likes', likeRoute)
 app.use('/ingredients', ingredientRoute)
+
 app.post('/files', uploadMultiple, function (req, res, next) {
-    if (req.files) {
-        console.log(req.files)
-        console.log('files uploaded')
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ recipe_id: req.body.recipeId, user_id: 1, file_name: req.files.files[0].path })
     }
+    fetch(`http://localhost:8000/recipes/${req.body.recipeId}/images`, requestOptions)
 })
 
 // methode privee *******************************************************************

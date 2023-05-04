@@ -10,7 +10,7 @@ import { reducers } from './reducers';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const store = createStore(reducers, {}, compose(applyMiddleware(thunk)));
-
+//console.log(store)
 root.render(
   <React.StrictMode>
     <Provider store={store}>

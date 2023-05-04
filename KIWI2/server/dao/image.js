@@ -4,9 +4,11 @@ import { CONTENT_TYPE_JSON, HTTP_OK } from './util.js'
 export const createImage = async (req, res) => {
     try {
         connect()
-        query('INSERT INTO image (file_name, adopted, recipe_id, user_id) VALUES ($1, $2, $3, $4)', [req.body.file_name, false, req.body.id, req.body.user_id], function () {
+        console.log('BONJOUR')
+        /*  query('INSERT INTO image (file_name, adopted, recipe_id, user_id) VALUES ($1, $2, $3, $4)', [req.body.file_name, false, req.params.id, req.body.user_id], function () {
             disconnect()
-        })
+        }) */
+        disconnect()
     } catch (error) {
         res.status(404).json({ message: error.message })
     }

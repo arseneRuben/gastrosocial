@@ -1,7 +1,6 @@
 import { START_LOADING, END_LOADING, FETCH_ALL, FETCH_RECIPE, FETCH_BY_SEARCH, CREATE, UPDATE, DELETE, LIKE, COMMENT, FETCH_BY_CREATOR } from '../constants/actionTypes';
 import * as api from '../api';
-import { createImage } from './images';
-import { create } from '@mui/material/styles/createTransitions';
+
 // ACTION CREATORS
 export const getRecipe = (id) => async (dispatch) => {
   try {
@@ -36,6 +35,16 @@ export const getRecipesByCreator = (name) => async (dispatch) => {
     console.log(error);
   }
 };
+export const getRecipesByTitle = (title) => async (dispatch) => {
+  try {
+    dispatch({ type: START_LOADING });
+    const { data: { data } } = await api.fetchRecipesByTitle(title);
+    dispatch({ type: FETCH_BY_SEARCH, payload: { data } });
+    dispatch({ type: END_LOADING });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const getRecipesBySearch = (searchQuery) => async (dispatch) => {
   try {
@@ -52,8 +61,8 @@ export const createRecipe = (recipe, history) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
     const { data } = await api.createRecipe(recipe);
-    const { images } =  await api.createImage(recipe.selectedFile, recipe.id, 1);
-    dispatch({ type: CREATE, payload: {data,images} });
+    dispatch({ type: CREATE, payload: {data} });
+    dispatch({ type: END_LOADING });
     history.push(`/recipes/${data.id}`);
   } catch (error) {
     console.log(error);

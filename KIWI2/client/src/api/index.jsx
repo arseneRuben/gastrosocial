@@ -13,6 +13,7 @@ export const createImage = (newImage, recipeId, userId) => API.post(`/recipes/${
 
 export const fetchRecipe = (id) => API.get(`/recipes/${id}`);
 export const fetchRecipes = () => API.get(`/recipes`);
+export const fetchRecipesByTitle = (title) => API.get(`/recipes/search?title=${title}`);
 export const fetchRecipesByCreator = (name) => API.get(`/recipes/creator?name=${name}`);
 export const fetchRecipesBySearch = (searchQuery) => API.get(`/recipes/search?searchQuery=${searchQuery.search || 'none'}&tags=${searchQuery.tags}`);
 export const createRecipe = (newRecipe) => API.post(`/recipes`, newRecipe);

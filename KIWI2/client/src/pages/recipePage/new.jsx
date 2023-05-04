@@ -1,11 +1,14 @@
+import React, { Component } from 'react'
+
 import { Typography } from "@mui/material";
 import InputComponent from "../../component/form/input-component";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "reactstrap";
-import { createRecipe, updateRecipe } from '../../actions/recipes';
+import { createRecipe, updateRecipe, getRecipesByTitle } from '../../actions/recipes';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
+
 
 
 
@@ -13,6 +16,11 @@ const NewRecipePage = () => {
       const history = useNavigate();
       const dispatch = useDispatch();
       const [multipleImages, setMultipleImages] = useState([]);
+
+      const  {recipes,isLoading}  = useSelector((state) => state.recipes);
+
+
+    
 
       // Functions to preview multiple images
       const changeMultipleFiles = (e) => {
@@ -39,24 +47,38 @@ const NewRecipePage = () => {
             formState,
             formState: { errors },
           } = useForm();
+          
 
+      const [newRecipe, setNewRecipe] = useState(null);
+      
       const onSubmit1 = async ( data) => {
+
               // Once we click on submit, the action of creation is dispatch
-              dispatch(createRecipe({ ...postData}, history))
+            dispatch(createRecipe({ ...postData}, history))
+            
+           
+        
               //files
               const formData = new FormData();
               for (const key of Object.keys(multipleImages)) {
-                formData.append('file', data.file[key]);
+                formData.append('files', data.file[key]);
               }
+              if(!isLoading){
+                  formData.append('recipeId',recipes[recipes.length-1].id )
+            }
+           
+           
             fetch('http://localhost:8000/files', {
                 method: 'POST',
                 body: formData,
               }).then((res) => console.log(res));
               setMultipleImages([]);
+             // clear();
+            };
 
-              clear();
-          };
-        
+           
+         
+      
       const clear = () => {
             setPostData({ 'proposed_title': '', 'proposed_description': '', 'portions':0,  'preparation_time':0 , 'cooking_time':0,  'user_id': 1,  'selectedFile': ''  });
           };
@@ -72,7 +94,7 @@ const NewRecipePage = () => {
                   <InputComponent name="portions"  labelClass="col-md-4 col-form-label text-md-right"  label="Nombres de portions "  value={postData.portions}  type="number"  onChange={(e)=> setPostData({...postData, 'portions':  e.target.value})} half />
                   <input
                         type="file"
-                        name="file1"
+                        name="files"
                         multiple
                         {...register('file', { required: true })}
                         onChange={changeMultipleFiles}

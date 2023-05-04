@@ -41,7 +41,15 @@ CREATE TABLE  IF NOT EXISTS public.ingredient
   CONSTRAINT fk_ingredient_category FOREIGN KEY(categoryId) REFERENCES category(id)
 );
 
-				   
+CREATE TABLE IF NOT EXISTS image
+(
+    id  SERIAL PRIMARY KEY,
+    file_name TEXT NOT NULL,
+    adopted boolean DEFAULT FALSE ,
+    recipe_id integer DEFAULT 0,
+    user_id integer NOT NULL DEFAULT 0,
+    CONSTRAINT fk_images_recipes FOREIGN KEY(recipe_id) REFERENCES recipe(id)
+);			   
 
 CREATE TABLE IF NOT EXISTS  favoris 
 (

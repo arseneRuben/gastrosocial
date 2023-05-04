@@ -1,11 +1,13 @@
 
 'use strict'
 import express from 'express'
+import multer from 'multer' // Handle multiple files upload
 
 // ROUTES
 import categoryRoute from './routes/category.js'
 import recipeRoute from './routes/recipe.js'
 import likeRoute from './routes/like.js'
+
 import ingredientRoute from './routes/ingredient.js'
 const app = express()
 
@@ -13,7 +15,18 @@ const PORT = 8000
 const CONTENT_TYPE_HTML = 'text/html'
 const HTTP_OK = 200
 
-// nodeFs.saveDatas(DATAS_FILE_NAME, TEST_DATA)
+/* FILE STORAGE */
+const storage = multer.diskStorage({
+    // Destination of uploaded files
+    destination: function (req, file, cb) {
+        cb(null, 'public/assets')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+    }
+})
+const upload = multer({ storage })
+const uploadMultiple = upload.fields([{ name: 'file' }])
 
 // Only to show node-fs-client
 // CORS for development only
@@ -44,6 +57,12 @@ app.use('/categories', categoryRoute)
 app.use('/recipes', recipeRoute)
 app.use('/likes', likeRoute)
 app.use('/ingredients', ingredientRoute)
+app.post('/files', uploadMultiple, function (req, res, next) {
+    if (req.files) {
+        console.log(req.files)
+        console.log('files uploaded')
+    }
+})
 
 // methode privee *******************************************************************
 

@@ -9,6 +9,7 @@ API.interceptors.request.use((req) => {
 
   return req;
 });*/
+export const createImage = (newImage, recipeId, userId) => API.post(`/recipes/${recipeId}/images`, newImage);
 
 export const fetchRecipe = (id) => API.get(`/recipes/${id}`);
 export const fetchRecipes = () => API.get(`/recipes`);
@@ -22,3 +23,5 @@ export const deleteRecipe = (id) => API.delete(`/recipes/${id}`);
 
 export const signIn = (formData) => API.recipe('/users/signin', formData);
 export const signUp = (formData) => API.recipe('/users/signup', formData);
+
+export const upload  = (formData) =>API.post("/upload-images", formData);

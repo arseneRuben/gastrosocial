@@ -42,7 +42,7 @@ export const getRecipe = async (req, res) => {
 export const createRecipe = async (req, res) => {
     try {
         connect()
-        query('INSERT INTO recipe (proposed_title, proposed_description,user_id,preparation_time,cooking_time,portions) VALUES ($1, $2, $3, $4, $5,$6)', [req.body.proposed_title, req.body.proposed_description, req.body.user_id, req.body.preparation_time, req.body.cooking_time, req.body.portions], function () {
+        return query('INSERT INTO recipe (proposed_title, proposed_description,user_id,preparation_time,cooking_time,portions) VALUES ($1, $2, $3, $4, $5,$6)', [req.body.proposed_title, req.body.proposed_description, req.body.user_id, req.body.preparation_time, req.body.cooking_time, req.body.portions], function () {
             disconnect()
         })
     } catch (error) {

@@ -1,11 +1,11 @@
-import { connect, query, disconnect } from './daoPostGres.js'
+import { connect, query, disconnect } from './daoMySql.js'
 import { CONTENT_TYPE_JSON, HTTP_OK, writeJSONResponse } from './util.js'
 
 export const getIngredients = async (req, res) => {
     try {
         console.log('Bonjour')
         connect()
-        query('SELECT * FROM ingredient ', [], (result) => {
+        query('SELECT * FROM ingredient;', [], (result) => {
             res.writeHead(HTTP_OK, { 'Content-Type': CONTENT_TYPE_JSON })
             res.end(JSON.stringify(result.rows, null, 4))
             disconnect()

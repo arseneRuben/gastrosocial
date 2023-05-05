@@ -13,6 +13,8 @@ return (
     )
 }
 
+
+
 class IngredientPage extends Component {
     constructor (props) {
         super(props)
@@ -22,8 +24,8 @@ class IngredientPage extends Component {
         }
     }
 
-    componentDidMount () {
-        fetch('http://localhost:8000/ingredients', { method: 'GET' })
+    componentDidMount() {
+        fetch('http://localhost:8000/ingredients/', { method: 'GET' })
             .then(response => response.json())
             .then(responseObject => {
                 this.setState({ ingredients: responseObject })

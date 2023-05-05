@@ -1,30 +1,34 @@
 
 'use strict'
+import mysql from 'mysql'
 
-const mysql = require('mysql')
+let connection = {}
 
-export function query (query, values, resultCallback) {
-    const pool = mysql.createPool({
-        connectionLimit: 10,
+export function connect () {
+    connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',
         password: '',
         database: 'kiwidb'
     })
-    pool.getConnection((err, connection) => (req, res) => {
-        if (err) throw err
-
-        connection.query(query, (err, rows) => {
-            connection.release() // return the connection to pool
-
-            if (!err) {
-                res.send(rows)
-            } else {
-                console.log(err)
-            }
-
-            // if(err) throw err
-            console.log('The data from beer table are: \n', rows)
-        })
+    connection.connect((err) => {
+        if (err) {
+            console.log('Error connecting to Db')
+            return
+        }
+        console.log('Connection established')
     })
+}
+
+export function query (query, values, resultCallback) {
+    connection.query(query, values, (error, result) => {
+        if (error) {
+            throw error
+        }
+        resultCallback(result)
+    })
+}
+export function disconnect () {
+    console.log('Connection ENDED')
+    connection.end()
 }

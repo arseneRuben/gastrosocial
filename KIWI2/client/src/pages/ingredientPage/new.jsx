@@ -1,16 +1,9 @@
 
 import { Component } from 'react';
 import InputComponent from '../../component/form/input-component';
+import { buildHeader } from '../utils';
 
-function buildHeader (method, body) {
-    return {
-        method,
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body)
-    }
-}
+
 
 class NewIngredientPage extends Component {
     constructor (props) {

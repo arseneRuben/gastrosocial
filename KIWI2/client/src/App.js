@@ -1,7 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import {useEffect} from 'react';
-import { getRecipes } from "./actions/recipes";
-import { useDispatch } from 'react-redux';
+
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
@@ -19,12 +17,7 @@ import RecipeDetails from "./pages/recipePage/RecipeDetails";
 
 
 const App = () => {
-  /*const dispatch = useDispatch();
-  
-  useEffect(()=> {
-    dispatch(getRecipes());
-    
-  }, [dispatch])*/
+ 
   
   return (
     <div className="container">
@@ -39,7 +32,7 @@ const App = () => {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/recipes/index" element={<RecipePage />} />
           <Route path="/recipes" element={<RecipePage />} />
-          <Route path="/recipes/:id"  element={<RecipeDetails/>} />
+          <Route path="/recipes/index/recipes/:id"  element={<RecipeDetails/>} />
           <Route path="/recipes/new" element={<NewRecipePage />} />
           <Route path="/auth" element={<AuthPage />} />
 

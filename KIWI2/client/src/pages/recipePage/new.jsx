@@ -1,130 +1,128 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import { Typography } from "@mui/material";
 import InputComponent from "../../component/form/input-component";
-import { useState } from "react";
+import FilesUploadComponent from "../../component/files-upload-component";
 import { Button } from "reactstrap";
-import { createRecipe } from '../../actions/recipes';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { useForm } from 'react-hook-form';
+import { buildHeader } from '../utils';
 
-
-
-
-
-const NewRecipePage = () => {
-      const history = useNavigate();
-      const dispatch = useDispatch();
-      const [multipleImages, setMultipleImages] = useState([]);
-      const  {recipes,isLoading}  = useSelector((state) => state.recipes);
-      const [ingredients, setIngredients] = useState([]);
-
-      // set ingredient list
-      if(ingredients.length===0){
-            fetch('http://localhost:8000/ingredients')
-            .then(resp => resp.json())
-            .then(data => setIngredients(data))
-            console.log(ingredients);
+  // Functions to preview multiple images
+  const changeMultipleFiles = (e) => {
+      if (e.target.files) {
+      const imageArray = Array.from(e.target.files).map((file) =>
+      URL.createObjectURL(file)
+      );
+     // setMultipleImages((prevImages) => prevImages.concat(imageArray));
       }
-    
+};
 
-      // Functions to preview multiple images
-      const changeMultipleFiles = (e) => {
-            if (e.target.files) {
-            const imageArray = Array.from(e.target.files).map((file) =>
-            URL.createObjectURL(file)
-            );
-            setMultipleImages((prevImages) => prevImages.concat(imageArray));
-            }
-      };
-      const renderImages = (data) => {
-            return data.map((image) => {
-              return <img className="image" src={image} alt="" key={image} />;
-            });
-      };
 
-      const [postData, setPostData] = useState({
-            'user_id': 1, 'proposed_title':'', 'proposed_description': '', 'portions':0, 'preparation_time':0, 'cooking_time':0,  'selectedFile': '' 
-      })
-      const {
-            register,
-            
-            handleSubmit,
-            formState,
-            formState: { errors },
-          } = useForm();
-          
 
+/*const newStep = () => {
+      stepNumber++
+      const stepSection = document.getElementById("steps")
+      let input = document.createElement("input");
+      input.setAttribute('type', 'text');
+      input.setAttribute('id', `step${stepNumber}`);
+      input.setAttribute('class', 'form-control p-2');
+      input.setAttribute('placeholder', `Etape ${stepNumber}`)
+      stepSection.append(input);
      
-      
-      const onSubmit1 = async ( data,e) => {
-            e.preventDefault();
-              // Once we click on submit, the action of creation is dispatch
-            dispatch(createRecipe({ ...postData}, history))
-            
-           
-        
-              //files
-              const formData = new FormData();
-              for (const key of Object.keys(multipleImages)) {
-                formData.append('files', data.file[key]);
-              }
-              // Add the id of the new recipe(autoincremented)
-              if(!isLoading && recipes.length>0){
-                  formData.append('recipeId',recipes[recipes.length-1].id )
-              }else {
-                  formData.append('recipeId',1 )
-              }
-             
-           
-             
-             
-            fetch('http://localhost:8000/files', {
-                method: 'POST',
-                body: formData,
-              }).then((res) => console.log(res));
-              setMultipleImages([]);
-             // clear();
-      };
+}; */
 
-           
-         
-      
-      const clear = () => {
-            setPostData({ 'proposed_title': '', 'proposed_description': '', 'portions':0,  'preparation_time':0 , 'cooking_time':0,  'user_id': 1,  'selectedFile': ''  });
-          };
+class NewRecipePage extends Component {
+
+    
+      constructor (props) {
+              super(props)
+              this.state = {
+                  ingredientsDb:[],
+                  stepNumber:1,
+                  formValues: {},
+              }
+              this.handleOnChange = this.handleOnChange.bind(this)
+      }
+     
+
+      handleOnSave = (e) => {
+            e.preventDefault()
+            const method = this.state.formValues.id ? 'PUT' : 'POST'
+            fetch('http://localhost:8000/recipes', buildHeader(method, this.state.formValues))
+                .then(response => response.json())
+                .then(responseObject => {
+                    this.setState({
+                        ingredients: responseObject,
+                        showForm: false
+                    })
+                })
+
+                
+                var formData = new FormData();
+                for (const key of Object.keys(this.state.imgCollection)) {
+                    formData.append('imgCollection', this.state.imgCollection[key])
+                }
+              
+
+              // set ingredient list
+          /*  if(ingredients.length===0){
+                  fetch('http://localhost:8000/ingredients')
+                  .then(resp => resp.json())
+                  .then(data => setIngredients(data))
+                  console.log(ingredients);
+            }*/
+        }
+        handleOnChange (event) {
+            this.setState({
+                formValues: {
+                    ...this.state.formValues,
+                    [event.target.name]: event.target.value
+                }
+            })
+        }
+
+      componentDidMount() {
+            fetch('http://localhost:8000/recipes')
+                .then(response => {
+                    console.log(response)
+                    return response.json()
+                })
+                .then(responseObject => {
+                    this.setState({ recipes: responseObject })
+                }).catch(error=>{
+                    console.log(error)
+                })
+        }
+     
         
+      render(){
         return (
 
-              <form autoComplete="off" noValidate className="" onSubmit={handleSubmit(onSubmit1)}>
+              <form autoComplete="off" noValidate className=""  action={this.handleOnSave}>
                   <Typography variant="h6" className=""> Creer une recette</Typography>
-                  <InputComponent name="proposed_title"  labelClass="col-md-4 col-form-label text-md-right"  label="Intitule "  value={postData.proposed_title} onChange={(e)=> setPostData({...postData, 'proposed_title':  e.target.value})} half />
-                  <InputComponent name="proposed_description"  labelClass="col-md-4 col-form-label text-md-right"  label="Description " value={postData.proposed_description} type="textarea" onChange={(e)=> setPostData({...postData, 'proposed_description':  e.target.value})} half />
-                  <InputComponent name="preparation_time"  labelClass="col-md-4 col-form-label text-md-right"  label="Duree de preparation " value={postData.preparation_time}  type="number" onChange={(e)=> setPostData({...postData, 'preparation_time':  e.target.value})} half />
-                  <InputComponent name="cooking_time"  labelClass="col-md-4 col-form-label text-md-right"  label="Duree de cuisson " value={postData.cooking_time}  type="number"  onChange={(e)=> setPostData({...postData, 'cooking_time':  e.target.value})} half />
-                  <InputComponent name="portions"  labelClass="col-md-4 col-form-label text-md-right"  label="Nombres de portions "  value={postData.portions}  type="number"  onChange={(e)=> setPostData({...postData, 'portions':  e.target.value})} half />
-                  <input
-                        type="file"
-                        name="files"
-                        multiple
-                        {...register('file', { required: true })}
-                        onChange={changeMultipleFiles}
-                        />
-                        {/* error handling with React Hook Form */}
-                        {errors.file && <p className="error">Please select an image</p>}
-                        
-                        {/* The render function with the multiple image state */}
-                        {renderImages(multipleImages)}
+                  <InputComponent name="proposed_title"  labelClass="col-md-4 col-form-label text-md-right"  label="Intitule "  value={this.state.formValues.proposed_title} onChange={this.handleOnChange} half />
+                  <InputComponent name="proposed_description"  labelClass="col-md-4 col-form-label text-md-right"  label="Description " value={this.state.formValues.proposed_description} type="textarea" onChange={this.handleOnChange} half />
+                  <InputComponent name="preparation_time"  labelClass="col-md-4 col-form-label text-md-right"  label="Duree de preparation " value={this.state.formValues.preparation_time}  type="number" onChange={this.handleOnChange} half />
+                  <InputComponent name="cooking_time"  labelClass="col-md-4 col-form-label text-md-right"  label="Duree de cuisson " value={this.state.formValues.cooking_time}  type="number"  onChange={this.handleOnChange} half />
+                  <InputComponent name="portions"  labelClass="col-md-4 col-form-label text-md-right"  label="Nombres de portions "  value={this.state.formValues.portions}  type="number"  onChange={this.handleOnChange} half />
+                  <div id="steps"  className="form-group row m-2">
+                        <input type="text" className='form-control p-2' label="Nouvelle etape" id="step1" placeholder='Etape 1' />
+                  </div>
+                  <FilesUploadComponent />
+
+                  <div className=" d-inline">
+                         <Button  color="warning" size="small" >Nouvelle etape</Button>
+                  </div>
                   <div className=" d-inline">
                         <Button className="" color="primary" type="submit" >Submit</Button>
                   </div>
+                  
                   <div className=" d-inline">
-                         <Button  color="secondary" size="small" onClick={clear} >Clear</Button>
+                         <Button  color="secondary" size="small" >Clear</Button>
                   </div>
+                 
                    
               </form>
-        )
+        )}
 
  
 };

@@ -2,8 +2,9 @@ import { connect, query, disconnect } from './daoPostGres.js'
 import { CONTENT_TYPE_JSON, HTTP_OK } from './util.js'
 
 export const createStep = async (req, res) => {
+    console.log('STEPS')
     connect()
-    query('INSERT INTO steps (recipeId, description, stepNumber) VALUES ($1, $2, $3)', [req.body.recipeId, req.body.description, req.body.stepNumber], function () {
+    query('INSERT INTO steps (recipe_id, description, step_number) VALUES ($1, $2, $3)', [req.param.recipe_id, req.body.description, req.body.step_number], function () {
         disconnect()
     })
 }

@@ -1,46 +1,54 @@
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 import SyncIcon from '@mui/icons-material/Sync';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import { Component } from 'react';
+import { Link } from 'react-router-dom';
 
-const RecipePage = () => {
-      const  {recipes,isLoading}  = useSelector((state) => state.recipes);
-      const navigate = useNavigate();
+      class RecipePage extends Component {
+        constructor (props) {
+          super(props)
+          this.state = {
+              recipes: []
+          }
+      }
 
-      const handleClick = async (e) => {
-        navigate(`/recipes/${e.target.id}`);
-      };
+      
 
+        componentDidMount() {
+            fetch('http://localhost:8000/recipes')
+                .then(response => {
+                    console.log(response)
+                    return response.json()
+                })
+                .then(responseObject => {
+                    this.setState({ recipes: responseObject })
+                }).catch(error=>{
+                    console.log(error)
+                })
+        }
 
-      if (!recipes.length && !isLoading ) return 'Pas de recettes';
+        render(){
         return (
-          <>
-                <div className="jumbotron">
-                    <div className="container">
-                      <h1 className="display-3">Catalogue des recettes</h1>
-                    
-                    </div>
-              </div>
-  
-                 {isLoading ? <SyncIcon /> :
+          <div>
                   <div className="  d-flex flex-wrap  mb-4 box-shadow">
-
-                         {recipes?.map((recipe) => (
+                         {this.state.recipes?.map((recipe) => (
                           <div className="card" key={recipe.id}>
                             <div className="card-body">
                               <h5 className="card-title">{recipe.proposed_title}</h5>
                              
                               <p className="card-text">{recipe.proposed_description}</p>
-                             <VisibilityIcon  id={recipe.id} onClick={handleClick}/>
+                              <Link to={`recipes/${recipe.id}`} className="btn btn-primary"><VisibilityIcon  id={recipe.id}/></Link>
+
+                               
                               
                             </div>
                           </div>
-                           
                       ))}
                       
-                  </div> }
-                  </>
+                  </div> 
+          </div>
         )
+     }
+      
 };
 export default RecipePage;

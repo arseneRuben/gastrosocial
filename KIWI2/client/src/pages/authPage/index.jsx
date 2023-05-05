@@ -42,7 +42,7 @@ const LoginPage = () => {
                   )}
                       <InputComponent name="email" labelClass="col-md-4 col-form-label text-md-right" label="Email" handleChange={handleChange} type="email" />
                       <InputComponent name="password" labelClass="col-md-4 col-form-label text-md-right" label="Mot depasse" handleChange={handleChange} />
-                  { isSignup && <InputComponent name="confirmPassword"  labelClass="col-md-4 col-form-label text-md-right"  label="Mot de passe de confirmation" handleChange={handleChange} type="password" /> }
+                     { isSignup && <InputComponent name="confirmPassword"  labelClass="col-md-4 col-form-label text-md-right"  label="Mot de passe de confirmation" handleChange={handleChange} type="password" /> }
                          
 
                             <div className="col-md-6 offset-md-4">

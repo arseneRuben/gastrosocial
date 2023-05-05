@@ -1,11 +1,11 @@
-import { connect, query, disconnect } from './dao.js'
+import { connect, query, disconnect } from './daoPostGres.js'
 import { CONTENT_TYPE_JSON, HTTP_OK } from './util.js'
 
 export const createImage = async (req, res) => {
     try {
         connect()
-        console.log('BONJOUR')
-        /*  query('INSERT INTO image (file_name, adopted, recipe_id, user_id) VALUES ($1, $2, $3, $4)', [req.body.file_name, false, req.params.id, req.body.user_id], function () {
+        console.log(req.body.file_name, false, req.body.recipe_id, req.body.user_id)
+        /* query('INSERT INTO image (file_name, recipe_id, user_id) VALUES ($1, $2, $3)', [req.body.file_name, req.body.recipe_id, req.body.user_id], function () {
             disconnect()
         }) */
         disconnect()

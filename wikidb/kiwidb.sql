@@ -13,14 +13,19 @@
 CREATE TABLE IF NOT EXISTS public.recipe
 (
     id SERIAL PRIMARY KEY,
-    proposedtitle character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    proposeddescription text COLLATE pg_catalog."default" NOT NULL,
-    createdat time without time zone DEFAULT now(),
-    updatedat time without time zone DEFAULT now(),
-    userId integer NOT NULL,
-    adoptedtitle character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    adopteddescription text COLLATE pg_catalog."default" NOT NULL,
-    status integer NOT NULL DEFAULT 0
+    proposed_title character varying(255) ,
+    proposed_description text COLLATE pg_catalog."default" NOT NULL,
+    created_at time without time zone DEFAULT now(),
+    updated_at time without time zone DEFAULT now(),
+    user_id integer NOT NULL DEFAULT 1,
+    preparation_time integer NOT NULL DEFAULT 0,
+    cooking_time integer NOT NULL DEFAULT 0,
+    portions integer NOT NULL DEFAULT 1,
+    adopted_title character varying(255) COLLATE pg_catalog."default",
+    adopted_description text,
+    status integer NOT NULL DEFAULT 0, 
+    
+    UNIQUE(adopted_title)
 );
 
 
@@ -36,18 +41,16 @@ CREATE TABLE IF NOT EXISTS public.categoryrecipe
 CREATE TABLE  IF NOT EXISTS public.ingredient 
 (
   id SERIAL PRIMARY KEY,
-  name VARCHAR(200) NOT NULL,
-  categoryId INTEGER NOT NULL,
-  CONSTRAINT fk_ingredient_category FOREIGN KEY(categoryId) REFERENCES category(id)
+  name VARCHAR(200) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS image
 (
-    id  SERIAL PRIMARY KEY,
+    id  SERIAL PRIMARY KEY ,
     file_name TEXT NOT NULL,
     adopted boolean DEFAULT FALSE ,
-    recipe_id integer DEFAULT 0,
-    user_id integer NOT NULL DEFAULT 0,
+    recipe_id integer DEFAULT 1,
+    user_id integer NOT NULL DEFAULT 1,
     CONSTRAINT fk_images_recipes FOREIGN KEY(recipe_id) REFERENCES recipe(id)
 );			   
 

@@ -22,6 +22,14 @@ export const comment = (value, id) => API.recipe(`/recipes/${id}/commentRecipe`,
 export const updateRecipe = (id, updatedRecipe) => API.patch(`/recipes/${id}`, updatedRecipe);
 export const deleteRecipe = (id) => API.delete(`/recipes/${id}`);
 
+
+export const fetchIngredient = (id) => API.get(`/ingredients/${id}`);
+export const fetchIngredients = () => API.get(`/ingredients`);
+export const fetchIngredientsByTitle = (title) => API.get(`/ingredients/search?title=${title}`);
+export const createIngredient = (newIngredient) => API.post(`/ingredients`, newIngredient);
+export const updateIngredient = (id, updatedIngredient) => API.patch(`/ingredients/${id}`, updatedIngredient);
+export const deleteIngredient = (id) => API.delete(`/ingredients/${id}`);
+
 export const signIn = (formData) => API.recipe('/users/signin', formData);
 export const signUp = (formData) => API.recipe('/users/signup', formData);
 

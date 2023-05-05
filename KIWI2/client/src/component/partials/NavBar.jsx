@@ -20,11 +20,11 @@ const Navbar = () => {
                     <form className="form-inline my-2 my-lg-0">
                         <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"/>
                     </form>
-                    <form class="d-flex">
-                        <button class="btn btn-outline-dark" type="submit">
-                            <i class="bi-cart-fill me-1"></i>
+                    <form className="d-flex">
+                        <button className="btn btn-outline-dark" type="submit">
+                            <i className="bi-cart-fill me-1"></i>
                             <ShoppingCartIcon/>
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                            <span className="badge bg-dark text-white ms-1 rounded-pill">0</span>
                         </button>
                     </form>
                     <ul className="nav navbar-nav ms-auto">

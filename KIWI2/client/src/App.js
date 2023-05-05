@@ -12,6 +12,8 @@ import ProfilePage from "./pages/profilePage";
 import AuthPage from "./pages/authPage";
 import RecipePage from './pages/recipePage';
 import NewRecipePage from './pages/recipePage/new';
+import NewIngredientPage from './pages/ingredientPage/new';
+
 import RecipeDetails from "./pages/recipePage/RecipeDetails";
 
 
@@ -31,11 +33,13 @@ const App = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/ingredients/index" element={<IngredientPage />} />
+          <Route path="/ingredients/new" element={<NewIngredientPage />} />
+
+
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/recipes/index" element={<RecipePage />} />
           <Route path="/recipes" element={<RecipePage />} />
           <Route path="/recipes/:id"  element={<RecipeDetails/>} />
-
           <Route path="/recipes/new" element={<NewRecipePage />} />
           <Route path="/auth" element={<AuthPage />} />
 

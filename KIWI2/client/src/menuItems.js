@@ -31,13 +31,13 @@ export const menuItems = [
       url: '/ingredients',
       submenu: [
         {
-          title: 'Nouvelle ',
+          title: 'Nouvel ',
           url: '/ingredients/new',
         },
         {
             title: 'Catalogue ',
             url: '/ingredients/index',
-          }
+        }
       
       
       ],

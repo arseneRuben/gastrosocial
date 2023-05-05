@@ -63,9 +63,10 @@ app.post('/files', uploadMultiple, function (req, res, next) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ recipe_id: req.body.recipeId, user_id: 1, file_name: req.files.files[0].path })
+        body: JSON.stringify({ recipe_id: req.body.recipeId, user_id: 1, file_name: 'arsen' })
     }
     fetch(`http://localhost:8000/recipes/${req.body.recipeId}/images`, requestOptions)
+    // console.log(req.files.files[0])
 })
 
 // methode privee *******************************************************************

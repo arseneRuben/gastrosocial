@@ -12,14 +12,21 @@ import { useForm } from 'react-hook-form';
 
 
 
+
 const NewRecipePage = () => {
       const history = useNavigate();
       const dispatch = useDispatch();
       const [multipleImages, setMultipleImages] = useState([]);
-
       const  {recipes,isLoading}  = useSelector((state) => state.recipes);
+      const [ingredients, setIngredients] = useState([]);
 
-
+      // set ingredient list
+      if(ingredients.length===0){
+            fetch('http://localhost:8000/ingredients')
+            .then(resp => resp.json())
+            .then(data => setIngredients(data))
+            console.log(ingredients);
+      }
     
 
       // Functions to preview multiple images
@@ -49,10 +56,10 @@ const NewRecipePage = () => {
           } = useForm();
           
 
-      const [newRecipe, setNewRecipe] = useState(null);
+     
       
-      const onSubmit1 = async ( data) => {
-
+      const onSubmit1 = async ( data,e) => {
+            e.preventDefault();
               // Once we click on submit, the action of creation is dispatch
             dispatch(createRecipe({ ...postData}, history))
             
@@ -63,18 +70,23 @@ const NewRecipePage = () => {
               for (const key of Object.keys(multipleImages)) {
                 formData.append('files', data.file[key]);
               }
-              if(!isLoading){
+              // Add the id of the new recipe(autoincremented)
+              if(!isLoading && recipes.length>0){
                   formData.append('recipeId',recipes[recipes.length-1].id )
-            }
+              }else {
+                  formData.append('recipeId',1 )
+              }
+             
            
-           
+             
+             
             fetch('http://localhost:8000/files', {
                 method: 'POST',
                 body: formData,
               }).then((res) => console.log(res));
               setMultipleImages([]);
              // clear();
-            };
+      };
 
            
          

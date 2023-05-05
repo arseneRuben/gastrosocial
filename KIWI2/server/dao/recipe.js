@@ -1,4 +1,4 @@
-import { connect, query, disconnect } from '../dao/dao.js'
+import { connect, query, disconnect } from './daoPostGres.js'
 import { CONTENT_TYPE_JSON, HTTP_OK, writeJSONResponse } from './util.js'
 
 export const getRecipes = async (req, res) => {

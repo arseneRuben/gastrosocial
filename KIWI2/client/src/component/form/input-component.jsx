@@ -1,6 +1,6 @@
 import React from 'react'
 
-const InputComponent = ({ name, label, type, onChange, value , autoFocus, labelClass, half, handleShowPassword}) => (
+const InputComponent = ({ name, label, type, onChange, value , autoFocus, labelClass, half=false}) => (
   <div className="form-group row m-2">
         <label className={labelClass} htmlFor={name}>{label}</label>
 

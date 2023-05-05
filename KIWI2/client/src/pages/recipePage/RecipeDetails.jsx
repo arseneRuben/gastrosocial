@@ -47,8 +47,8 @@ const RecipeDetails = () => {
                         <h1 className="display-5 fw-bolder">{recipe.proposed_title}</h1>
                         <div className="fs-5 mb-5">
                             <span className="text-decoration"> <FavoriteIcon /> 20</span>
-                            <div class="ratings-widget">
-                                <div   class="title">
+                            <div className="ratings-widget">
+                                <div   className="title">
                                 {recipe[0].preparation_time} mintutes
                                 </div>
                                 <div>

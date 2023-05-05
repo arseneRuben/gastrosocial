@@ -1,13 +1,17 @@
-import { connect, query, disconnect } from './dao.js'
+import { connect, query, disconnect } from './daoPostGres.js'
 import { CONTENT_TYPE_JSON, HTTP_OK, writeJSONResponse } from './util.js'
 
 export const getIngredients = async (req, res) => {
-    connect()
-    query('SELECT * FROM ingredient ', [], (result) => {
-        res.writeHead(HTTP_OK, { 'Content-Type': CONTENT_TYPE_JSON })
-        res.end(JSON.stringify(result.rows, null, 4))
-        disconnect()
-    })
+    try {
+        connect()
+        query('SELECT * FROM ingredient ', [], (result) => {
+            res.writeHead(HTTP_OK, { 'Content-Type': CONTENT_TYPE_JSON })
+            res.end(JSON.stringify(result.rows, null, 4))
+            disconnect()
+        })
+    } catch (error) {
+        res.status(404).json({ message: error.message })
+    }
 }
 
 export const deleteIngredients = async (req, res) => {
@@ -41,8 +45,9 @@ export const getIngredientsByRecipe = async (req, res) => {
 }
 
 export const createIngredient = async (req, res) => {
+    console.log('BONJOUR')
     connect()
-    query('INSERT INTO ingredient (id, name, categoryid) VALUES ($1, $2, $3)', [req.body.id, req.body.name, req.body.categoryid], function () {
+    query('INSERT INTO ingredient (id, name, unite) VALUES ($1, $2, $3)', [req.body.id, req.body.name, req.body.unite], function () {
         disconnect()
     })
 }

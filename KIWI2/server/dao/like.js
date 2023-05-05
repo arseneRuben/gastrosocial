@@ -1,4 +1,4 @@
-import { connect, query, disconnect } from './dao.js'
+import { connect, query, disconnect } from './daoPostGres.js'
 import { CONTENT_TYPE_JSON, HTTP_OK } from './util.js'
 
 export const createLike = async (req, res) => {

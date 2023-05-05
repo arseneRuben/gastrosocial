@@ -33,9 +33,10 @@ class NewIngredientPage extends Component {
         })
     }
 
-    handleOnSave = () => {
+    handleOnSave = (e) => {
+        e.preventDefault()
         const method = this.state.formValues.id ? 'PUT' : 'POST'
-        fetch('http://localhost:8080/ingredients', buildHeader(method, this.state.formValues))
+        fetch('http://localhost:8000/ingredients', buildHeader(method, this.state.formValues))
             .then(response => response.json())
             .then(responseObject => {
                 this.setState({
@@ -52,17 +53,17 @@ class NewIngredientPage extends Component {
                 <div className="card d-flex p-2">
                         <div className="card-header text-center"> Nouvel ingredient</div>
                         <div className="card-body">
-                            <form  action={this.handleOnSave}>
-                                <InputComponent onChange={this.handleInputOnChange} label="Intitule:" type='text' name='title' value={this.state.formValues.title} />
+                            <form  onSubmit={this.handleOnSave}>
+                                <InputComponent onChange={this.handleOnChange} label="Intitule:" type='text' name='name' value={this.state.formValues.title} />
 
                                 <div className="input-group mb-3">
                                     <div className="input-group-prepend">
-                                        <label className="input-group-text" for="inputGroupSelect01">Unites de mesure</label>
+                                        <label className="input-group-text" htmlFor="inputGroupSelect01">Unites de mesure</label>
                                     </div>
-                                    <select className="custom-select" id="inputGroupSelect01">
+                                    <select name="unity" onChange={this.handleOnChange} className="custom-select" id="inputGroupSelect01">
                                         <option selected>Choisi...</option>
-                                        <option className="1" value="G">Gramme</option>
-                                        <option className="2" value="L">Litre</option>
+                                        <option className="1" defaultValue="G">Gramme</option>
+                                        <option className="2" defaultValue="L">Litre</option>
                                     </select>
                                 </div>
                                 <div className="col-md-6 offset-md-4">

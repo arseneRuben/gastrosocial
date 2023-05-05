@@ -3,6 +3,7 @@ import { CONTENT_TYPE_JSON, HTTP_OK, writeJSONResponse } from './util.js'
 
 export const getIngredients = async (req, res) => {
     try {
+        console.log('Bonjour')
         connect()
         query('SELECT * FROM ingredient ', [], (result) => {
             res.writeHead(HTTP_OK, { 'Content-Type': CONTENT_TYPE_JSON })
@@ -45,9 +46,10 @@ export const getIngredientsByRecipe = async (req, res) => {
 }
 
 export const createIngredient = async (req, res) => {
-    console.log('BONJOUR')
+    // console.log(req.body.name, req.body.unity)
     connect()
-    query('INSERT INTO ingredient (id, name, unite) VALUES ($1, $2, $3)', [req.body.id, req.body.name, req.body.unite], function () {
+
+    query('INSERT INTO ingredient ( name, unity) VALUES ($1, $2)', [req.body.name, req.body.unity], function () {
         disconnect()
     })
 }

@@ -16,10 +16,10 @@ export const getRecipe = (id) => async (dispatch) => {
 
 export const getRecipes = () => async (dispatch) => {
   try {
-    dispatch({ type: START_LOADING });
+   // dispatch({ type: START_LOADING });
     const {  data}  = await api.fetchRecipes();
     dispatch({ type: FETCH_ALL, payload: { data } });
-    dispatch({ type: END_LOADING });
+   // dispatch({ type: END_LOADING });
   } catch (error) {
     console.log(error);
   }

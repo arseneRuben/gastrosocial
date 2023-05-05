@@ -38,11 +38,7 @@ CREATE TABLE IF NOT EXISTS public.categoryrecipe
 	CONSTRAINT fk_categoryrecipe_recipe FOREIGN KEY(recipeId) REFERENCES recipe(id)   
 );
 
-CREATE TABLE  IF NOT EXISTS public.ingredient 
-(
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(200) NOT NULL
-);
+
 
 CREATE TABLE IF NOT EXISTS image
 (
@@ -91,6 +87,15 @@ CREATE TABLE IF NOT EXISTS public.ingredientrecipe
     CONSTRAINT fk_ingredientrecipe_recipe FOREIGN KEY(recipeId) REFERENCES recipe(id) ,
     CONSTRAINT uniq_ingredientrecipe UNIQUE(recipeId, ingredientId)
 );
+
+CREATE TABLE  IF NOT EXISTS public.ingredient 
+(
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(200) NOT NULL,
+  unity VARCHAR(1) NOT NULL DEFAULT 'G'
+);
+INSERT INTO public.ingredient( name, unity)
+    VALUES ('fruits et legumes', 'G'), ('laitus', 'L'), ('aromes', 'L');
 
 
 INSERT INTO category(name,description) VALUES('africain','recette africaine');

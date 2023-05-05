@@ -19,12 +19,12 @@ import RecipeDetails from "./pages/recipePage/RecipeDetails";
 
 
 const App = () => {
-  const dispatch = useDispatch();
+  /*const dispatch = useDispatch();
   
   useEffect(()=> {
     dispatch(getRecipes());
     
-  }, [dispatch])
+  }, [dispatch])*/
   
   return (
     <div className="container">

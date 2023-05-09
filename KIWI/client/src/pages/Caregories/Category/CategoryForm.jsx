@@ -7,12 +7,11 @@ import { buildHeader } from '../../utils'
 class CategoryForm extends Component {
     constructor (props) {
         super(props)
-
         this.state = {
             // values of differents fields
             formValues: {},
         }
-
+        this.handleAddCatagory = this.props.handleAddCatagory;
         this.handleOnChange = this.handleOnChange.bind(this)
         this.clear = this.clear.bind(this)
         this.handleOnSave = this.handleOnSave.bind(this)
@@ -28,13 +27,14 @@ class CategoryForm extends Component {
           }
       };
     handleOnChange (event) {
+       
         this.setState({
             formValues: {
                 ...this.state.formValues,
                 [event.target.name]: event.target.value
             }
         })
-       // this.clear()
+        
     }
 
     handleOnSave = (e) => {
@@ -44,9 +44,11 @@ class CategoryForm extends Component {
             .then(response => response.json())
             .then(responseObject => {
                 this.setState({
-                    categories: responseObject,
+                    categorie: responseObject,
                 })
+                this.handleAddCatagory(responseObject)
             })
+            this.clear()
     }
 
     render () {

@@ -9,7 +9,15 @@ import EditIcon from '@mui/icons-material/Edit';
         this.state = {
             categories: []
         }
+        this.handleAddCatagory = this.handleAddCatagory.bind(this)
     }
+
+    
+    handleAddCatagory(newCategory){
+        this.setState({categories : this.state.categories.concat([newCategory])});
+    }
+
+  
     componentDidMount() {
         fetch('http://localhost:8000/categories')
             .then(response => {
@@ -22,9 +30,11 @@ import EditIcon from '@mui/icons-material/Edit';
                 console.log(error)
             })
     }
+   
+ 
 
     render () {
-        console.log(this.state.categories)
+        
     return (
         
         <div className='row container'>
@@ -47,7 +57,7 @@ import EditIcon from '@mui/icons-material/Edit';
                 </div>
             </div>
             <div className='col-4'>
-                <CategoryForm />
+                <CategoryForm handleAddCatagory = {this.handleAddCatagory} />
             </div>
             
         </div>

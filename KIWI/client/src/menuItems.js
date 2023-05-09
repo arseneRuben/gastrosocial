@@ -13,7 +13,7 @@ export const menuItems = [
         },
         {
             title: 'Catalogue ',
-            url: '/recipes/index',
+            url: '/recipes',
           },
         {
           title: 'Favoris',
@@ -45,17 +45,6 @@ export const menuItems = [
     {
       title: 'Caterories',
       url: '/categories',
-      submenu: [
-        {
-          title: 'Nouvelle ',
-          url: '/categories/new',
-        },
-        {
-            title: 'Liste ',
-            url: '/categories',
-        }
       
-      
-      ],
     },
   ];

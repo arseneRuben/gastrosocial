@@ -1,4 +1,6 @@
 import React, { Component, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
 //Used Icons
 import SyncIcon from '@mui/icons-material/Sync'
 import StarIcon from '@mui/icons-material/Star';
@@ -8,37 +10,19 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import { getRecipe } from '../../actions/recipes'
 import { CardMedia } from '@mui/material';
 
-class RecipeDetails extends Component {
+const RecipeDetails = ({currentRecipeId, setCurrentRecipeId}) => {
 
-    constructor (props) {
-        super(props)
-        this.state = {
-            recipes:[],
-        }
-    }
-    componentDidMount() {
-        fetch('http://localhost:8000/recipes')
-            .then(response => {
-                return response.json()
-            })
-            .then(responseObject => {
-                this.setState({ recipes: responseObject })
-            }).catch(error=>{
-                console.log(error)
-            })
-    }
+  const { recipes,  isLoading } = useSelector((state) => state.recipes);
+  const  recipe  = recipes.find((r) => r._id === currentRecipeId);
+  console.log()
+  //const navigate = useNavigate()
+  const handleAddOnGroceryList = async (e) => {
+   //navigate(`/recipes/${recipe.id}`);
+  };
 
-
-  
-
-
-
-  render(){
-    return (
-
-     <>
-    {/* Recipe section */}
-
+  return (
+    <>
+        {/* Recipe section */}
         <section className="py-5">
             <div className="container px-4 px-lg-5 my-5">
                 <div className="row gx-4 gx-lg-5 align-items-center">
@@ -46,11 +30,13 @@ class RecipeDetails extends Component {
                     <div className="col-md-6">
                         <div className="small mb-1">{this.recipes[0].proposed_title}</div>
                         <h1 className="display-5 fw-bolder">{this.recipes.proposed_title}</h1>
+                      
                         <div className="fs-5 mb-5">
                             <span className="text-decoration"> <FavoriteIcon /> 20</span>
                             <div className="ratings-widget">
                                 <div   className="title">
-                                {this.recipes[0].preparation_time} mintutes
+                                    {this.recipes[0].preparation_time} mintutes
+                                    {recipe[0].preparationTime} mintutes
                                 </div>
                                 <div>
                                         <StarIcon />
@@ -62,6 +48,7 @@ class RecipeDetails extends Component {
                             </div>
                         </div>
                         <p className="lead">{this.recipes[0].proposed_description}</p>
+                        <p className="lead">{recipe[0].proposedDescription}</p>
                         <div className="d-flex">
                             <input className="form-control text-center me-3" id="inputQuantity" type="num" value="1"   onChange={this.handleAddOnGroceryList}/>
                             <button className="btn btn-outline-dark flex-shrink-0" type="button">
@@ -163,7 +150,7 @@ class RecipeDetails extends Component {
             </div>
         </section>
         </>
-    )}
+    )
 
  
 };

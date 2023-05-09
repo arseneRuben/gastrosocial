@@ -10,15 +10,19 @@ import IngredientPage from "./pages/ingredientPage";
 import NewIngredientPage from "./pages/ingredientPage/new";
 import EditIngredientPage from "./pages/ingredientPage/edit";
 import RecipePage from "./pages/recipePage";
+import NewRecipePage from "./pages/recipePage/new";
+
 
 import { useDispatch } from "react-redux";
 import { useEffect , useState} from "react";
-import { getRecipe, getRecipes } from "./actions/recipes";
+import { getRecipes } from "./actions/recipes";
+import RecipeDetails from "./pages/recipePage/RecipeDetails";
+import EditRecipePage from "./pages/recipePage/edit";
 
 
 function App() {
+  const [currentId, setCurrentId] = useState(null)
   const dispatch = useDispatch();
-  //const [currentRecipeId , setCurrentRecipeId] = useState(null)
   useEffect(() => {
    dispatch(getRecipes())
   }, [dispatch]);
@@ -33,9 +37,13 @@ function App() {
           <Route path="/auth" element={<LoginPage />} />
           <Route path="/ingredients" element={<IngredientPage />} />
           <Route path="/ingredients/new" element={<NewIngredientPage />} />
-          <Route path="/recipes" element={<RecipePage />} />
-          <Route path="/ingredients/new" element={<NewIngredientPage />} />
           <Route exact path="/ingredients/edit/:id" element={<EditIngredientPage />} />
+
+
+          <Route path="/recipes" element={<RecipePage   setCurrentId={setCurrentId} />} />
+          <Route path="/recipes/:id" element={<RecipeDetails />} />
+          <Route path="/recipes/new" element={<NewRecipePage    />}  />
+          <Route path="/recipes/edit/:id" element={<EditRecipePage/>}  />
           <Route path="/categories" element={<CategoryPage/>} />
         </Routes>
       </BrowserRouter>

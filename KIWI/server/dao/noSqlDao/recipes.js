@@ -27,14 +27,16 @@ export const createRecipe = async (req, res) => {
 
 // Update a recipe
 export const updateRecipe = async (req, res) => {
-    const { id } = req.params
+    const { id: _id } = req.params
     const recipe = req.body
-
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No recipe with id: ${id}`)
-
-    const updatedRecipe = Recipe.findByIdAndUpdate(id, recipe, { new: true })
-
-    res.json(updatedRecipe)
+    try {
+        if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send(`No recipe with id: ${_id}`)
+        recipe.updatedAt = new Date()
+        const updatedRecipe = await Recipe.findByIdAndUpdate(id, { ...recipe, _id }, { new: true })
+        res.json(updatedRecipe)
+    } catch (error) {
+        res.status(404).json({ message: error.message })
+    }
 }
 
 // Update a recipe
@@ -53,8 +55,11 @@ export const getRecipe = async (req, res) => {
 // Update a recipe
 export const deleteRecipe = async (req, res) => {
     const { id } = req.params
-
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No recipe with id: ${id}`)
-    await Recipe.findByIdAndRemove(id)
-    res.json({ message: 'Recipe deleted successfully' })
+    try {
+        if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No recipe with id: ${id}`)
+        await Recipe.findByIdAndRemove(id)
+        res.json({ message: 'Recipe deleted successfully' })
+    } catch (error) {
+        res.status(404).json({ message: error.message })
+    }
 }

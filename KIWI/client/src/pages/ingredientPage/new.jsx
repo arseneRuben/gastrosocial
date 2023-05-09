@@ -14,9 +14,10 @@ class NewIngredientPage extends Component {
             formValues: {},
             image: new FormData()
         }
-
+      //  this.navigate = this.props.navigate.bind(this);
         this.handleOnChange = this.handleOnChange.bind(this)
         this.handleOnSave = this.handleOnSave.bind(this)
+        this.clear = this.clear.bind(this)
     }
 
     
@@ -28,6 +29,15 @@ class NewIngredientPage extends Component {
             }
         })
     }
+
+    clear (){
+        for (var key in this.state.formValues) {
+                document.getElementById(key).value=""
+        }
+        this.setState({
+            formValues: {}
+        })
+    };
 
     handleOnSave = (e) => {
         const image = document.getElementById("image")
@@ -41,7 +51,6 @@ class NewIngredientPage extends Component {
             fetch("http://localhost:8000/upload_file", {
                 method: 'POST',
                 body: this.state.image,
-              
             }).then((res) => console.log(res))
             .catch((err)=> ("Erreur de transfer", err))
         
@@ -54,7 +63,8 @@ class NewIngredientPage extends Component {
                     ingredients: responseObject,
                 })
             })
-       
+       this.clear()
+      // this.navigate('/ingredients')
     }
     
 
@@ -66,7 +76,7 @@ class NewIngredientPage extends Component {
                 
             <div className="col-md-6">
                 <div className="card d-flex p-2">
-                        <div className="card-header text-center"> {this.props.params.id ? "Modifier Ingredient" : "Nouvel ingredient" }</div>
+                        <div className="card-header text-center"> Nouvel ingredient</div>
                         <div className="card-body">
                             <form  onSubmit={this.handleOnSave}>
                                 <InputComponent onChange={this.handleOnChange} label="Intitule:" type='text' name='name' value={this.state.formValues.title} />

@@ -14,11 +14,21 @@ export function buildHeader (method, body) {
 }
 
 
-export const fetchRecipes = () => fetch(`${baseUrl}/recipes`)
+export const fetchRecipes = () => fetch(`${baseUrl}/recipes`).then(response => {
+    return response.json()
+}).catch(error=>{
+    console.log(error)
+})
+export const updateRecipe = (id, updatedRecipe) => fetch(`${baseUrl}/recipes/${id}`, buildHeader('PUT', updatedRecipe)).then(response => {
+    return response.json()
+}).catch(error=>{
+    console.log(error)
+})
+
+
 export const fetchRecipe = (id)=> fetch(`${baseUrl}/recipes/${id}`)
 export const createRecipe = (newRecipe) => fetch(`${baseUrl}/recipes`, buildHeader('POST', newRecipe))
-export const updateRecipe = (id, updatedRecipe) => fetch(`${baseUrl}/recipes/${id}`, buildHeader('PUT', updatedRecipe))
-export const deleteRecipe = (id) => fetch(`${baseUrl}/recipes/${id}`, buildHeader('DELETE', null))
+export const deleteRecipe = (id) => fetch(`${baseUrl}/recipes/${id}`, { method: 'DELETE' })
 
 export const fetchIngredient = (id) =>  fetch(`${baseUrl}/ingredients/${id}`)
 export const fetchIngredients = ()  =>   fetch(`${baseUrl}/ingredients`)

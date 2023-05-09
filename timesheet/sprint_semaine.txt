@@ -1,0 +1,7 @@
+Sprint de la semaine
+	-Finaliser la creation et la presentation de recettes
+	-Gestion des utilisateurs(sign in, sign up, roles)
+	-Modification des recette et publication
+	-Pagination de la liste des recettes
+	-Gestion des likes et des Evaluation
+

@@ -1,5 +1,6 @@
 
 import { Component } from 'react'
+
 import InputComponent from '../../component/form/input-component'
 import { buildHeader } from '../utils'
 import withRouter from '../withRouter';
@@ -12,7 +13,6 @@ class EditIngredientPage extends Component {
 
         this.state = {
             // values of differents fields
-         
             formValues: {},
             image: new FormData()
         }

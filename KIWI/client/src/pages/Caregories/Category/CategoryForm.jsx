@@ -19,12 +19,13 @@ class CategoryForm extends Component {
 
    
     clear (){
+      
+        for (var key in this.state.formValues) {
+              document.getElementById(key).value=""
+        }
         this.setState({
             formValues: {}
         })
-        for (var key in this.state.formValues) {
-              document.getElementById(key).value=""
-          }
       };
     handleOnChange (event) {
        

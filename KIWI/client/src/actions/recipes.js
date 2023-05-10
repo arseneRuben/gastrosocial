@@ -60,6 +60,17 @@ export const deleteRecipe = (id) => async (dispatch) => {
 
 
 
+export const likeRecipe = (id) => async (dispatch) => {
+  //const user = JSON.parse(localStorage.getItem('profile'));
+  try {
+    const { data } = await api.likeRecipe(id);
+    dispatch({ type: LIKE, payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
 /*
 export const getRecipesByCreator = (name) => async (dispatch) => {
   try {
@@ -96,15 +107,6 @@ export const getRecipesBySearch = (searchQuery) => async (dispatch) => {
 
 
 
-export const likeRecipe = (id) => async (dispatch) => {
-  const user = JSON.parse(localStorage.getItem('profile'));
-  try {
-    const { data } = await api.likeRecipe(id, user?.token);
-    dispatch({ type: LIKE, payload: data });
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 export const commentRecipe = (value, id) => async (dispatch) => {
   try {

@@ -1,4 +1,4 @@
-import { FETCH_ALL, FETCH_RECIPE , CREATE, UPDATE, DELETE} from '../constants/actionTypes';
+import { FETCH_ALL, FETCH_RECIPE , CREATE, UPDATE, DELETE, LIKE} from '../constants/actionTypes';
 
 const recipes = (state = {recipes: [] }, action) => {
   switch (action.type) {
@@ -13,6 +13,7 @@ const recipes = (state = {recipes: [] }, action) => {
     case CREATE:
           return { ...state, recipes: [...state.recipes, action.payload] }; // Array of recipes: new recipe in the action.payload
     case UPDATE:  // action.payload is the new updated
+    case LIKE:
             return { ...state, recipes: state.recipes.map((recipe) => (recipe._id === action.payload._id ? action.payload : recipe)) };
     case FETCH_ALL:
     return {

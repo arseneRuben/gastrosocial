@@ -9,10 +9,8 @@ const recipeSchema = mongoose.Schema(
         proposedTitle: String,
         proposedDecription: String,
 
-        likes: {
-            type: Map,
-            of: Boolean
-        },
+        likes: { type: [String], default: [] },
+
         ingredients: [String],
         mainImage: String,
         portions: {

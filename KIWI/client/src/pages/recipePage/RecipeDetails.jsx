@@ -1,34 +1,38 @@
 import {  useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { Component } from 'react'
+
 //Used Icons
 import SyncIcon from '@mui/icons-material/Sync'
 import StarIcon from '@mui/icons-material/Star'
 import StarBorderIcon from '@mui/icons-material/StarBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import { CardMedia } from '@mui/material'
+import withRouter from '../withRouter'
 
-const RecipeDetails = () => {
-    const  {recipe ,recipes,isLoading}  = useSelector((state) => state.recipes);
-    console.log(recipe)
-    //const  recipe  = recipes.find((r) => r._id === id);
-    const params = useParams(), id = params.id
-    // find the recipe to detail by his id
-   /* fetch(`http://localhost:8000/recipes/${id}`)
-    .then(response => {
-         return response.json()
-    })
-    .then(responseObject => {
-        recipe= responseObject 
-    }).catch(error=>{
-        console.log(error)
-    })*/
+class RecipeDetails extends Component{
+    constructor (props) {
+        super(props)
     
-    //const navigate = useNavigate()
-    const handleAddOnGroceryList = async (e) => {
-    //navigate(`/recipes/${recipe.id}`);
-    };
-
- 
+        this.state = {
+            recipe: {},
+        }
+      }
+    componentDidMount() {
+        fetch(`http://localhost:8000/recipes/${this.props.params.id}`)
+            .then(response => {
+                 return response.json()
+            })
+            .then(responseObject => {
+                this.setState({ recipe: responseObject })
+               
+            }).catch(error=>{
+                console.log(error)
+            })
+    }
+   
+    render(){
+        console.log(this.state)
     return (
         
           
@@ -37,16 +41,16 @@ const RecipeDetails = () => {
                 <section className="py-5">
                     <div className="container px-4 px-lg-5 my-5">
                         <div className="row gx-4 gx-lg-5 align-items-center">
-                            <div className="col-md-6"><img className="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /></div>
+                            <div className="col-md-6">        <CardMedia  image={this.state.recipe.mainImage}  title={this.state.recipe.proposed_title}   style={{ paddingTop: '56.25%', backgroundColor: 'rgba(0, 0, 0, 0.5)' }} /></div>
                             <div className="col-md-6">
-                                <div className="small mb-1">{recipe.proposedTitle}</div>
-                                <h1 className="display-5 fw-bolder">{recipe.proposedTitle}</h1>
+                                <div className="small mb-1">{this.state.recipe.proposedTitle}</div>
+                                <h1 className="display-5 fw-bolder">{this.state.recipe.proposedTitle}</h1>
                             
                                 <div className="fs-5 mb-5">
                                     <span className="text-decoration"> <FavoriteIcon /> 20</span>
                                     <div className="ratings-widget">
                                         <div   className="title">
-                                            {recipe.preparationTime} mintutes
+                                            {this.state.recipe.preparationTime} mintutes
                                         </div>
                                         <div>
                                                 <StarIcon />
@@ -57,7 +61,7 @@ const RecipeDetails = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <p className="lead">{recipe.proposedDescription}</p>
+                                <p className="lead">{this.state.recipe.proposedDescription}</p>
                                 <div className="d-flex">
                                     <input className="form-control text-center me-3" id="inputQuantity" type="num" value="1"   onChange={this.handleAddOnGroceryList}/>
                                     <button className="btn btn-outline-dark flex-shrink-0" type="button">
@@ -77,7 +81,7 @@ const RecipeDetails = () => {
                             <div className="col mb-5">
                                 <div className="card h-100">
                                     {/*  Recipe image */}
-                                    <CardMedia className="card-img-top" image={recipe.mainImage}  title={recipe.proposedTitle}/>
+                                    <CardMedia className="card-img-top" image={this.state.recipe.mainImage}  title={this.state.recipe.proposedTitle}/>
                                     {/*  Recipe details */}
                                     <div className="card-body p-4">
                                         <div className="text-center">
@@ -160,9 +164,9 @@ const RecipeDetails = () => {
             </>
 
         );
-
+    }
 
 
  
 }
-export default RecipeDetails;
+export default withRouter(RecipeDetails);

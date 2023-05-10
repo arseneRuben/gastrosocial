@@ -11,12 +11,12 @@ const RecipePage = () => {
           <>
               <div className="jumbotron">
                     <div className="container">
-                      <h1 className="display-3"> { !recipes.length && !isLoading ? 'Pas de recettes' : ' Catalogue des recettes '}</h1>     
+                      <h1 className="display-3 align-center text-nowrap"> { !recipes.length && !isLoading ? 'Pas de recettes' : ' Catalogue des recettes '}</h1>     
                     </div>
               </div>
   
                  {isLoading ? <SyncIcon /> :
-                        <div className="row  d-flex flex-wrap  mb-4 box-shadow" >
+                        <div className="row  d-flex flex-wrap  m-4 box-shadow" >
                               {recipes?.map((recipe) => (
                                               <RecipeItem recipe={recipe}  />
                               ))}

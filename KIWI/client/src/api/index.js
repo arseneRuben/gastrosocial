@@ -19,17 +19,21 @@ export const fetchRecipes = () => fetch(`${baseUrl}/recipes`).then(response => {
 }).catch(error=>{
     console.log(error)
 })
-export const updateRecipe = (id, updatedRecipe) => fetch(`${baseUrl}/recipes/${id}`, buildHeader('PUT', updatedRecipe)).then(response => {
-    return response.json()
-}).catch(error=>{
-    console.log(error)
-})
+export const updateRecipe = (id, updatedRecipe) => fetch(`${baseUrl}/recipes/${id}`, buildHeader('PUT', updatedRecipe))
 
 
 export const fetchRecipe = (id)=> fetch(`${baseUrl}/recipes/${id}`)
 export const createRecipe = (newRecipe) => fetch(`${baseUrl}/recipes`, buildHeader('POST', newRecipe))
-export const deleteRecipe = (id) => fetch(`${baseUrl}/recipes/${id}`, { method: 'DELETE' })
-
+export const deleteRecipe = (id) => fetch(`${baseUrl}/recipes/${id}`, { method: 'DELETE' }).then(response => {
+    return response.json()
+}).catch(error=>{
+    console.log(error)
+})
+export const likeRecipe = (id) =>fetch(`/recipes/${id}/like`, { method: 'PUT' }).then(response => {
+    return response.json()
+}).catch(error=>{
+    console.log(error)
+})
 export const fetchIngredient = (id) =>  fetch(`${baseUrl}/ingredients/${id}`)
 export const fetchIngredients = ()  =>   fetch(`${baseUrl}/ingredients`)
 export const createIngredient = (newIngredient) => fetch(`${baseUrl}/ingredients`, buildHeader('POST', newIngredient))
@@ -45,7 +49,6 @@ export const createImage = (newImage, recipeId, userId) => API.post(`/recipes/${
 export const fetchRecipesByTitle = (title) => API.get(`/recipes/search?title=${title}`);
 export const fetchRecipesByCreator = (name) => API.get(`/recipes/creator?name=${name}`);
 export const fetchRecipesBySearch = (searchQuery) => API.get(`/recipes/search?searchQuery=${searchQuery.search || 'none'}&tags=${searchQuery.tags}`);
-export const likeRecipe = (id) => API.patch(`/recipes/${id}/likeRecipe`);
 export const comment = (value, id) => API.recipe(`/recipes/${id}/commentRecipe`, { value });
 export const deleteRecipe = (id) => API.delete(`/recipes/${id}`);
 

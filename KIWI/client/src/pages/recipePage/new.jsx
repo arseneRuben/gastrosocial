@@ -1,23 +1,23 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Typography } from "@mui/material";
 import InputComponent from "../../component/form/input-component";
 import { useState } from "react";
 import { Button } from "reactstrap";
-import { createRecipe, updateRecipe } from '../../actions/recipes';
+import { createRecipe } from '../../actions/recipes';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import FileBase from 'react-file-base64';
 import StepInputComponent from '../../component/form/step-input-component';
+import CategoriesInputContainer from '../../component/form/categories-input-container';
 
 
 
-const NewRecipePage = ({currentRecipeId, setCurrentRecipeId}) => {
+const NewRecipePage = () => {
 
       const [stepsList, setStepsList] = useState([]);
+      //Callback function to add Step inputs in the recipe form
       const addStepInputs = () => {
-        
         setStepsList(stepsList.concat(<StepInputComponent stepNumber={stepsList.length}   />));
-      
       }
       const dispatch = useDispatch()
       const navigate = useNavigate()
@@ -36,9 +36,8 @@ const NewRecipePage = ({currentRecipeId, setCurrentRecipeId}) => {
            }
            // Add the step object in the postData 
            setPostData({ ...postData, 'steps': steps })
-           // Create the recipe object
-           dispatch(createRecipe({ ...postData}, navigate))
-               
+           // Dispach the creation of recipe 
+           dispatch(createRecipe({ ...postData}, navigate))     
     }
     const clear = () => {
         setPostData({ 'proposedTitle': '', 'proposedDescription': '', 'portions':0,  'preparationTime':0 , 'cookingTime':0,   'proposedImages': []  });
@@ -47,8 +46,10 @@ const NewRecipePage = ({currentRecipeId, setCurrentRecipeId}) => {
 
         return (
               <form autoComplete="off" noValidate className="" onSubmit={handleSubmit}  >
+                   {/* Header */}
                   <Typography variant="h6" className="text-center"> Creer une recette</Typography>
-                  <fieldset className="form-group border p-3">
+                  <fieldset className="form-group border p-1">
+                  {/* First part */}
                   <legend className="w-auto px-2">Presentation generale</legend>
                   <div className='row'>
                     <div className='col-6'>
@@ -68,11 +69,12 @@ const NewRecipePage = ({currentRecipeId, setCurrentRecipeId}) => {
                    
                   </div>
                   <div className='row'>
-                        <div className='col-2'>
+                        <div className='col-3'>
                             <InputComponent name="portions"  labelClass="col-md-4 col-form-label text-md-right"  label="Portions "  value={postData.portions}  type="number"  onChange={(e)=> setPostData({...postData, 'portions':  e.target.value})}  />
                         </div>
-                        <div className='col-6 mt-4'>
-                            <FileBase type="file" label="Image principale" placeHolder="Image principale" multiple={false} onDone={({ base64 }) => setPostData({ ...postData, 'mainImage': base64 })} />
+                        <div className='col-5 mt-4'>
+                            <label>Image principale</label>
+                            <FileBase type="file"  multiple={false} onDone={({ base64 }) => setPostData({ ...postData, 'mainImage': base64 })} />
                         </div>
                         <div className='col-4'>
                            <InputComponent name="steps"  labelClass="col-md-4 col-form-label text-md-right"  label="Nombres d'etapes "  type="number"  onChange={addStepInputs}  />
@@ -80,23 +82,28 @@ const NewRecipePage = ({currentRecipeId, setCurrentRecipeId}) => {
                         </div>
                   </div>
                   </fieldset>
-                  <fieldset className="form-group border p-3" id="steps_section">
-                  <legend className="w-auto px-2">Etapes</legend>
+                  <fieldset className="form-group border p-1" id="steps_section">
+                         {/* Steps section */}
+                         <legend className="w-auto px-1">Etapes de preparation et de cuisson</legend>
                          {stepsList}
-                 </fieldset>
-                
-                 
-                  
-                 <div className=" d-inline">
-                        <Button onClick={addStepInputs} color="warning" >Ajouter une etape</Button>
-                  </div>
-                                    
-                  <div className=" d-inline">
-                        <Button className="" color="primary" type="submit" >Submit</Button>
-                  </div>
-                  <div className=" d-inline">
-                         <Button  color="secondary" size="small" onClick={clear} >Clear</Button>
-                  </div>
+                   </fieldset>
+                   <fieldset className="form-group border p-1" id="steps_section">
+                        <CategoriesInputContainer/>
+                   </fieldset>
+
+                   <fieldset className="form-group border p-1" id="submission_section">
+                        <div className='d-flex justify-content-around'>
+                              <div className=" d-inline">
+                                    <Button onClick={addStepInputs} color="warning" >Ajouter une etape</Button>
+                              </div>
+                              <div className=" d-inline">
+                                    <Button className="" color="primary" type="submit" >Submit</Button>
+                              </div>
+                              <div className=" d-inline">
+                                    <Button  color="secondary" size="small" onClick={clear} >Clear</Button>
+                              </div>
+                        </div>
+                  </fieldset>
                    
               </form>
         )

@@ -1,9 +1,7 @@
-import {  useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+
 import { Component } from 'react'
 
 //Used Icons
-import SyncIcon from '@mui/icons-material/Sync'
 import StarIcon from '@mui/icons-material/Star'
 import StarBorderIcon from '@mui/icons-material/StarBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
@@ -32,7 +30,7 @@ class RecipeDetails extends Component{
     }
    
     render(){
-        console.log(this.state)
+     
     return (
         
           

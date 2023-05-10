@@ -1,11 +1,6 @@
-import { useState } from 'react';
 
 import React, { Component } from "react";
-
 class StepInputComponent extends Component {
-    
- 
-
    render() {
       return (
             <div className="form-group row">

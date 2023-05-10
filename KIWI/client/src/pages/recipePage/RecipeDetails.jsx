@@ -17,6 +17,7 @@ class RecipeDetails extends Component{
     
         this.state = {
             recipe: {},
+            categories:{}
         }
       }
     componentDidMount() {
@@ -26,15 +27,24 @@ class RecipeDetails extends Component{
             })
             .then(response => {
                 this.setState({ recipe: response })
-               
+            }).catch(error=>{
+                console.log(error)
+            })
+        fetch(`http://localhost:8000/recipes/${this.props.params.id}/categories`)
+            .then(response => {
+                 return response.json()
+            })
+            .then(response => {
+                this.setState({ categories: response })
+               console.log(response)
             }).catch(error=>{
                 console.log(error)
             })
     }
    
     render(){
-        
-        if(this.state.recipe.steps==null) return <SyncIcon/>
+        console.log(this.state.categories)
+        if(this.state.recipe.steps==null ) return <SyncIcon/>
        
     return (
         
@@ -80,15 +90,25 @@ class RecipeDetails extends Component{
                 <section className='py-5'>
                     <div className="container">
                         <div className="row">
-                            <div className="col-12 col-sm-8 col-lg-8">
+                            <div className="col-sm-8 col-lg-8">
                                 <h6 className="text-muted">Differentes etapes de preparation et de cuisson</h6> 
                                 <ul className="list-group">
                                     {
                                         this.state.recipe.steps.map((step, index) => (
                                             <StepItemComponent image={"http://localhost:8000/download/"+step.imageId} description={step.stepId} key={index}  />
-                                         )  )
+                                         ))
                                     }
                                 </ul>
+                            </div>
+                            <div className="col-sm-4 col-lg-4">
+                                <h6 className="text-muted">Differentes categories</h6> 
+                                {this.state.categories.length > 0 &&
+                                <ul className="list-group">
+                                    {
+                                        this.state.categories.map((item) => <h3>{item.name}</h3> )
+                                    }
+                                </ul>
+                                }
                             </div>
                         </div>
                     </div>

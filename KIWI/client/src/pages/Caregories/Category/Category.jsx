@@ -8,9 +8,9 @@ const Category = (item) => {
             <div class="card-head">
                 <h5>{item.name}</h5>
             </div>
-            <div class="card-body">
+           {/* <div class="card-body">
                 <p>{item.description}</p> 
-            </div> 
+    </div>  */}
         </>
         
     )

@@ -1,5 +1,7 @@
 import mongoose from 'mongoose'
 import Recipe from '../../models/recipe.js'
+import Category from '../../models/category.js'
+
 // Collect all recipes from the database
 export const getRecipes = async (req, res) => {
     try {
@@ -42,16 +44,27 @@ export const updateRecipe = async (req, res) => {
 // Update a recipe
 export const getRecipe = async (req, res) => {
     const { id } = req.params
-
     try {
         const recipe = await Recipe.findById(id)
-
         res.status(200).json(recipe)
     } catch (error) {
         res.status(404).json({ message: error.message })
     }
 }
+export const getRecipeCategories = async (req, res) => {
+    const { id } = req.params
+    try {
+        const recipe = await Recipe.findById(id)
 
+        const categories = await Promise.all(
+            recipe.categories.map((catId) => Category.findById(catId))
+        )
+
+        res.status(200).json(categories)
+    } catch (error) {
+        res.status(404).json({ message: error.message })
+    }
+}
 // Update a recipe
 export const deleteRecipe = async (req, res) => {
     const { id } = req.params

@@ -5,7 +5,7 @@ const InputComponent = ({ name, label, type, onChange, value , autoFocus, labelC
         <label className={labelClass} htmlFor={name}>{label}</label>
 
         <div className={half ? "col-md-6":  "col-md-12"}>
-            {type!=='textarea' ?   <input className="form-control" name={name} type={type}  id={name} onChange={onChange} value={value}  autoFocus={autoFocus}  />: 
+            {type!=='textarea' ?   <input className="form-control" name={name} type={type}  id={name} onChange={onChange} value={value}  autoFocus={autoFocus}  placeholder={label}  />: 
                 <textarea className="form-control"  name={name} id={name} onChange={onChange} value={value}  autoFocus={autoFocus} rows="3"></textarea>
             }
            

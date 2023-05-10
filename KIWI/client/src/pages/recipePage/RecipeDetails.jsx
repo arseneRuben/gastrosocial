@@ -35,7 +35,7 @@ class RecipeDetails extends Component{
     render(){
         
         if(this.state.recipe.steps==null) return <SyncIcon/>
-        console.log(this.state.recipe)
+       
     return (
         
           
@@ -84,8 +84,8 @@ class RecipeDetails extends Component{
                                 <h6 className="text-muted">Differentes etapes de preparation et de cuisson</h6> 
                                 <ul className="list-group">
                                     {
-                                        this.state.recipe.steps.map((step) => (
-                                            <StepItemComponent image={"http://localhost:8000/download/"+step.imageId} description={step.stepId}  />
+                                        this.state.recipe.steps.map((step, index) => (
+                                            <StepItemComponent image={"http://localhost:8000/download/"+step.imageId} description={step.stepId} key={index}  />
                                          )  )
                                     }
                                 </ul>

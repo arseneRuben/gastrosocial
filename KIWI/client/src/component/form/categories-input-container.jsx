@@ -1,6 +1,8 @@
 
 import React, { Component } from "react";
-import SyncIcon from '@mui/icons-material/Sync'
+
+const toggleElement = (arr, val) =>
+  arr.includes(val) ? arr.filter(el => el !== val) : [...arr, val];
 
 class CategoriesInputConainer extends Component {
     constructor (props) {
@@ -20,8 +22,10 @@ class CategoriesInputConainer extends Component {
       
         this.setState({
             ...this.state,
-             selectedCategoryIds: this.state.selectedCategoryIds.concat(e.target.id)
+             selectedCategoryIds: toggleElement(this.state.selectedCategoryIds,e.target.id)
           })     
+          document.getElementById(e.target.id).classList+="bg-secondary text-white"
+          this.props.setCategories(this.state.selectedCategoryIds)
       }
       handleInputChange (e) {
            this.setState({
@@ -57,7 +61,7 @@ class CategoriesInputConainer extends Component {
            <div className="form-group row p-4">
                       <input className="form-control" onChange={this.handleInputChange} type="text"  placeholder="Dans quelles categories positionner votre recette ?"/>
                       {this.state.filteredCategories.map((item) => 
-                        <div className='card col-md-2 p-6' key={item._id}>
+                        <div className='col-md-2 border border-secondary' key={item._id}>
                                 <h5  id={item._id} onClick={this.handleClick}>{item.name}</h5>
                         </div>  
                       )} 

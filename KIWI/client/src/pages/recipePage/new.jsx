@@ -13,11 +13,11 @@ import CategoriesInputContainer from '../../component/form/categories-input-cont
 
 
 const NewRecipePage = () => {
-
+      const [categories, setCategories] = useState([]);
       const [stepsList, setStepsList] = useState([]);
       //Callback function to add Step inputs in the recipe form
       const addStepInputs = () => {
-        setStepsList(stepsList.concat(<StepInputComponent stepNumber={stepsList.length}   />));
+        setStepsList(stepsList.concat(<StepInputComponent stepNumber={stepsList.length} key={stepsList.length}  />));
       }
       const dispatch = useDispatch()
       const navigate = useNavigate()
@@ -48,13 +48,13 @@ const NewRecipePage = () => {
            // Add the step object in the postData 
           // setPostData({ ...postData, 'steps': steps })
            // Dispach the creation of recipe 
-           dispatch(createRecipe({ ...postData, 'steps': steps }, navigate))     
+           dispatch(createRecipe({ ...postData, 'steps': steps, 'categories': categories }, navigate))     
     }
     const clear = () => {
         setPostData({ 'proposedTitle': '', 'proposedDescription': '', 'portions':0,  'preparationTime':0 , 'cookingTime':0,   'proposedImages': []  });
     };
  
-      
+       
         return (
               <form autoComplete="off" noValidate className="" onSubmit={handleSubmit}  >
                    {/* Header */}
@@ -99,7 +99,8 @@ const NewRecipePage = () => {
                          {stepsList}
                    </fieldset>
                    <fieldset className="form-group border p-1" id="steps_section">
-                        <CategoriesInputContainer/>
+                        <CategoriesInputContainer setCategories={setCategories}/>
+                        
                    </fieldset>
 
                    <fieldset className="form-group border p-1" id="submission_section">

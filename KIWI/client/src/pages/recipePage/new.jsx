@@ -28,22 +28,33 @@ const NewRecipePage = () => {
     const handleSubmit = async (e) => {
             e.preventDefault();
             const steps = []
-           //Buils de step object
+           
+           let  imageData=new FormData()
+
            for(let i=0; i<stepsList.length; i++){
-                  steps.push(
+                  // Send each image to the server 
+                  imageData.append("file",  document.getElementById(`image-step-${i}`).files[0])
+                  fetch("http://localhost:8000/upload_file", {
+                        method: 'POST',
+                        body: imageData,
+                    }).then((res) => console.log(res))
+                    .catch((err)=> ("Erreur de transfer", err))
+                    //Buils  step object
+                    steps.push(
                         {"stepId": document.getElementById(`text-step-${i}`).value, "imageId": document.getElementById(`image-step-${i}`).value.split('\\')[2]}
                   )
+                  imageData=new FormData()
            }
            // Add the step object in the postData 
-           setPostData({ ...postData, 'steps': steps })
+          // setPostData({ ...postData, 'steps': steps })
            // Dispach the creation of recipe 
-           dispatch(createRecipe({ ...postData}, navigate))     
+           dispatch(createRecipe({ ...postData, 'steps': steps }, navigate))     
     }
     const clear = () => {
         setPostData({ 'proposedTitle': '', 'proposedDescription': '', 'portions':0,  'preparationTime':0 , 'cookingTime':0,   'proposedImages': []  });
     };
  
-
+      
         return (
               <form autoComplete="off" noValidate className="" onSubmit={handleSubmit}  >
                    {/* Header */}
@@ -61,7 +72,7 @@ const NewRecipePage = () => {
                   </div>
                   <div className='row'>
                     <div className='col-6'>
-                         <InputComponent name="preparationTime"  labelClass="col-md-4 col-form-label text-md-right"  label="Preparion (en min)" value={postData.preparationTime}  type="number" onChange={(e)=> setPostData({...postData, 'preparationTime':  e.target.value})}  />
+                         <InputComponent name="preparationTime"  labelClass="col-md-4 col-form-label text-md-right"  label="Preparation (en min)" value={postData.preparationTime}  type="number" onChange={(e)=> setPostData({...postData, 'preparationTime':  e.target.value})}  />
                     </div>
                     <div className='col-6'>
                          <InputComponent name="cookingTime"  labelClass="col-md-4 col-form-label text-md-right"  label="Cuisson (en min)  " value={postData.cookingTime}  type="number"  onChange={(e)=> setPostData({...postData, 'cookingTime':  e.target.value})}  />

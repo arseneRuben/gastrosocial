@@ -3,10 +3,13 @@ import { Component } from 'react'
 
 //Used Icons
 import StarIcon from '@mui/icons-material/Star'
+import SyncIcon from '@mui/icons-material/Sync';
+
 import StarBorderIcon from '@mui/icons-material/StarBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import { CardMedia } from '@mui/material'
 import withRouter from '../withRouter'
+import StepItemComponent from './StepItemComponent'
 
 class RecipeDetails extends Component{
     constructor (props) {
@@ -21,8 +24,8 @@ class RecipeDetails extends Component{
             .then(response => {
                  return response.json()
             })
-            .then(responseObject => {
-                this.setState({ recipe: responseObject })
+            .then(response => {
+                this.setState({ recipe: response })
                
             }).catch(error=>{
                 console.log(error)
@@ -30,7 +33,9 @@ class RecipeDetails extends Component{
     }
    
     render(){
-     
+        
+        if(this.state.recipe.steps==null) return <SyncIcon/>
+        console.log(this.state.recipe)
     return (
         
           
@@ -67,6 +72,23 @@ class RecipeDetails extends Component{
                                         Ajouter 
                                     </button>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                {/* Steps description */}
+                <section className='py-5'>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-12 col-sm-8 col-lg-8">
+                                <h6 className="text-muted">Differentes etapes de preparation et de cuisson</h6> 
+                                <ul className="list-group">
+                                    {
+                                        this.state.recipe.steps.map((step) => (
+                                            <StepItemComponent image={"http://localhost:8000/download/"+step.imageId} description={step.stepId}  />
+                                         )  )
+                                    }
+                                </ul>
                             </div>
                         </div>
                     </div>

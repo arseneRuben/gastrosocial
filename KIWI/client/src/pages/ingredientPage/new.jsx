@@ -8,7 +8,6 @@ import { buildHeader } from '../utils'
 class NewIngredientPage extends Component {
     constructor (props) {
         super(props)
-
         this.state = {
             // values of differents fields
             formValues: {},
@@ -32,7 +31,7 @@ class NewIngredientPage extends Component {
 
     clear (){
         for (var key in this.state.formValues) {
-                document.getElementById(key).value=""
+             //   document.getElementById(key).value=""
         }
         this.setState({
             formValues: {}
@@ -68,57 +67,48 @@ class NewIngredientPage extends Component {
     }
     
 
-    render () {
-   
-
+    render(){
         return (
-            <div className='row justify-content-center '>
-                
-            <div className="col-md-6">
-                <div className="card d-flex p-2">
-                        <div className="card-header text-center"> Nouvel ingredient</div>
-                        <div className="card-body">
-                            <form  onSubmit={this.handleOnSave}>
-                                <InputComponent onChange={this.handleOnChange} label="Intitule:" type='text' name='name' value={this.state.formValues.title} />
-                                <InputComponent  type='hidden' name='id' value={this.state.formValues.id} />
-
-                                <div className="input-group mb-3">
-                                    <div className="input-group-prepend">
-                                        <label className="input-group-text" htmlFor="inputGroupSelect01">Unites de mesure</label>
+            <div className='row justify-content-center '>      
+                <div className="col-md-6">
+                    <div className="card d-flex p-2">
+                            <div className="card-header text-center"> Nouvel ingredient</div>
+                            <div className="card-body">
+                                <form  onSubmit={this.handleOnSave}>
+                                    <InputComponent onChange={this.handleOnChange} label="Intitule:" type='text' name='name' value={this.state.formValues.title} />
+                                    <InputComponent  type='hidden' name='id' value={this.state.formValues.id} />
+                                    <div className="input-group mb-3">
+                                        <div className="input-group-prepend">
+                                            <label className="input-group-text" htmlFor="inputGroupSelect01">Unites de mesure</label>
+                                        </div>
+                                        <select name="unity" onChange={this.handleOnChange} className="custom-select" id="inputGroupSelect01">
+                                            <option defaultValue="">Choisi...</option>
+                                            <option defaultValue="G">Gramme</option>
+                                            <option  defaultValue="L">Litre</option>
+                                        </select>
                                     </div>
-                                    <select name="unity" onChange={this.handleOnChange} className="custom-select" id="inputGroupSelect01">
-                                        <option defaultValue="">Choisi...</option>
-                                        <option defaultValue="G">Gramme</option>
-                                        <option  defaultValue="L">Litre</option>
-                                    </select>
-                                  
-                                </div>
-                                <div className="input-group mb-3">
-                                    <label htmlFor='image'> Associer une image</label>
-                                    <input id='image' onChange={this.handleOnChange}  type="file" name="image"  value={this.state.formValues.image} />
-                                </div>
-
-                                <div className=" d-flex justify-content-between">
-                                    <div className=" d-inline">
-                                        <button type="submit" className="btn btn-primary" >
-                                            Valider
-                                        </button>
+                                    <div className="input-group mb-3">
+                                        <label htmlFor='image'> Associer une image</label>
+                                        <input id='image' onChange={this.handleOnChange}  type="file" name="image"  value={this.state.formValues.image} />
                                     </div>
-                                    <div className=" d-inline">
-                                        <button type="reset" className="btn btn-secondary" >
-                                            Annuler
-                                        </button>
+                                    <div className=" d-flex justify-content-between">
+                                        <div className=" d-inline">
+                                            <button type="submit" className="btn btn-primary" >
+                                                Valider
+                                            </button>
+                                        </div>
+                                        <div className=" d-inline">
+                                            <button type="reset" className="btn btn-secondary" >
+                                                Annuler
+                                            </button>
+                                        </div>
                                     </div>
-                                 </div>
-                            </form>
-                        </div>
-            
+                                </form>
+                            </div>
+                    </div>
                 </div>
-                </div>
-                </div>
+            </div>
         )
     }
-
-    
 };
 export default NewIngredientPage;

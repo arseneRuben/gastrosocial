@@ -36,14 +36,12 @@ class RecipeDetails extends Component{
             })
             .then(response => {
                 this.setState({ categories: response })
-               console.log(response)
             }).catch(error=>{
                 console.log(error)
             })
     }
    
     render(){
-        console.log(this.state.categories)
         if(this.state.recipe.steps==null ) return <SyncIcon/>
        
     return (

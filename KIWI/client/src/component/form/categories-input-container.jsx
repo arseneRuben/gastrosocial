@@ -1,4 +1,4 @@
-
+import { Link } from 'react-router-dom';
 import React, { Component } from "react";
 
 const toggleElement = (arr, val) =>
@@ -18,13 +18,14 @@ class CategoriesInputConainer extends Component {
         this.handleClick = this.handleClick.bind(this)
       }
 
-      handleClick(e){
       
+      handleClick(e){
         this.setState({
             ...this.state,
              selectedCategoryIds: toggleElement(this.state.selectedCategoryIds,e.target.id)
           })     
-          document.getElementById(e.target.id).classList+="bg-secondary text-white"
+          document.getElementById(e.target.id).classList.toggle("bg-secondary")  
+          document.getElementById(e.target.id).classList.toggle("text-white")
           this.props.setCategories(this.state.selectedCategoryIds)
       }
       handleInputChange (e) {
@@ -58,13 +59,14 @@ class CategoriesInputConainer extends Component {
  
       return (
           
-           <div className="form-group row p-4">
-                      <input className="form-control" onChange={this.handleInputChange} type="text"  placeholder="Dans quelles categories positionner votre recette ?"/>
+           <div className="form-group row p-4 d-flex">
+                      <input className="form-control mb-2 " onChange={this.handleInputChange} type="text"  placeholder="Dans quelles categories positionner votre recette ?"/>
                       {this.state.filteredCategories.map((item) => 
-                        <div className='col-md-2 border border-secondary' key={item._id}>
-                                <h5  id={item._id} onClick={this.handleClick}>{item.name}</h5>
+                        <div className='col-md-2 m-3 ' key={item._id}>
+                                <h6  id={item._id} onClick={this.handleClick}>{item.name}</h6>
                         </div>  
                       )} 
+                    {(this.state.filteredCategories.length===0)&& <Link  className="btn btn-primary btn-sm"to="/categories">Nouvelle categorie?</Link>}
             </div>
                 
        );

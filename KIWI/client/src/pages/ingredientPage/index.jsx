@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Link} from "react-router-dom";
 import EditIcon from '@mui/icons-material/Edit';
-
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
 
 class IngredientPage extends Component {
@@ -21,7 +21,7 @@ class IngredientPage extends Component {
             }) */
          
 
-            console.log(e.target.id)
+          //  console.log(e.target.id)
       };
 
 
@@ -44,7 +44,7 @@ class IngredientPage extends Component {
             <h1 className="jumbotron-heading"> Liste des categories</h1>
             <div className="row d-flex flex-row">
                         {this.state.ingredients.map((item) => 
-                            <div className="col-md-4">
+                            <div className="col-md-3">
                             <div className="card mb-4 box-shadow">
                                 <img className="card-img-top" src={"http://localhost:8000/download/"+item.image} alt="Card image cap"/>
                                 <div className="card-body">
@@ -52,8 +52,10 @@ class IngredientPage extends Component {
                                 <div className="d-flex justify-content-between align-items-center">
                                     <div className="btn-group">
                                     <button type="button" onClick={this.handleClick} id={item._id} className="btn btn-sm btn-outline-secondary"> 
-                                    <Link to={`/ingredients/edit/${item._id}`}  ClassName="active"><EditIcon/></Link>
-
+                                        <Link to={`/ingredients/edit/${item._id}`}  ClassName="active"><EditIcon/></Link>
+                                    </button>
+                                    <button type="button" onClick={this.handleClick} id={item._id} className="btn btn-sm btn-outline-secondary"> 
+                                         <Link to={`/ingredients/delete/${item._id}`}  ><RemoveCircleIcon/></Link>
                                     </button>
                                     </div>
                                     <small className="text-muted">{item.unity}</small>

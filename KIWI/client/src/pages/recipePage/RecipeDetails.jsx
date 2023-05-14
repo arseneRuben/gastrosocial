@@ -42,24 +42,13 @@ class RecipeDetails extends Component{
             }).catch(error=>{
                 console.log(error)
             })
-         //Fetch his ingredients
-        fetch(`http://localhost:8000/recipes/${this.props.params.id}/ingredients`)
-            .then(response => {
-                 return response.json()
-            })
-            .then(response => {
-                this.setState({ ingredients: response })
-            }).catch(error=>{
-                console.log(error)
-            })
+      
     }
    
     render(){
+        console.log(this.state.recipe)
         if(this.state.recipe.steps==null ) return <SyncIcon/>
-       
     return (
-        
-          
              <>
                 {/* Recipe section */}
                 <section className="py-5">
@@ -228,7 +217,6 @@ class RecipeDetails extends Component{
                     </div>
                 </section>
             </>
-
         );
     }
 

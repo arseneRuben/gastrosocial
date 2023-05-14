@@ -1,20 +1,22 @@
-import { Link } from 'react-router-dom';
-import React, { Component } from "react";
-import DeleteIcon from '@mui/icons-material/Delete';
-import Item from './item';
+import { Link } from 'react-router-dom'
+import React, { Component } from "react"
+import DeleteIcon from '@mui/icons-material/Delete'
+import Item from './item'
 import {
     Row,
     Col,
     Form,
     ListGroup,
     Button
-  } from "react-bootstrap";
+  } from "react-bootstrap"
+import UnityOptions from '../../pages/ingredientPage/unity-options'
 
 class IngredientInputComponent extends Component {
     constructor (props) {
         super(props)
         this.state = {
             ingredients:[],
+            preselectedUnity: "",
             query:"",
             selectedIngredients: [],  //List of ingredients already selected, and present in todoList
             filteredIngredients: [],  //List of ingredients present in the search results
@@ -26,9 +28,8 @@ class IngredientInputComponent extends Component {
         this.onDeleteItem = this.onDeleteItem.bind(this)
         this.onCheckboxChange = this.onCheckboxChange.bind(this)
         this.onClearAllItems = this.onClearAllItems.bind(this)
-      }
-
-      componentDidMount() {
+    }
+    componentDidMount() {
         fetch('http://localhost:8000/ingredients')
             .then(response => {
                  return response.json()
@@ -38,77 +39,79 @@ class IngredientInputComponent extends Component {
             }).catch(error=>{
                 console.log(error)
             })
-       }
+    }
      
-     onClearAllItems = (event) => {
+    onClearAllItems = (event) => {
         this.state.selectedIngredients.map((item) => {
             if (item.done) document.getElementById( item.name).classList.remove("bg-secondary")  
-          });
+        })
         const new_items = this.state.selectedIngredients.filter((item) => {
-          if (!item.done) return item;
-        });
-        this.setState({ selectedIngredients: new_items });
+            if (!item.done) return item
+        })
+        this.setState({ selectedIngredients: new_items })
         this.props.setIngredients(new_items)
-      };
+    }
 
-     onUpdateItem = (id, done) => {
+    onUpdateItem = (id, done) => {
         const new_items =  this.state.selectedIngredients.map((item) => {
-          if (id === item.id) return { ...item, done: done };
-          else return item;
+          if (id === item.id) return { ...item, done: done }
+          else return item
         });
-        this.setState({ selectedIngredients: new_items });
+        this.setState({ selectedIngredients: new_items })
         this.props.setIngredients(new_items)
-      };
+    }
 
     onCheckboxChange = (event) => {
         const flag = event.target.checked;
         const new_items =  this.state.selectedIngredients.map((item) => {
-          return { ...item, done: flag };
-        });
-        this.setState({ selectedIngredients: new_items });
+          return { ...item, done: flag }
+        })
+        this.setState({ selectedIngredients: new_items })
         this.props.setIngredients(new_items)
-      };
+    }
 
     onDeleteItem = (id) => {
-      const selectedItem =  this.state.selectedIngredients.filter((item) => {
-            if (id === item.id) return item;
-      });
-      document.getElementById( selectedItem[0].name).classList.remove("bg-secondary")  
-      const new_items =  this.state.selectedIngredients.filter((item) => {
-          if (id !== item.id) return item;
-      });
-        
-        this.setState({ selectedIngredients: new_items });
+        const selectedItem =  this.state.selectedIngredients.filter((item) => {
+              if (id === item.id) return item
+        })
+        document.getElementById( selectedItem[0].name).classList.remove("bg-secondary")  
+        const new_items =  this.state.selectedIngredients.filter((item) => {
+              if (id !== item.id) return item
+        })
+        this.setState({ selectedIngredients: new_items })
         this.props.setIngredients(new_items)
-      };
+    }
 
-      onInsertIngredient = (event) => {
+    onInsertIngredient = (event) => {
         event.preventDefault()
         const ingredientName = document.getElementById("ingredient").value;
-       
+        const unity = document.getElementById("unity").value;
+      
         const qte = document.getElementById("qte").value;
         if ("" === ingredientName || qte<=0) {
-          alert("Blank Input Error");
-          return;
+          alert("Blank Input Error")
+          return
         }
         const newItem = {
-          id: this.state.ingredients.filter(ing => ing.name == document.getElementById("ingredient").value)[0]._id, // Id of the ingredient inserted in the ingredientName input
+          id: this.state.ingredients.filter(ing => ing.name === document.getElementById("ingredient").value)[0]._id, // Id of the ingredient inserted in the ingredientName input
           name: ingredientName,
           qte: qte,
+          unity: unity,
           selected: false
-        };
-       
+        }
         this.setState({ ...this.state, selectedIngredients: [newItem, ...this.state.selectedIngredients]})
         this.props.setIngredients([newItem, ...this.state.selectedIngredients])
         document.getElementById( document.getElementById("ingredient").value).classList.add("bg-secondary")  
-      };
+    }
 
       
-      handleClick(e){
+    handleClick(e){
         //Before the user will push a new ingredient 
         document.getElementById("ingredient").value = e.target.id
-      }
-      handleInputChange (e) {
+        const preselectedUnity = this.state.ingredients.filter(ing => (ing.name === e.target.id ))[0].unity
+        this.setState({ ...this.state, preselectedUnity: preselectedUnity })
+    }
+    handleInputChange (e) {
         if(e.target.id==="ingredientQuery"){
            this.setState({
             ...this.state,
@@ -127,10 +130,10 @@ class IngredientInputComponent extends Component {
      
    
    render() {
-    const total_count = this.state.selectedIngredients.length;
+    const total_count = this.state.selectedIngredients.length
     const done_count = this.state.selectedIngredients.reduce((prev, current) => {
-      return current.done ? prev + 1 : prev;
-    }, 0);
+      return current.done ? prev + 1 : prev
+    }, 0)
       return (
         <>
             {/* List  */}
@@ -174,16 +177,21 @@ class IngredientInputComponent extends Component {
               </Col>
             </Row>
             {/* End: Footer  */}
-             {/* Search Box */}
+            {/* Search Box */}
             <div className="form-group row p-4 d-flex">
-                      <div className=' col-3 mb-1'>
+                      <div className=' col-2 mb-1'>
                           <input className="form-control " id="ingredientQuery" onChange={this.handleInputChange} type="text"  placeholder="Search "/>
                       </div>
-                      <div className=' col-4 mb-1'>
+                      <div className=' col-2 mb-1'>
                           <input className="form-control " id="ingredient" type="text"  placeholder="Ingredients "/>
                       </div>
                       <div className=' col-3  mb-1'>
-                      <input className="form-control " id="qte" onChange={this.handleInputChange} type="number"  placeholder="Qte "/>
+                        <input className="form-control " id="qte" onChange={this.handleInputChange} type="number"  placeholder="Qte "/>
+                      </div>
+                      <div className=' col-3  mb-1'>
+                      <select name="unity"  id="unity" className=" form-control custom-select">
+                           <UnityOptions preselectedUnity={this.state.preselectedUnity}/>
+                      </select>
                       </div>
                       <div className=' col-2  mb-1'>
                             <button className='btn btn-secondary' id="pushBtn" onClick={this.onInsertIngredient}>Push</button>
@@ -191,10 +199,10 @@ class IngredientInputComponent extends Component {
                       {
                         this.state.filteredIngredients.map((item, index) => 
                         <div className='col-md-2  border-secondary m-3' key={index}>
-                                <h5 id={item.name} onClick={this.handleClick}>{item.name}</h5>
+                            <h5 id={item.name} onClick={this.handleClick}>{item.name}</h5>
                         </div>)
                       } 
-                    {(this.state.filteredIngredients.length===0)&& <Link  className="btn btn-primary btn-sm"to="/ingredients/new">Nouvelle ingredient?</Link>}
+                    {(this.state.filteredIngredients.length===0) && <Link  className="btn btn-primary btn-sm"to="/ingredients/new">Nouvelle ingredient?</Link>}
             </div>
              {/* End Search Box */}
             </>

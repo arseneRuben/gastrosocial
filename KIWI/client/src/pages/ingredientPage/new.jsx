@@ -2,6 +2,7 @@
 import { Component } from 'react'
 import InputComponent from '../../component/form/input-component'
 import { buildHeader } from '../utils'
+import UnityOptions from './unity-options'
 
 
 
@@ -81,10 +82,8 @@ class NewIngredientPage extends Component {
                                         <div className="input-group-prepend">
                                             <label className="input-group-text" htmlFor="inputGroupSelect01">Unites de mesure</label>
                                         </div>
-                                        <select name="unity" onChange={this.handleOnChange} className="custom-select" id="inputGroupSelect01">
-                                            <option defaultValue="">Choisi...</option>
-                                            <option defaultValue="G">Gramme</option>
-                                            <option  defaultValue="L">Litre</option>
+                                        <select name="unity" onChange={this.handleOnChange} value={this.state.formValues.unity} className=" form-control custom-select" id="inputGroupSelect01">
+                                          <UnityOptions />
                                         </select>
                                     </div>
                                     <div className="input-group mb-3">

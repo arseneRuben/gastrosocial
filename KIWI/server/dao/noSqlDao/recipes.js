@@ -84,7 +84,6 @@ export const getRecipeIngredients = async (req, res) => {
 }
 // Update a recipe
 export const deleteRecipe = async (req, res) => {
-    console.log('RECIPE')
     const { id } = req.params
     try {
         if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No recipe with id: ${id}`)

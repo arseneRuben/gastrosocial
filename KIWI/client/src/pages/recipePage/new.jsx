@@ -100,13 +100,17 @@ const NewRecipePage = () => {
                          <legend className="w-auto px-1">Etapes de preparation et de cuisson</legend>
                          {stepsList}
                    </fieldset>
-                  <div className='row p-2 bg-light'>
-                        <fieldset className="form-group border p-1 col-7" id="steps_section">
+                  <div className=' p-2 bg-light'>
+                        <fieldset className="form-group border p-1 " id="steps_section">
                               <legend className="w-auto ">Ingredients</legend>
                               <IngredientInputComponent setIngredients={setIngredients} />
                               
                         </fieldset>
-                        <fieldset className="form-group border p-1 col-5" id="steps_section">
+                       
+                  </div>
+                  <div className=' p-2 bg-light'>
+                       
+                        <fieldset className="form-group border p-1 " id="steps_section">
                               <legend className="w-auto ">Categories</legend>
                               <CategoriesInputContainer setCategories={setCategories}/>
                         </fieldset>

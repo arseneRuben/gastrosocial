@@ -15,7 +15,8 @@ export default class Item extends Component {
     };
   };
   render() {
-    const { id, name,qte, done } = this.props;
+    const { id, name,qte, done, unity } = this.props;
+    
     return (
       <ListGroup.Item>
         <Row key={this.props.id}>
@@ -28,6 +29,7 @@ export default class Item extends Component {
           </Col>
           <Col>{name}</Col>
           <Col>{qte}</Col>
+          <Col>{unity}</Col>
           <Col>
             <Button variant="danger" size="sm" onClick={this.onDeleteItem(id)}>
                 <RemoveCircleIcon />

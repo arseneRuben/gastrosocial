@@ -18,6 +18,7 @@ router.get('/search', findRecipeByTitle) // list of  recipes
 router.get('/', getRecipes) // list of  recipes
 router.get('/:id', getRecipe) // Single   recipe
 router.post('/', createRecipe)
+router.delete('/:id', deleteRecipe)
 
 /* CREATE */
 router.post('/:id/steps', createStep)

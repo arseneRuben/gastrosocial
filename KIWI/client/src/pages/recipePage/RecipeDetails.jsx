@@ -15,12 +15,10 @@ import IngredientItemComponent from './IngredientItemComponent';
 class RecipeDetails extends Component{
     constructor (props) {
         super(props)
-    
         this.state = {
             recipe: {},
             categories:{},
             ingredients:{}
-
         }
       }
     componentDidMount() {

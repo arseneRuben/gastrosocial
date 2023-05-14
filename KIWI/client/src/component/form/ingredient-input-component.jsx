@@ -175,7 +175,7 @@ class IngredientInputComponent extends Component {
             </Row>
             {/* End: Footer  */}
              {/* Search Box */}
-           <div className="form-group row p-4 d-flex">
+            <div className="form-group row p-4 d-flex">
                       <div className=' col-3 mb-1'>
                           <input className="form-control " id="ingredientQuery" onChange={this.handleInputChange} type="text"  placeholder="Search "/>
                       </div>
@@ -188,11 +188,12 @@ class IngredientInputComponent extends Component {
                       <div className=' col-2  mb-1'>
                             <button className='btn btn-secondary' id="pushBtn" onClick={this.onInsertIngredient}>Push</button>
                       </div>
-                      {this.state.filteredIngredients.map((item, index) => 
+                      {
+                        this.state.filteredIngredients.map((item, index) => 
                         <div className='col-md-2  border-secondary m-3' key={index}>
                                 <h5 id={item.name} onClick={this.handleClick}>{item.name}</h5>
-                        </div>
-                      )} 
+                        </div>)
+                      } 
                     {(this.state.filteredIngredients.length===0)&& <Link  className="btn btn-primary btn-sm"to="/ingredients/new">Nouvelle ingredient?</Link>}
             </div>
              {/* End Search Box */}

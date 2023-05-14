@@ -15,8 +15,11 @@ const RecipeItem = ({ recipe, setCurrentId }) => {
  
 
   const handleShowDetails = (e) => {
-    // console.log(recipe)
      navigate(`/recipes/${recipe._id}`);
+   }
+   const handleDeleteRecipe = (e) => {
+    dispatch(deleteRecipe(recipe._id, navigate))
+    
    }
   const handleUpdate = (e) => {
    // console.log(recipe)
@@ -38,7 +41,7 @@ const RecipeItem = ({ recipe, setCurrentId }) => {
                 <Button size="small" color="info" onClick={()=> dispatch(likeRecipe(recipe._id))}>
                   <ThumbUpAltIcon fontSize='small' /> 5
                 </Button>
-                <Button size="small" color="secondary"  onClick={()=> dispatch(deleteRecipe(recipe._id))}>
+                <Button size="small" color="secondary"  onClick={handleDeleteRecipe}>
                   <DeleteForeverIcon fontSize='small' /> 
                 </Button>
             </CardActions>

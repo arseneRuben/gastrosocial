@@ -1,6 +1,5 @@
 import { START_LOADING, END_LOADING, FETCH_ALL, FETCH_RECIPE, FETCH_BY_SEARCH, CREATE, UPDATE, DELETE, LIKE, COMMENT, FETCH_BY_CREATOR } from '../constants/actionTypes';
 import * as api from '../api';
-import { useNavigate } from "react-router-dom";
 
 // ACTION CREATORS
 export const getRecipe = (id) => async (dispatch) => {
@@ -49,10 +48,13 @@ export const updateRecipe = (id, recipe) => async (dispatch) => {
   }
 };
 
-export const deleteRecipe = (id) => async (dispatch) => {
+export const deleteRecipe = (id,navigate) => async (dispatch) => {
   try {
+    dispatch({ type: START_LOADING });
      await api.deleteRecipe(id);
-    dispatch({ type: UPDATE, payload: id });
+    dispatch({ type: DELETE, payload: id });
+    navigate('/recipes')
+    dispatch({ type: END_LOADING });
   } catch (error) {
     console.log(error);
   }

@@ -11,7 +11,10 @@ const recipeSchema = mongoose.Schema(
 
         likes: { type: [String], default: [] },
 
-        ingredients: [String],
+        ingredients: {
+            type: Array,
+            default: []
+        },
         mainImage: String,
         portions: {
             type: Number,

@@ -10,6 +10,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import { CardMedia } from '@mui/material'
 import withRouter from '../withRouter'
 import StepItemComponent from './StepItemComponent'
+import IngredientItemComponent from './IngredientItemComponent';
 
 class RecipeDetails extends Component{
     constructor (props) {
@@ -17,10 +18,13 @@ class RecipeDetails extends Component{
     
         this.state = {
             recipe: {},
-            categories:{}
+            categories:{},
+            ingredients:{}
+
         }
       }
     componentDidMount() {
+        //Fetch the recipe
         fetch(`http://localhost:8000/recipes/${this.props.params.id}`)
             .then(response => {
                  return response.json()
@@ -30,12 +34,23 @@ class RecipeDetails extends Component{
             }).catch(error=>{
                 console.log(error)
             })
+        //Fetch his categories
         fetch(`http://localhost:8000/recipes/${this.props.params.id}/categories`)
             .then(response => {
                  return response.json()
             })
             .then(response => {
                 this.setState({ categories: response })
+            }).catch(error=>{
+                console.log(error)
+            })
+         //Fetch his ingredients
+        fetch(`http://localhost:8000/recipes/${this.props.params.id}/ingredients`)
+            .then(response => {
+                 return response.json()
+            })
+            .then(response => {
+                this.setState({ ingredients: response })
             }).catch(error=>{
                 console.log(error)
             })
@@ -88,7 +103,21 @@ class RecipeDetails extends Component{
                 <section className='py-5'>
                     <div className="container">
                         <div className="row">
-                            <div className="col-sm-8 col-lg-8">
+                        <div className="col-sm-4 col-lg-4">
+                                <h6 className="text-muted">Ingredients</h6> 
+                                {this.state.ingredients.length > 0 &&
+                                <ul className="list-group">
+                                     {
+                                        this.state.ingredients.map((ingredient, index) => (
+                                            this.state.recipe.ingredients.map((id, name, qte,selected, index) => (
+                                                (name===ingredient.name)&&
+                                                     <IngredientItemComponent qte={qte} ingredient={ingredient} key={index}  />
+                                                ))))
+                                    }
+                                </ul>
+                                }
+                            </div>
+                            <div className="col-sm-4 col-lg-4">
                                 <h6 className="text-muted">Differentes etapes de preparation et de cuisson</h6> 
                                 <ul className="list-group">
                                     {
@@ -108,6 +137,7 @@ class RecipeDetails extends Component{
                                 </ul>
                                 }
                             </div>
+                           
                         </div>
                     </div>
                 </section>

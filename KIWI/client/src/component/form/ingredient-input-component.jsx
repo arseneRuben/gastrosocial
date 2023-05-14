@@ -14,6 +14,7 @@ class IngredientInputComponent extends Component {
     constructor (props) {
         super(props)
         this.state = {
+            ingredients:[],
             query:"",
             selectedIngredients: [],  //List of ingredients already selected, and present in todoList
             filteredIngredients: [],  //List of ingredients present in the search results
@@ -84,17 +85,19 @@ class IngredientInputComponent extends Component {
       onInsertIngredient = (event) => {
         event.preventDefault()
         const ingredientName = document.getElementById("ingredient").value;
+       
         const qte = document.getElementById("qte").value;
         if ("" === ingredientName || qte<=0) {
           alert("Blank Input Error");
           return;
         }
         const newItem = {
-          id: event.target.id,
+          id: this.state.ingredients.filter(ing => ing.name == document.getElementById("ingredient").value)[0]._id, // Id of the ingredient inserted in the ingredientName input
           name: ingredientName,
           qte: qte,
           selected: false
         };
+       
         this.setState({ ...this.state, selectedIngredients: [newItem, ...this.state.selectedIngredients]})
         this.props.setIngredients([newItem, ...this.state.selectedIngredients])
         document.getElementById( document.getElementById("ingredient").value).classList.add("bg-secondary")  

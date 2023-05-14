@@ -55,7 +55,6 @@ export const getIngredient = async (req, res) => {
 // Update a ingredient
 export const deleteIngredient = async (req, res) => {
     const { id } = req.params
-
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No ingredient with id: ${id}`)
     await Ingredient.findByIdAndRemove(id)
     res.json({ message: 'Ingredient deleted successfully' })

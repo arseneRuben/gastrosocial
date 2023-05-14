@@ -1,0 +1,5 @@
+/ Ajouter l'unite de mesure dans la liste des ingredients du formulaire de creation
+/ Traitement de la liste des epiceries
+/ 1- mettre a jour la doc
+  2- Mettre a jour le bac end
+  3- Mettre a jour le front

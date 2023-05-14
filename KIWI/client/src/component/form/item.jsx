@@ -6,6 +6,7 @@ export default class Item extends Component {
   onCheckboxChange = (id) => {
     return (event) => {
       this.props.onUpdateItem(id, event.target.checked);
+
     };
   };
   onDeleteItem = (id) => {
@@ -17,7 +18,7 @@ export default class Item extends Component {
     const { id, name,qte, done } = this.props;
     return (
       <ListGroup.Item>
-        <Row>
+        <Row key={this.props.id}>
           <Col>
             <Form.Check
               inline

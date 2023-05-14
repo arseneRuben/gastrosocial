@@ -1,5 +1,6 @@
 import express from 'express'
 import mongoose from 'mongoose'
+
 import cors from 'cors'
 import path from 'path'
 
@@ -8,7 +9,7 @@ import recipeRoutes from './routes/noSql/recipes.js'
 import categoryRoutes from './routes/noSql/categories.js'
 import ingredientRoutes from './routes/noSql/ingredients.js'
 import multer from 'multer'
-import { uploadFiles, uploadFile } from './routes/uploads.js'
+import { uploadFile } from './routes/uploads.js'
 
 const app = express()
 app.use(express.json({ limit: '30mb', extended: true }))

@@ -3,7 +3,6 @@ import SyncIcon from '@mui/icons-material/Sync';
 import RecipeItem from './RecipeItem';
 
 
-
 const RecipePage = () => {
       const  {recipes,isLoading}  = useSelector((state) => state.recipes);
 
@@ -16,11 +15,16 @@ const RecipePage = () => {
               </div>
   
                  {isLoading ? <SyncIcon /> :
+                 <>
                         <div className="row  d-flex flex-wrap  m-4 box-shadow" >
                               {recipes?.map((recipe) => (
                                               <RecipeItem recipe={recipe}  />
                               ))}
+                              
                         </div> 
+                       
+                  </>
+                      
                   }
 
          </>

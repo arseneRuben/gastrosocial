@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 const ingredientSchema = mongoose.Schema(
     {
 
-        name: String,
+        name: { type: String, required: true, unique: true },
         categoryId: String,
         unity: String,
         image: String

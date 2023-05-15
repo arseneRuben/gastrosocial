@@ -95,11 +95,11 @@ class RecipeDetails extends Component{
                                 {this.state.ingredients.length > 0 &&
                                 <ul className="list-group">
                                      {
-                                        this.state.ingredients.map((ingredient, index) => (
+                                        {/*this.state.ingredients.map((ingredient, index) => (
                                             this.state.recipe.ingredients.map((id, name, qte,selected, index) => (
                                                 (name===ingredient.name)&&
                                                      <IngredientItemComponent qte={qte} ingredient={ingredient} key={index}  />
-                                                ))))
+                                            ))))*/}
                                     }
                                 </ul>
                                 }
@@ -118,9 +118,9 @@ class RecipeDetails extends Component{
                                 <h6 className="text-muted">Differentes categories</h6> 
                                 {this.state.categories.length > 0 &&
                                 <ul className="list-group">
-                                    {
+                                    {/*
                                         this.state.categories.map((item) => <h3>{item.name}</h3> )
-                                    }
+                                */}
                                 </ul>
                                 }
                             </div>

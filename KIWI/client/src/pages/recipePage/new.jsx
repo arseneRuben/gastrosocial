@@ -46,9 +46,11 @@ const NewRecipePage = () => {
                         {"stepId": document.getElementById(`text-step-${i}`).value, "imageId": document.getElementById(`image-step-${i}`).value.split('\\')[2]}
                   )
                   imageData=new FormData()
+                
+
            }
-           // Add the step object in the postData 
-          // setPostData({ ...postData, 'steps': steps })
+           // Save in the local storage
+           localStorage.setItem('postData', postData);
            // Dispach the creation of recipe 
            dispatch(createRecipe({ ...postData, 'steps': steps, 'categories': categories , 'ingredients': ingredients }, navigate))     
     }

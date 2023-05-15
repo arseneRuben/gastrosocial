@@ -81,19 +81,25 @@
               <code>
              $ {
                     
-                    "adoptedTitle": "Riz saute",
-                    "adoptedDescription": "Riz special rapide repas a base du riz et de condiments",
-                    "adoptedImages":[idImage1, idImage2],
+                    "preparationTime":  34,
+                    "cookingTime":  34,
+                    "portions": 4,
+                    "mainImage":"imagerepresentation"
                     "proposedTitle": "Riz saute",
                     "proposedDescription": "Riz special rapide repas a base du riz et de condiments",
-                    "ingredients":[idIngredient1, idIngredient2, idIngredient3, idIngredient4],
-                    "proposedImages": [idImage1, idImage2],
+                    "ingredients":[{idIngredient1, qte1, unity1}, 
+                                    {idIngredient2, qte2, unity2}
+                                    {idIngredient3, qte3, unity1}],
+                   
                     "categories": [idCategorie1,idCategorie2,idCategorie3],
-                    "comments": [idComment1,idComment2,idComment3],
-                    "status":1,
-                    "authorId": 3,
-                    "steps": [stepId1,stepId2, stepId3 ]
-
+                    "steps": [
+                        {
+                          "StepNumber": 1,
+                          "description": "Description of step 1"
+                          "image" : "step1_image.png"
+                        },
+                    ...
+                    ]
                 }
               </code>
             </pre>
@@ -104,16 +110,7 @@
               <th>Valeurs</th>
               <th>Defaut</th>
             </tr>
-            <tr>
-              <td>adoptedTitle</td>
-              <td>Titre qui sera adoptee pour la recette une fois qu'elle sera validee</td>
-              <td>""</td>
-            </tr>
-            <tr>
-              <td>adoptedDescription</td>
-              <td>Description de la recette qui sera adopte une fois qu'elle sera validee</td>
-              <td>""</td>
-            </tr>
+           
             <tr>
               <td>proposedTitle</td>
               <td>Titre propose par le createur de la recette</td>
@@ -140,9 +137,9 @@
               <td>[]</td>
             </tr>
               <tr>
-              <td>comments</td>
-              <td>Liste des identifiants des commentaires associees a la recette </td>
-              <td>[]</td>
+              <td>mainImage</td>
+              <td>Image principale de la recette </td>
+              <td></td>
             </tr>
           </table>
         
@@ -152,7 +149,7 @@
             <pre class="code code--block">
          <code>
              $ {
-                    "id": 2,
+                     "id": 2,
                     "adoptedTitle": "",
                     "adoptedDescription": "",
                     "adoptedImages":[],
@@ -162,11 +159,11 @@
                     "proposedImages": [2, 9],
                     "categories": [1,3,2],
                     "comments": [4,2,3],
-                    "status":1,
+                    "status":"UPDATED",
                     "authorId": 4,
                     "steps": [5,2, 6 ],
                     "createdAt": "2021-08-06T17:04:26.000Z",
-                    "updatetedAt": "2021-08-06T17:04:26.000Z",
+                    "updatetedAt": "2022-05-06T17:05:16.000Z",
 
                 }
               </code>

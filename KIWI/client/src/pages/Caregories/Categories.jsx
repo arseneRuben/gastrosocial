@@ -10,21 +10,37 @@ import EditIcon from '@mui/icons-material/Edit';
             categories: []
         }
         this.handleAddCatagory = this.handleAddCatagory.bind(this)
+        this.handleOnEdit = this.handleOnEdit.bind(this)
+       
     }
 
     
+    handleOnEdit(event){
+        
+        fetch(`http://localhost:8000/categories/${event.target.id}`)
+        .then(response => {
+            
+             return response.json()
+        })
+        .then(responseObject => {
+            this.setState({ ...this.state,category: responseObject[0] })
+        }).catch(error=>{
+            console.log(error)
+        })
+    }
     handleAddCatagory(newCategory){
-        this.setState({categories : this.state.categories.concat([newCategory])});
+        this.setState({...this.state,categories : this.state.categories.concat([newCategory])});
+        
     }
 
   
-    componentDidMount() {
+    componentWillMount() {
         fetch('http://localhost:8000/categories')
             .then(response => {
                  return response.json()
             })
             .then(responseObject => {
-                this.setState({ categories: responseObject })
+                this.setState({ ...this.state,categories: responseObject })
               
             }).catch(error=>{
                 console.log(error)
@@ -34,7 +50,6 @@ import EditIcon from '@mui/icons-material/Edit';
  
 
     render () {
-        
     return (
         
         <div className='row container'>
@@ -50,14 +65,14 @@ import EditIcon from '@mui/icons-material/Edit';
                             <div className="card-body">
                                 <p>{item.description}</p> 
                              </div>
-                             <EditIcon className='card-link'  />
+                             <EditIcon className='card-link'  id={item._id}  onClick={this.handleOnEdit} />
                         </div>  
                     )} 
             
                 </div>
             </div>
             <div className='col-4'>
-                <CategoryForm handleAddCatagory = {this.handleAddCatagory} />
+                <CategoryForm handleAddCatagory = {this.handleAddCatagory} category={this.state.category}/>
             </div>
             
         </div>

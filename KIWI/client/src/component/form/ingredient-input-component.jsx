@@ -137,7 +137,7 @@ class IngredientInputComponent extends Component {
       return (
         <>
             {/* List  */}
-             <ListGroup variant="flush">
+             <ListGroup variant="flush"  className=" m-1">
               {this.state.selectedIngredients.map((item) => {
                 return (
                   <Item
@@ -151,8 +151,8 @@ class IngredientInputComponent extends Component {
             </ListGroup>
              {/* End: List */}
              {/* Footer  */}
-             <Row className="justify-content-md-center">
-              <Col xs={2}>
+             <Row className="justify-content-md-center m-2">
+              <Col xs={4} >
                 <Form.Check
                   inline
                   checked={
@@ -163,7 +163,7 @@ class IngredientInputComponent extends Component {
                   onChange={this.onCheckboxChange}
                 />
               </Col>
-              <Col xs={6}>
+              <Col xs={5}>
                 {done_count} / {total_count}
               </Col>
               <Col>

@@ -15,9 +15,16 @@ class CategoryForm extends Component {
         this.handleOnChange = this.handleOnChange.bind(this)
         this.clear = this.clear.bind(this)
         this.handleOnSave = this.handleOnSave.bind(this)
+       
     }
+    componentWillMount() {
+       this.setState({ formValues:this.props.category})
+    }
+    componentDidMount() {
+        this.setState({ formValues:this.props.category})
+     }
 
-   
+    
     clear (){
       
         for (var key in this.state.formValues) {
@@ -53,14 +60,15 @@ class CategoryForm extends Component {
     }
 
     render () {
+        console.log(this.props)
         return (
             <div className='row justify-content-center '>
                 <div className="card d-flex p-2">
                         <div className="card-header text-center"> Nouvel categorie</div>
                         <div className="card-body">
                             <form autoComplete="off" noValidate  onSubmit={this.handleOnSave}>
-                                <InputComponent onChange={this.handleOnChange} label="Nom:" type='text' name='name' value={this.state.formValues.name} />
-                                <InputComponent onChange={this.handleOnChange} label="Description:" type='textarea' name='description' value={this.state.formValues.description} />
+                                <InputComponent onChange={this.handleOnChange} label="Nom:" type='text' name='name' value={this.state.formValues?.name} />
+                                <InputComponent onChange={this.handleOnChange} label="Description:" type='textarea' name='description' value={this.state.formValues?.description} />
                                 <div className="col-md-6 offset-md-4 d-flex justify-content-around">
                                     <div className=" d-inline">
                                         <button type="submit" className="btn btn-primary" >

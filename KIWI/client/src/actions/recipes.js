@@ -29,7 +29,8 @@ export const getRecipes = () => async (dispatch) => {
 export const createRecipe = (recipe, navigate) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
-    const data  = await api.createRecipe(recipe);
+    
+   const data  = await api.createRecipe(recipe);
     dispatch({ type: CREATE, payload: {data} });
     navigate('/recipes')
     dispatch({ type: END_LOADING });

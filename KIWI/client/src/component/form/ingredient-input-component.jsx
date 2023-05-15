@@ -97,7 +97,8 @@ class IngredientInputComponent extends Component {
           name: ingredientName,
           qte: qte,
           unity: unity,
-          selected: false
+          selected: false,
+          image:  this.state.ingredients.filter(ing => ing.name === document.getElementById("ingredient").value)[0].image
         }
         this.setState({ ...this.state, selectedIngredients: [newItem, ...this.state.selectedIngredients]})
         this.props.setIngredients([newItem, ...this.state.selectedIngredients])

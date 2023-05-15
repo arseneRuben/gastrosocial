@@ -22,7 +22,6 @@ const RecipeItem = ({ recipe, setCurrentId }) => {
     
    }
   const handleUpdate = (e) => {
-   // console.log(recipe)
     navigate(`/recipes/edit/${recipe._id}`);
   }
  

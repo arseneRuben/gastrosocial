@@ -10,7 +10,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import { CardMedia } from '@mui/material'
 import withRouter from '../withRouter'
 import StepItemComponent from './StepItemComponent'
-import IngredientItemComponent from './IngredientItemComponent';
+import IngredientItemComponent from './IngredientItemComponent'
+
 
 class RecipeDetails extends Component{
     constructor (props) {
@@ -46,8 +47,8 @@ class RecipeDetails extends Component{
     }
    
     render(){
-        console.log(this.state.recipe)
-        if(this.state.recipe.steps==null ) return <SyncIcon/>
+        if(this.state.recipe.steps==null || this.state.recipe.ingredients==null  ) return <SyncIcon/>
+        
     return (
              <>
                 {/* Recipe section */}
@@ -56,7 +57,6 @@ class RecipeDetails extends Component{
                         <div className="row gx-4 gx-lg-5 align-items-center">
                             <div className="col-md-6">        <CardMedia  image={this.state.recipe.mainImage}  title={this.state.recipe.proposed_title}   style={{ paddingTop: '56.25%', backgroundColor: 'rgba(0, 0, 0, 0.5)' }} /></div>
                             <div className="col-md-6">
-                                <div className="small mb-1">{this.state.recipe.proposedTitle}</div>
                                 <h1 className="display-5 fw-bolder">{this.state.recipe.proposedTitle}</h1>
                             
                                 <div className="fs-5 mb-5">
@@ -92,17 +92,17 @@ class RecipeDetails extends Component{
                         <div className="row">
                         <div className="col-sm-4 col-lg-4">
                                 <h6 className="text-muted">Ingredients</h6> 
-                                {this.state.ingredients.length > 0 &&
+                                
                                 <ul className="list-group">
-                                     {
-                                        {/*this.state.ingredients.map((ingredient, index) => (
-                                            this.state.recipe.ingredients.map((id, name, qte,selected, index) => (
-                                                (name===ingredient.name)&&
-                                                     <IngredientItemComponent qte={qte} ingredient={ingredient} key={index}  />
-                                            ))))*/}
+                                    
+                                    {
+                                        this.state.recipe.ingredients.map((ing, index) => (
+                                            <IngredientItemComponent qte={ing.qte} name={ing.name} unity={ing.unity} image={ing.image} key={index}/>
+                                         ))
                                     }
+                                    
                                 </ul>
-                                }
+                                
                             </div>
                             <div className="col-sm-4 col-lg-4">
                                 <h6 className="text-muted">Differentes etapes de preparation et de cuisson</h6> 
@@ -118,9 +118,9 @@ class RecipeDetails extends Component{
                                 <h6 className="text-muted">Differentes categories</h6> 
                                 {this.state.categories.length > 0 &&
                                 <ul className="list-group">
-                                    {/*
+                                    {
                                         this.state.categories.map((item) => <h3>{item.name}</h3> )
-                                */}
+                                }
                                 </ul>
                                 }
                             </div>

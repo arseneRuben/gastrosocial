@@ -18,7 +18,7 @@ export const createRecipe = async (req, res) => {
     const recipe = req.body
 
     const newRecipe = new Recipe(recipe)
-
+    console.log(newRecipe)
     try {
         await newRecipe.save()
 
@@ -73,9 +73,14 @@ export const getRecipeIngredients = async (req, res) => {
     const { id } = req.params
     try {
         const recipe = await Recipe.findById(id)
+        const results = new Map()
+
         const ingredients = await Promise.all(
             recipe.ingredients.map((ingId, name, qte, selected) => Ingredient.find({ name }))
         )
+        /* ingredients.map((ing) => {
+            results.set(ing._id, )
+        }) */
         console.log(ingredients)
         res.status(200).json(ingredients)
     } catch (error) {

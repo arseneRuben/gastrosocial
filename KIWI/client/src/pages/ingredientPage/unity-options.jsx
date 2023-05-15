@@ -4,8 +4,8 @@ const UnityOptions = (props) => {
     return (
         <>
              
-              {unities.map(unit => 
-                              <option  selected={(props.preselectedUnity == unit.name) ? 'selected' : ''} defaultValue={unit.name}>{unit.name}</option>
+              {unities.map((unit, index) => 
+                              <option key={index}  selected={(props.preselectedUnity == unit.name) ? 'selected' : ''} defaultValue={unit.name}>{unit.name}</option>
 
               )}
         </>

@@ -19,7 +19,11 @@ export const fetchRecipes = () => fetch(`${baseUrl}/recipes`).then(response => {
 }).catch(error=>{
     console.log(error)
 })
-export const updateRecipe = (id, updatedRecipe) => fetch(`${baseUrl}/recipes/${id}`, buildHeader('PUT', updatedRecipe))
+export const updateRecipe = (id, updatedRecipe) => fetch(`${baseUrl}/recipes/${id}`, buildHeader('PUT', updatedRecipe)).then(response => {
+    return response.json()
+}).catch(error=>{
+    console.log(error)
+})
 
 
 export const fetchRecipe = (id)=> fetch(`${baseUrl}/recipes/${id}`)

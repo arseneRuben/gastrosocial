@@ -13,8 +13,12 @@ export const unities = [
         value: 'Litre',
       },
       {
-        name: 'Mili-Litre',
-        value: 'Gramme',
+        name: 'MiliLitre',
+        value: 'mililitre',
+      },
+      {
+        name: 'Miligramme',
+        value: 'Miligramme',
       },
       {
         name: 'Lb',

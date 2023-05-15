@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Typography } from "@mui/material";
 import InputComponent from "../../component/form/input-component";
 import { useState } from "react";
 import { Button } from "reactstrap";
-import { createRecipe } from '../../actions/recipes';
+import { useParams } from "react-router-dom"
+import SyncIcon from '@mui/icons-material/Sync';
+import { createRecipe, updateRecipe } from '../../actions/recipes';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import FileBase from 'react-file-base64';
 import StepInputComponent from '../../component/form/step-input-component';
 import CategoriesInputContainer from '../../component/form/categories-input-container';
@@ -13,7 +15,12 @@ import IngredientInputComponent from '../../component/form/ingredient-input-comp
 
 
 
-const NewRecipePage = () => {
+const NewRecipePage = ({currentRecipeId}) => {
+
+      const  {recipes,isLoading}  = useSelector((state) => state.recipes);
+      const params = useParams(), id = params.id
+      const  recipe  = recipes.find((r) => r._id === id);
+
       const [categories, setCategories] = useState([]);
       const [stepsList, setStepsList] = useState([]);
       const [ingredients, setIngredients] = useState([]);
@@ -24,8 +31,10 @@ const NewRecipePage = () => {
       const dispatch = useDispatch()
       const navigate = useNavigate()
       const [postData, setPostData] = useState({
-            'proposedTitle':'', 'proposedDescription': '', 'portions':0, 'preparationTime':0, 'cookingTime':0,'mainImage':'',  'proposedImages': [] 
+            'proposedTitle':'', 'proposedDescription': '', 'portions':0, 'preparationTime':0, 'cookingTime':0,'mainImage':''
       })
+
+
     
     const handleSubmit = async (e) => {
             e.preventDefault()
@@ -46,42 +55,49 @@ const NewRecipePage = () => {
                         {"stepId": document.getElementById(`text-step-${i}`).value, "imageId": document.getElementById(`image-step-${i}`).value.split('\\')[2]}
                   )
                   imageData=new FormData()
-                
-
            }
            // Save in the local storage
            localStorage.setItem('postData', postData);
-           // Dispach the creation of recipe 
-           dispatch(createRecipe({ ...postData, 'steps': steps, 'categories': categories , 'ingredients': ingredients }, navigate))     
-    }
+          
+      if(!recipe?._id){
+            // Dispach the creation of recipe 
+            dispatch(createRecipe({ ...postData, 'steps': steps, 'categories': categories , 'ingredients': ingredients }, navigate))     
+            clear()
+              } else {
+            dispatch(updateRecipe(recipe?._id, { ...postData, 'steps': steps, 'categories': categories , 'ingredients': ingredients }, navigate));
+            clear()
+           }
+       }
     const clear = () => {
-        setPostData({ 'proposedTitle': '', 'proposedDescription': '', 'portions':0,  'preparationTime':0 , 'cookingTime':0,   'proposedImages': []  });
+        setPostData({ 'proposedTitle': '', 'proposedDescription': '', 'portions':0,  'preparationTime':0 ,'mainImage':'',  'cookingTime':0 });
     };
- 
-       
+    useEffect(() => {
+      if (!recipe?.mainImage) clear();
+      if (recipe) setPostData(recipe);
+    }, [recipe]);
+    if(isLoading || postData.steps ) return <SyncIcon/>
         return (
               <form autoComplete="off" noValidate className="" onSubmit={handleSubmit}  >
                    {/* Header */}
-                  <Typography variant="h6" className="text-center"> Creer une recette</Typography>
+                   <Typography variant="h6" className="text-center">{recipe ? `Modifier  ${recipe?.proposedTitle}` : 'Creer une recette'}</Typography>
                   <fieldset className="form-group border p-1">
                   {/* First part */}
                   <legend className="w-auto px-2">Presentation generale</legend>
                   <div className='row bg-light'>
                     <div className='col-6'>
-                             <InputComponent name="proposedTitle"  labelClass="col-md-4 col-form-label text-md-right"  label="Intitule "  value={postData.proposedTitle} onChange={(e)=> setPostData({...postData, 'proposedTitle':  e.target.value})}  />
+                             <InputComponent name="proposedTitle"  labelClass="col-md-4 col-form-label text-md-right"  label="Intitule "          type="text"  value={postData.proposedTitle} onChange={(e)=> setPostData({...postData, 'proposedTitle':  e.target.value})}  />
                     </div>
                     <div className='col-6'>
-                         <InputComponent name="proposedDescription"  labelClass="col-md-4 col-form-label text-md-right"  label="Description " value={postData.proposedDescription} type="textarea" onChange={(e)=> setPostData({...postData, 'proposedDescription':  e.target.value})}  />
+                            <InputComponent name="proposedDescription"  labelClass="col-md-4 col-form-label text-md-right"  label="Description "  type="textarea"   value={postData.proposedDescription} onChange={(e)=> setPostData({...postData, 'proposedDescription':  e.target.value})}  />
                     </div>
                   </div>
                   <div className='row bg-light'>
                     <div className='col-6'>
-                         <InputComponent name="preparationTime"  labelClass="col-md-4 col-form-label text-md-right"  label="Preparation (en min)" value={postData.preparationTime}  type="number" onChange={(e)=> setPostData({...postData, 'preparationTime':  e.target.value})}  />
+                         <InputComponent name="preparationTime"  labelClass="col-md-4 col-form-label text-md-right"  label="Preparation (en min)" type="number"    value={postData.preparationTime}       onChange={(e)=> setPostData({...postData, 'preparationTime':  e.target.value})}  />
                     </div>
                     <div className='col-6'>
-                         <InputComponent name="cookingTime"  labelClass="col-md-4 col-form-label text-md-right"  label="Cuisson (en min)  " value={postData.cookingTime}  type="number"  onChange={(e)=> setPostData({...postData, 'cookingTime':  e.target.value})}  />
+                         <InputComponent name="cookingTime"  labelClass="col-md-4 col-form-label text-md-right"  label="Cuisson (en min)"         type="number"            value={postData.cookingTime}       onChange={(e)=> setPostData({...postData, 'cookingTime':  e.target.value})}  />
                     </div>
-                   
                   </div>
                   <div className='row bg-light'>
                         <div className='col-3'>
@@ -92,33 +108,32 @@ const NewRecipePage = () => {
                             <FileBase type="file"  multiple={false} onDone={({ base64 }) => setPostData({ ...postData, 'mainImage': base64 })} />
                         </div>
                         <div className='col-4'>
-                           <InputComponent name="steps"  labelClass="col-md-4 col-form-label text-md-right"  label="Nombres d'etapes "  type="number"  onChange={addStepInputs}  />
-
+                           <InputComponent name="steps"  labelClass="col-md-4 col-form-label text-md-right"  label="Nombre d'etapes "  type="number"  onChange={addStepInputs}    />
                         </div>
                   </div>
                   </fieldset>
                   <fieldset className="form-group border p-1 bg-light" id="steps_section">
                          {/* Steps section */}
                          <legend className="w-auto px-1">Etapes de preparation et de cuisson</legend>
-                         {stepsList}
+                        {
+                       
+                               stepsList
+                        }
+
                    </fieldset>
                   <div className=' p-2 bg-light'>
                         <fieldset className="form-group border p-1 " id="steps_section">
                               <legend className="w-auto ">Ingredients</legend>
                               <IngredientInputComponent setIngredients={setIngredients} />
-                              
                         </fieldset>
                        
                   </div>
                   <div className=' p-2 bg-light'>
-                       
                         <fieldset className="form-group border p-1 " id="steps_section">
                               <legend className="w-auto ">Categories</legend>
                               <CategoriesInputContainer setCategories={setCategories}/>
                         </fieldset>
                   </div>
-                 
-                   
                    <fieldset className="form-group border p-1" id="submission_section">
                         <div className='d-flex justify-content-around'>
                               <div className=" d-inline">
@@ -132,7 +147,6 @@ const NewRecipePage = () => {
                               </div>
                         </div>
                   </fieldset>
-                   
               </form>
         )
 

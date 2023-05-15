@@ -6,8 +6,22 @@ const recipeSchema = mongoose.Schema(
         author: String,
         adoptedTitle: String,
         adoptedDescription: String,
-        proposedTitle: String,
-        proposedDecription: String,
+        preparationTime: {
+            type: Number,
+            default: 0
+        },
+        cookingTime: {
+            type: Number,
+            default: 0
+        },
+        proposedTitle: {
+            type: String,
+            required: true
+        },
+        proposedDescription: {
+            type: String,
+            required: true
+        },
 
         likes: { type: [String], default: [] },
 
@@ -32,7 +46,6 @@ const recipeSchema = mongoose.Schema(
             type: Array,
             default: []
         },
-        proposedImages: [String],
         adoptedImages: {
             type: Array,
             default: []

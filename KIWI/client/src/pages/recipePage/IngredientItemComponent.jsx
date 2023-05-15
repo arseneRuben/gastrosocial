@@ -1,27 +1,11 @@
-const IngredientItemComponent = ({  qte, ingredient }) => (
-    <div class="col-12 col-sm-6 col-lg-4">
-    <div class="single-small-receipe-area d-flex">
-        {/* Receipe Thumb */}
-        <div class="receipe-thumb">
-            <img src={"http://localhost:8000/download/"+ingredient.image} alt={ingredient.image}/>
-        </div>
-        {/*  Receipe Content */}
-        <div class="receipe-content">
-            
-            <a href="receipe-post.html">
-                    <h5>{ingredient.name}</h5>
-            </a>
-            <div class="ratings">
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star-o" aria-hidden="true"></i>
-            </div>
-            <p>qte {ingredient.unity}</p>
-        </div>
-    </div>
-</div>
+const IngredientItemComponent = ({  qte, name,  unity,image }) => (
+   
+     <li className="list-group-item d-flex justify-content-between align-items-center">  
+     <p> {name} ( {qte} {unity})</p>
+     <div className="image-parent">
+         <img src={ image ? "http://localhost:8000/download/"+image : "http://localhost:8000/download/download.jpg"} className="img-fluid rounded-circle" height="300" width="200" alt={image}/>
+         </div>
+     </li>
   )
 
   export default IngredientItemComponent

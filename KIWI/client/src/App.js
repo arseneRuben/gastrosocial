@@ -43,7 +43,7 @@ function App() {
           <Route path="/recipes" element={<RecipePage   setCurrentId={setCurrentId} />} />
           <Route path="/recipes/:id" element={<RecipeDetails />} />
           <Route path="/recipes/new" element={<NewRecipePage    />}  />
-          <Route path="/recipes/edit/:id" element={<EditRecipePage/>}  />
+          <Route path="/recipes/edit/:id" element={<NewRecipePage/>}  />
           <Route path="/categories" element={<CategoryPage/>} />
         </Routes>
       </BrowserRouter>

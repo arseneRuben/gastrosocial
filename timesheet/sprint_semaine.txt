@@ -1,7 +1,11 @@
-Sprint de la semaine
+Sprint de la semaine du 8 mai au 13 mai 2023
 	-Finaliser la creation et la presentation de recettes
-	-Gestion des utilisateurs(sign in, sign up, roles)
-	-Modification des recette et publication
-	-Pagination de la liste des recettes
-	-Gestion des likes et des Evaluation
+	-Suppression de la recette
+	
 
+
+Sprint de la semaine du 15 mai au 18 mai 2023
+	-Modification des recette et publication
+	-Gestion des utilisateurs(sign in, sign up, roles)
+	-Pagination de la liste des recettes, des categories
+	-Gestion des likes et des Evaluation

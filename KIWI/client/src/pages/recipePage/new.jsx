@@ -15,12 +15,13 @@ import IngredientInputComponent from '../../component/form/ingredient-input-comp
 
 
 
-const NewRecipePage = ({currentRecipeId}) => {
+const NewRecipePage = () => {
 
+      // Get the edited recipe if editing mode
       const  {recipes,isLoading}  = useSelector((state) => state.recipes);
       const params = useParams(), id = params.id
-      const  recipe  = recipes.find((r) => r._id === id);
-
+      const  recipe  = (id!=null)?  recipes.find((r) => r._id === id): null;  // current recipe if editing,
+     
       const [categories, setCategories] = useState([]);
       const [stepsList, setStepsList] = useState([]);
       const [ingredients, setIngredients] = useState([]);
@@ -33,16 +34,12 @@ const NewRecipePage = ({currentRecipeId}) => {
       const [postData, setPostData] = useState({
             'proposedTitle':'', 'proposedDescription': '', 'portions':0, 'preparationTime':0, 'cookingTime':0,'mainImage':''
       })
-
-
     
-    const handleSubmit = async (e) => {
+      const handleSubmit = async (e) => {
             e.preventDefault()
             const steps = []
-           
-           let  imageData=new FormData()
-
-           for(let i=0; i<stepsList.length; i++){
+            let  imageData=new FormData()
+            for(let i=0; i<stepsList.length; i++){
                   // Send each image to the server 
                   imageData.append("file",  document.getElementById(`image-step-${i}`).files[0])
                   fetch("http://localhost:8000/upload_file", {
@@ -59,23 +56,31 @@ const NewRecipePage = ({currentRecipeId}) => {
            // Save in the local storage
            localStorage.setItem('postData', postData);
           
-      if(!recipe?._id){
-            // Dispach the creation of recipe 
-            dispatch(createRecipe({ ...postData, 'steps': steps, 'categories': categories , 'ingredients': ingredients }, navigate))     
-            clear()
-              } else {
-            dispatch(updateRecipe(recipe?._id, { ...postData, 'steps': steps, 'categories': categories , 'ingredients': ingredients }, navigate));
-            clear()
-           }
-       }
-    const clear = () => {
-        setPostData({ 'proposedTitle': '', 'proposedDescription': '', 'portions':0,  'preparationTime':0 ,'mainImage':'',  'cookingTime':0 });
-    };
-    useEffect(() => {
-      if (!recipe?.mainImage) clear();
-      if (recipe) setPostData(recipe);
-    }, [recipe]);
-    if(isLoading || postData.steps ) return <SyncIcon/>
+            if(!recipe?._id){
+                        // Dispach the creation of recipe 
+                        dispatch(createRecipe({ ...postData, 'steps': steps, 'categories': categories , 'ingredients': ingredients }, navigate))     
+                        clear()
+                  } else {
+                        dispatch(updateRecipe(recipe?._id, { ...postData, 'steps': steps, 'categories': categories , 'ingredients': ingredients }, navigate));
+                        clear()
+                  }
+             }
+      const clear = () => {
+            setPostData({ 'proposedTitle': '', 'proposedDescription': '', 'portions':0,  'preparationTime':0 ,'mainImage':'',  'cookingTime':0 });
+      };
+
+      useEffect(() => {
+                  if (!recipe?.mainImage) clear();
+                  if (recipe) { // If the recipe exist, we set the PostData
+                        setPostData(recipe);
+                        setCategories(recipe.categories)
+                        setIngredients(recipe.ingredients)
+                        //setStepsList(recipe.steps)
+                  }
+            }, [recipe]);
+      
+    if(isLoading ) return <SyncIcon/>
+  
         return (
               <form autoComplete="off" noValidate className="" onSubmit={handleSubmit}  >
                    {/* Header */}
@@ -116,15 +121,14 @@ const NewRecipePage = ({currentRecipeId}) => {
                          {/* Steps section */}
                          <legend className="w-auto px-1">Etapes de preparation et de cuisson</legend>
                         {
-                       
                                stepsList
                         }
-
                    </fieldset>
                   <div className=' p-2 bg-light'>
                         <fieldset className="form-group border p-1 " id="steps_section">
                               <legend className="w-auto ">Ingredients</legend>
-                              <IngredientInputComponent setIngredients={setIngredients} />
+                              {recipe ? <IngredientInputComponent setIngredients={setIngredients} selectedIngredients={recipe.ingredients}/> : <IngredientInputComponent setIngredients={setIngredients} selectedIngredients={[]} />}
+                              
                         </fieldset>
                        
                   </div>

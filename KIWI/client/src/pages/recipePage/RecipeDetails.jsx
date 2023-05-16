@@ -90,21 +90,17 @@ class RecipeDetails extends Component{
                 <section className='py-5'>
                     <div className="container">
                         <div className="row">
-                        <div className="col-sm-4 col-lg-4">
+                        <div className="col-sm-5 col-lg-5">
                                 <h6 className="text-muted">Ingredients</h6> 
-                                
                                 <ul className="list-group">
-                                    
                                     {
                                         this.state.recipe.ingredients.map((ing, index) => (
                                             <IngredientItemComponent qte={ing.qte} name={ing.name} unity={ing.unity} image={ing.image} key={index}/>
                                          ))
                                     }
-                                    
                                 </ul>
-                                
                             </div>
-                            <div className="col-sm-4 col-lg-4">
+                            <div className="col-sm-5 col-lg-5">
                                 <h6 className="text-muted">Differentes etapes de preparation et de cuisson</h6> 
                                 <ul className="list-group">
                                     {
@@ -114,12 +110,12 @@ class RecipeDetails extends Component{
                                     }
                                 </ul>
                             </div>
-                            <div className="col-sm-4 col-lg-4">
+                            <div className="col-sm-2 col-lg-2">
                                 <h6 className="text-muted">Differentes categories</h6> 
                                 {this.state.categories.length > 0 &&
                                 <ul className="list-group">
                                     {
-                                        this.state.categories.map((item) => <h3>{item.name}</h3> )
+                                        this.state.categories.map((item,index) => <h3 key={index}>{item.name}</h3> )
                                 }
                                 </ul>
                                 }

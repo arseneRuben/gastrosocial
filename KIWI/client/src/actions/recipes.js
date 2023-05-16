@@ -40,10 +40,11 @@ export const createRecipe = (recipe, navigate) => async (dispatch) => {
 };
 
 
-export const updateRecipe = (id, recipe) => async (dispatch) => {
+export const updateRecipe = (id, recipe, navigate) => async (dispatch) => {
   try {
-    const  data  = await api.updateRecipe(id, recipe);
+     const  data  = await api.updateRecipe(id, recipe);
     dispatch({ type: UPDATE, payload: data });
+    navigate('/recipes')
   } catch (error) {
     console.log(error);
   }

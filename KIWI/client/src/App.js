@@ -17,7 +17,6 @@ import { useDispatch } from "react-redux";
 import { useEffect , useState} from "react";
 import { getRecipes } from "./actions/recipes";
 import RecipeDetails from "./pages/recipePage/RecipeDetails";
-import EditRecipePage from "./pages/recipePage/edit";
 
 
 function App() {

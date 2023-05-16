@@ -35,7 +35,7 @@ export const updateRecipe = async (req, res) => {
     try {
         if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send(`No recipe with id: ${_id}`)
         recipe.updatedAt = new Date()
-        const updatedRecipe = await Recipe.findByIdAndUpdate(id, { ...recipe, _id }, { new: true })
+        const updatedRecipe = await Recipe.findByIdAndUpdate(_id, { ...recipe, _id }, { new: true })
         res.json(updatedRecipe)
     } catch (error) {
         res.status(404).json({ message: error.message })
@@ -73,7 +73,6 @@ export const getRecipeIngredients = async (req, res) => {
     const { id } = req.params
     try {
         const recipe = await Recipe.findById(id)
-        const results = new Map()
 
         const ingredients = await Promise.all(
             recipe.ingredients.map((ingId, name, qte, selected) => Ingredient.find({ name }))

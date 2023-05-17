@@ -1,11 +1,13 @@
 import { menuItems } from '../../menuItems'
 import logo from './logo.jpg'
 import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
 
 import MenuItems from './menu/MenuItems'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 const Navbar = () => {
-    const user = "e"
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile'))); // Get the user logged in
+    console.log(user)
     return (
         <nav className='navbar navbar-expand-sm navbar-light bg-light'>
             <div className='container-fluid'>
@@ -32,20 +34,24 @@ const Navbar = () => {
                         </button>
                     </form>
                     <ul className="nav navbar-nav ms-auto">
-                    <Link className="nav-link dropdown-toggle" to="/"  data-bs-toggle="dropdown">Auth</Link>
-                        {user ? (
-                             
+                    
+                      {user!=null ? (
+                            <>
+                             <Link className="nav-link dropdown-toggle" to="/"  data-bs-toggle="dropdown">
+                             <img src={user?.profile?.picture} alt="image" class="rounded-circle" height="40"/>
+                             </Link>
                             <div className='dropdown-menu dropdown-menu-end'>
-                               <Link className="dropdown-item" to="/">Moderations</Link>
+                               <Link className="dropdown-item" to="/profile">profile</Link>
                                <Link className="dropdown-item" to="/">Settings</Link>
                                <div className='dropdown-divider'></div>
-                               <Link className="dropdown-item" to="/auth">Logout</Link>
+                               <Link className="dropdown-item" to="/logout">Logout</Link>
                             </div>
+                            </>
                             
 
                         ): (
                             <div className='dropdown-menu dropdown-menu-end'>
-                               <Link className="dropdown-item" to="/">Login</Link>
+                               <Link className="dropdown-item" to="/auth">Login</Link>
                             </div>
                         )}
                          

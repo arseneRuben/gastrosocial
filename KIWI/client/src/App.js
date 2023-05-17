@@ -7,6 +7,8 @@ import Header from "./component/partials/Header";
 import HomePage from "./pages/homePage";
 import CategoryPage from "./pages/Caregories/Categories";
 import LoginPage from "./pages/authPage";
+import ProfilePage from "./pages/profilePage";
+
 import IngredientPage from "./pages/ingredientPage";
 import NewIngredientPage from "./pages/ingredientPage/new";
 import EditIngredientPage from "./pages/ingredientPage/edit";
@@ -36,7 +38,8 @@ function App() {
        <Header/>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/auth" element={<LoginPage />} />
+          <Route path="/auth" element={!user ? <LoginPage /> : <ProfilePage />} />
+          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/ingredients" element={<IngredientPage />} />
           <Route path="/ingredients/new" element={<NewIngredientPage />} />
           <Route exact path="/ingredients/edit/:id" element={<EditIngredientPage />} />

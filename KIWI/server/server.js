@@ -1,7 +1,6 @@
 
 'use strict'
 import express from 'express'
-import multer from 'multer' // Handle multiple files upload
 
 import cors from 'cors'
 
@@ -10,7 +9,6 @@ import cors from 'cors'
 // ROUTES
 import recipeRoute from './routes/sql/recipe.js'
 import categoryRoute from './routes/sql/category.js'
-
 import ingredientRoute from './routes/sql/ingredient.js'
 
 const app = express()

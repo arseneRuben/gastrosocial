@@ -42,7 +42,8 @@ export const updateIngredient = (id, updatedIngredient) => fetch(`${baseUrl}/ing
 export const deleteIngredient = (id) => fetch(`${baseUrl}/ingredients/${id}`, buildHeader('DELETE', null))
 
 
-
+export const signIn = (formData) => fetch('/users/signin', buildHeader('POST', formData));
+export const signUp = (formData) => fetch('/users/signup', buildHeader('POST', formData));
 
 /*
 export const createImage = (newImage, recipeId, userId) => API.post(`/recipes/${recipeId}/images`, newImage);
@@ -61,7 +62,6 @@ export const createIngredient = (newIngredient) => API.post(`/ingredients`, newI
 export const updateIngredient = (id, updatedIngredient) => API.patch(`/ingredients/${id}`, updatedIngredient);
 export const deleteIngredient = (id) => API.delete(`/ingredients/${id}`);
 
-export const signIn = (formData) => API.recipe('/users/signin', formData);
-export const signUp = (formData) => API.recipe('/users/signup', formData);
+
 
 export const upload  = (formData) =>API.post("/upload-images", formData);*/

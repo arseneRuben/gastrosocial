@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 import Header from "./component/partials/Header";
 import HomePage from "./pages/homePage";
 import CategoryPage from "./pages/Caregories/Categories";
@@ -13,6 +14,7 @@ import RecipePage from "./pages/recipePage";
 import NewRecipePage from "./pages/recipePage/new";
 
 
+
 import { useDispatch } from "react-redux";
 import { useEffect , useState} from "react";
 import { getRecipes } from "./actions/recipes";
@@ -20,7 +22,8 @@ import RecipeDetails from "./pages/recipePage/RecipeDetails";
 
 
 function App() {
-  const [currentId, setCurrentId] = useState(null)
+  const user = JSON.parse(localStorage.getItem('profile'));
+
   const dispatch = useDispatch();
   useEffect(() => {
    dispatch(getRecipes())
@@ -39,7 +42,7 @@ function App() {
           <Route exact path="/ingredients/edit/:id" element={<EditIngredientPage />} />
 
 
-          <Route path="/recipes" element={<RecipePage   setCurrentId={setCurrentId} />} />
+          <Route path="/recipes" element={<RecipePage    />} />
           <Route path="/recipes/:id" element={<RecipeDetails />} />
           <Route path="/recipes/new" element={<NewRecipePage    />}  />
           <Route path="/recipes/edit/:id" element={<NewRecipePage/>}  />
